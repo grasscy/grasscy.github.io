@@ -339,7 +339,7 @@
                 
               
 
-              <time title="Created: 2018-10-20 17:15:51 / Modified: 19:40:03" itemprop="dateCreated datePublished" datetime="2018-10-20T17:15:51+08:00">2018-10-20</time>
+              <time title="Created: 2018-10-20 17:15:51 / Modified: 19:46:49" itemprop="dateCreated datePublished" datetime="2018-10-20T17:15:51+08:00">2018-10-20</time>
             
 
             
@@ -412,7 +412,7 @@
 </ul>
 <p>第三点我仔仔细细看了官方文档、网上各种教程，都没有找出原因和解决方法。so，hexo+github pages方案对我来说，行不通。</p>
 <p>于是采取了另一办法，hexo+Nginx。nginx虽只闻其名不知其用，但也意识到，为了日后方便，还是用docker为好。因此，磕磕绊绊的完成dockerfile、docker-compose.yml、nginx的配置文件blog.conf之后，通过http终于可以正常访问了。</p>
-<p>下一步就是配置https了。我没想到自己在这却卡了很久：无论是http跳转至https、还是直接通过https访问，浏览器都显示“连接超时”，调试窗口的network中一直是peeding状态。</p>
+<p>下一步就是配置https了z，没想到自己在这却卡了很久：无论是http跳转至https、还是直接通过https访问，浏览器都显示“连接超时”，调试窗口的network中一直是peeding状态。</p>
 <p>反反复复改了多次blog.conf，最后找到的真实原因却很简单：安全组的443端口没开放，emmm…</p>
 <p>不过最终还是完成了目标：hexo g -d，一条命令即可。</p>
 
