@@ -108,20 +108,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="小草窝">
-<meta property="og:url" content="http://grassc.cn/categories/java/java源码/index.html">
+  <meta name="description" content="本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。 Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：  采用腾讯云主机部署，如果要迁移可能有些麻烦 每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可">
+<meta name="keywords" content="Hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+Nginx+Docker搭建记录">
+<meta property="og:url" content="http://grassc.cn/2018/10/20/Hexo+Nginx+Docker搭建记录/index.html">
 <meta property="og:site_name" content="小草窝">
+<meta property="og:description" content="本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。 Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：  采用腾讯云主机部署，如果要迁移可能有些麻烦 每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可">
 <meta property="og:locale" content="zh_Hans">
+<meta property="og:updated_time" content="2018-10-20T11:40:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小草窝">
+<meta name="twitter:title" content="Hexo+Nginx+Docker搭建记录">
+<meta name="twitter:description" content="本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。 Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：  采用腾讯云主机部署，如果要迁移可能有些麻烦 每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可">
 
 
 
 
 
 
-  <link rel="canonical" href="http://grassc.cn/categories/java/java源码/"/>
+  <link rel="canonical" href="http://grassc.cn/2018/10/20/Hexo+Nginx+Docker搭建记录/"/>
 
 
 
@@ -131,7 +136,7 @@
   };
 </script>
 
-  <title>Category: java源码 | 小草窝</title>
+  <title>Hexo+Nginx+Docker搭建记录 | 小草窝</title>
   
 
 
@@ -178,7 +183,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -231,7 +236,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
   </li>
@@ -272,138 +277,208 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>java源码<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/2018/10/20/Hexo+Nginx+Docker搭建记录/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小草窝">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/10/19/jdk-AbstractStringBuilder-StringBuilder-StringBuffer/" itemprop="url">
-              
-                <span itemprop="name">jdk-AbstractStringBuilder/StringBuilder/StringBuffer</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Hexo+Nginx+Docker搭建记录
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-19T20:14:21+08:00"
-              content="2018-10-19" >
-          10-19
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-10-20 17:15:51 / Modified: 19:40:03" itemprop="dateCreated datePublished" datetime="2018-10-20T17:15:51+08:00">2018-10-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/other/" itemprop="url" rel="index"><span itemprop="name">other</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/18/jdk-String/" itemprop="url">
-              
-                <span itemprop="name">jdk-String</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-18T19:59:06+08:00"
-              content="2018-10-18" >
-          10-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/17/jdk-Object/" itemprop="url">
-              
-                <span itemprop="name">jdk_Object</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-17T22:54:10+08:00"
-              content="2018-10-17" >
-          10-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。</p>
+<p>Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：</p>
+<ul>
+<li>采用腾讯云主机部署，如果要迁移可能有些麻烦</li>
+<li>每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可？</li>
+<li>hexo似乎不支持https？</li>
+</ul>
+<p>Hexo支持git部署，将hexo部署到git上看起来是个不错的选择。github pages甚至已经支持了自定义域名使用https协议，关于hexo+github pages的教程也有大把。看似一切都很简单美好，自己部署时却出现了问题：</p>
+<ul>
+<li>访问速度。这虽然有点慢，暂时也没多大事。</li>
+<li>github pages的文档上，DNS解析的A记录一共需配置4条ip，自己的腾讯云套餐只支持2个负载均衡。可能是由于这个原因，引发了下一个不可忽视的问题。</li>
+<li>http://域名 无法访问。www.和https:都可以访问，而首次采用http:访问却不行。只有通过www./https访问之后，才可以通过http访问。</li>
+</ul>
+<p>第三点我仔仔细细看了官方文档、网上各种教程，都没有找出原因和解决方法。so，hexo+github pages方案对我来说，行不通。</p>
+<p>于是采取了另一办法，hexo+Nginx。nginx虽只闻其名不知其用，但也意识到，为了日后方便，还是用docker为好。因此，磕磕绊绊的完成dockerfile、docker-compose.yml、nginx的配置文件blog.conf之后，通过http终于可以正常访问了。</p>
+<p>下一步就是配置https了。我没想到自己在这却卡了很久：无论是http跳转至https、还是直接通过https访问，浏览器都显示“连接超时”，调试窗口的network中一直是peeding状态。</p>
+<p>反反复复改了多次blog.conf，最后找到的真实原因却很简单：安全组的443端口没开放，emmm…</p>
+<p>不过最终还是完成了目标：hexo g -d，一条命令即可。</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/19/jdk-AbstractStringBuilder-StringBuilder-StringBuffer/" rel="next" title="jdk-AbstractStringBuilder/StringBuilder/StringBuffer">
+                <i class="fa fa-chevron-left"></i> jdk-AbstractStringBuilder/StringBuilder/StringBuffer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -655,6 +730,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
 
   
 
