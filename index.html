@@ -293,6 +293,210 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/2019/03/13/java-SyncLock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小草窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/13/java-SyncLock/" itemprop="url">
+                  java并发之锁
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-13 19:33:32" itemprop="dateCreated datePublished" datetime="2019-03-13T19:33:32+08:00">2019-03-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-14 21:54:20" itemprop="dateModified" datetime="2019-03-14T21:54:20+08:00">2019-03-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/并发/" itemprop="url" rel="index"><span itemprop="name">并发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="并发：锁"><a href="#并发：锁" class="headerlink" title="并发：锁 "></a>并发：锁 <!-- omit in toc --></h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>说到并发，就不能不提互斥锁。我们知道，互斥锁是为了使同一时间，只有一个线程可以对共享变量的状态造成影响，从而避免共享变量状态发生无法预测的变化。在java中，我们不仅可以使用关键字synchronized来加锁，还可以使用api级别的Lock来更加细粒度的加锁。</p>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E5%86%85%E7%BD%AE%E9%94%81synchronized">内置锁：synchronized</a></li>
+<li><a href="#lock%E4%B8%8Ereentrantlock">Lock与ReentrantLock</a></li>
+</ul>
+<h2 id="内置锁：synchronized"><a href="#内置锁：synchronized" class="headerlink" title="内置锁：synchronized"></a>内置锁：synchronized</h2><p>synchronized作为关键字之一，为我们提供了便利的内置锁机制来保证线程安全。synchronized有三种用法，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object obj = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实例对象加锁</span></span><br><span class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Class对象加锁</span></span><br><span class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bar</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">baz</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// lock对象加锁</span></span><br><span class="line">        <span class="keyword">synchronized</span> (obj) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>synchronized内置锁拥有一个计数器，如果某线程进入了临界区，该线程便会占有锁并且内置锁的计数器加1，离开临界区计数器则会减1，直到计数器为0才会释放锁。这也就是说，对于一个线程来讲，内置锁是可以重入的。</p>
+<p>而java中，挂起与恢复线程需要依赖操作系统，而操作系统切换线程的资源消耗比较大，属于重量级操作，所以频繁的切换线程将会大大影响并发性能。因此，JVM对内置锁进行了大量优化来减少切换线程的次数，如偏向锁、轻量级锁。</p>
+<p>要理解偏向锁，先得眼光投向java对象在内存中的存储。在Hotspot虚拟机中，java对象的存储分为三个部分：对象头、实例数据和对齐填充字节。对象头又分为三个部分，其中一部分叫做Mark Word。而Mark Word中，有专门的锁状态标识来记录锁状态：无锁、偏向锁、轻量级锁与重量级锁。</p>
+<p>偏向锁偏向于最近获得锁的线程。当锁对象被线程A获取时，JVM将会把锁状态标识设为偏向锁模式，并且用CAS将线程A的ID记录在Mark Word中。直到另一个线程B尝试去获取锁之前，线程A进入临界区时都不需要进行额外的操作。</p>
+<p>如果线程B尝试获得锁时，锁未被占有，那么本着最近原则，偏向锁将会属于线程B。但如果锁正在被线程A占有，那么偏向锁将会膨胀成轻量级锁：锁状态变为轻量级锁。</p>
+<p>轻量级锁主要是通过自旋操作，去让线程“忙等待”而不是被挂起（自旋锁）。当线程A占有锁并占有一个处理器进行计算时时，线程B在另一个处理器上通过自旋等待A释放锁。如果A在B的等待过程中释放了锁，那么显然就避免了一次切换线程的开销。不过，自旋等待中会白白耗费处理器资源，所以，在进行了一定次数的自旋之后，轻量级锁将会膨胀为重要级锁：线程将会挂起，然后恢复。</p>
+<p>自旋还有一种自适应策略：如果当前拥有自旋锁的线程，也是在自旋等待期间获得锁的，那么JVM会认为这次自旋策略成功的可能性更大，从而增加当前线程容许的自旋次数。</p>
+<p>同时，synchronized是非公平性的：一个线程会先试图直接抢占锁，失败之后才会加入等待队列排队获得锁。</p>
+<p>所以，JVM通过增加偏向锁与轻量级锁等减少内置锁切换线程的开销，大大增加了synchronized的性能。而除了语法层面的互斥锁synchronized，java还提供了Api层面的Lock接口来进行同步。与synchronized相比，Lock额外拥有等待可中断、限时等待、多条件绑定等特性。</p>
+<h2 id="Lock与ReentrantLock"><a href="#Lock与ReentrantLock" class="headerlink" title="Lock与ReentrantLock"></a>Lock与ReentrantLock</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Lock</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">lockInterruptibly</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">(<span class="keyword">long</span> time, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Condition <span class="title">newCondition</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Condition</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">await</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">awaitUninterruptibly</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">awaitNanos</span><span class="params">(<span class="keyword">long</span> nanosTimeout)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">await</span><span class="params">(<span class="keyword">long</span> time, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">awaitUntil</span><span class="params">(Date deadline)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">signal</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">signalAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以lock.lock()和lock.unlock()包裹的代码块，大致相当于用synchronized修饰的代码块。而Lock接口的其他方法，则提供了synchronized锁不具备的特性：</p>
+<ul>
+<li>void lockInterruptibly()：线程在等待锁的过程中可以被其他线程所中断</li>
+<li>boolean tryLock()：尝试获得锁</li>
+<li>boolean tryLock(long time, TimeUnit unit)：尝试在给定时间中获得锁</li>
+<li>Condition newCondition()：新条件绑定</li>
+</ul>
+<p>lock与condition.await()/condition.signal()的协作，类似于synchronized(obj)和obj.wait()/obj.notify()的配合，但一个lock可以通过lock.newCondition()绑定多个条件，一个synchronized却只能有一个obj。</p>
+<p>ReentrantLock作为Lock的实现类，除了如类名所示，同synchronized一样可重入之外，还可以指定是公平锁还是非公平锁：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ReentrantLock</span><span class="params">(<span class="keyword">boolean</span> fair)</span> </span>&#123;</span><br><span class="line">    sync = fair ? <span class="keyword">new</span> FairSync() : <span class="keyword">new</span> NonfairSync();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://grassc.cn/2019/03/08/jdk-CopyOnWriteArray/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2086,205 +2290,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/2018/10/20/Hexo+Nginx+Docker_InstallNotes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小草窝">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/20/Hexo+Nginx+Docker_InstallNotes/" itemprop="url">
-                  Hexo+Nginx+Docker搭建记录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-20 17:15:51" itemprop="dateCreated datePublished" datetime="2018-10-20T17:15:51+08:00">2018-10-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-03 06:48:10" itemprop="dateModified" datetime="2019-03-03T06:48:10+08:00">2019-03-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/other/" itemprop="url" rel="index"><span itemprop="name">other</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。</p>
-<p>Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：</p>
-<ul>
-<li>采用腾讯云主机部署，如果要迁移可能有些麻烦</li>
-<li>每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可？</li>
-<li>hexo似乎不支持https？</li>
-</ul>
-<p>Hexo支持git部署，将hexo部署到git上看起来是个不错的选择。github pages甚至已经支持了自定义域名使用https协议，关于hexo+github pages的教程也有大把。看似一切都很简单美好，自己部署时却出现了问题：</p>
-<ul>
-<li>访问速度。这虽然有点慢，暂时也没多大事。</li>
-<li>github pages的文档上，DNS解析的A记录一共需配置4条ip，自己的腾讯云套餐只支持2个负载均衡。可能是由于这个原因，引发了下一个严重的问题：</li>
-<li>http://域名 无法访问。www.和https:都可以访问，而首次采用http:访问却不行。只有通过www./https访问之后，才可以通过http访问。</li>
-</ul>
-<p>第三点我仔仔细细看了官方文档、网上各种教程，都没有找出原因和解决方法。so，hexo+github pages方案对我来说，暂时不可行。</p>
-<p>于是采取了另一办法，hexo+Nginx。nginx虽只闻其名不知其用，但也意识到，为了日后方便，还是用docker为好。因此，磕磕绊绊的完成dockerfile、docker-compose.yml、nginx的配置文件blog.conf之后，通过http终于可以正常访问了。</p>
-<p>下一步就是配置https了，没想到自己在这却卡了很久：无论是http跳转至https、还是直接通过https访问，浏览器都显示“连接超时”，调试窗口的network中一直是peeding状态。</p>
-<p>反反复复改了多次blog.conf，最后找到的真实原因却很简单：云服务器安全组的443端口没开放，emmm…</p>
-<p>不过最终还是完成了目标：hexo g -d，一条命令即可。</p>
-<p>以下是几个配置文件：</p>
-<ul>
-<li><p>Dockerfile</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> web_home=/home/www</span><br><span class="line"><span class="keyword">ARG</span> conf_path=/etc/nginx/conf.d</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_to=/etc/nginx/ssl</span><br><span class="line"></span><br><span class="line"><span class="comment"># local</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_from=ssl-grassc.cn/Nginx</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_1=<span class="number">1</span>_grassc.cn_bundle.crt</span><br><span class="line"><span class="keyword">ARG</span> ssl_2=<span class="number">2</span>_grassc.cn.key</span><br><span class="line"><span class="keyword">ARG</span> conf=blog.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN apt-get update \</span></span><br><span class="line"><span class="comment">#    &amp;&amp; apt-get install vim -y \</span></span><br><span class="line"><span class="keyword">RUN</span> mkdir $web_home \</span><br><span class="line">    &amp;&amp; mkdir $ssl_to</span><br><span class="line"></span><br><span class="line">COPY $conf $conf_path</span><br><span class="line">COPY $ssl_from/$ssl_1 $ssl_to</span><br><span class="line">COPY $ssl_from/$ssl_2 $ssl_to</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line">EXPOSE 443</span><br><span class="line"></span><br><span class="line">WORKDIR $conf_dir</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>docker-compose.yml</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  blogweb:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"80:80"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"443:443"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"/home/cc/blog:/home/www/blog"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>blog.conf</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="comment">#	root /home/www/blog;</span></span><br><span class="line">        <span class="attribute">rewrite</span><span class="regexp"> ^(.*)</span> https://<span class="variable">$host</span><span class="variable">$1</span> <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">        <span class="attribute">server_name</span> grassc.cn; <span class="comment">#填写绑定证书的域名</span></span><br><span class="line">        </span><br><span class="line">        <span class="attribute">ssl_certificate</span> ssl/1_grassc.cn_bundle.crt;</span><br><span class="line">        <span class="attribute">ssl_certificate_key</span> ssl/2_grassc.cn.key;</span><br><span class="line">        <span class="attribute">ssl_session_timeout</span> <span class="number">5m</span>;</span><br><span class="line">        <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>; <span class="comment">#按照这个协议配置</span></span><br><span class="line">        <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<span class="comment">#按照这个套件配置</span></span><br><span class="line">        <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>   /home/www/blog/public; <span class="comment">#站点目录</span></span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2332,7 +2337,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

@@ -293,6 +293,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/2018/10/20/Hexo+Nginx+Docker_InstallNotes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小草窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/20/Hexo+Nginx+Docker_InstallNotes/" itemprop="url">
+                  Hexo+Nginx+Docker搭建记录
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-20 17:15:51" itemprop="dateCreated datePublished" datetime="2018-10-20T17:15:51+08:00">2018-10-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-03 06:48:10" itemprop="dateModified" datetime="2019-03-03T06:48:10+08:00">2019-03-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/other/" itemprop="url" rel="index"><span itemprop="name">other</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。</p>
+<p>Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：</p>
+<ul>
+<li>采用腾讯云主机部署，如果要迁移可能有些麻烦</li>
+<li>每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可？</li>
+<li>hexo似乎不支持https？</li>
+</ul>
+<p>Hexo支持git部署，将hexo部署到git上看起来是个不错的选择。github pages甚至已经支持了自定义域名使用https协议，关于hexo+github pages的教程也有大把。看似一切都很简单美好，自己部署时却出现了问题：</p>
+<ul>
+<li>访问速度。这虽然有点慢，暂时也没多大事。</li>
+<li>github pages的文档上，DNS解析的A记录一共需配置4条ip，自己的腾讯云套餐只支持2个负载均衡。可能是由于这个原因，引发了下一个严重的问题：</li>
+<li>http://域名 无法访问。www.和https:都可以访问，而首次采用http:访问却不行。只有通过www./https访问之后，才可以通过http访问。</li>
+</ul>
+<p>第三点我仔仔细细看了官方文档、网上各种教程，都没有找出原因和解决方法。so，hexo+github pages方案对我来说，暂时不可行。</p>
+<p>于是采取了另一办法，hexo+Nginx。nginx虽只闻其名不知其用，但也意识到，为了日后方便，还是用docker为好。因此，磕磕绊绊的完成dockerfile、docker-compose.yml、nginx的配置文件blog.conf之后，通过http终于可以正常访问了。</p>
+<p>下一步就是配置https了，没想到自己在这却卡了很久：无论是http跳转至https、还是直接通过https访问，浏览器都显示“连接超时”，调试窗口的network中一直是peeding状态。</p>
+<p>反反复复改了多次blog.conf，最后找到的真实原因却很简单：云服务器安全组的443端口没开放，emmm…</p>
+<p>不过最终还是完成了目标：hexo g -d，一条命令即可。</p>
+<p>以下是几个配置文件：</p>
+<ul>
+<li><p>Dockerfile</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> web_home=/home/www</span><br><span class="line"><span class="keyword">ARG</span> conf_path=/etc/nginx/conf.d</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_to=/etc/nginx/ssl</span><br><span class="line"></span><br><span class="line"><span class="comment"># local</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_from=ssl-grassc.cn/Nginx</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_1=<span class="number">1</span>_grassc.cn_bundle.crt</span><br><span class="line"><span class="keyword">ARG</span> ssl_2=<span class="number">2</span>_grassc.cn.key</span><br><span class="line"><span class="keyword">ARG</span> conf=blog.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN apt-get update \</span></span><br><span class="line"><span class="comment">#    &amp;&amp; apt-get install vim -y \</span></span><br><span class="line"><span class="keyword">RUN</span> mkdir $web_home \</span><br><span class="line">    &amp;&amp; mkdir $ssl_to</span><br><span class="line"></span><br><span class="line">COPY $conf $conf_path</span><br><span class="line">COPY $ssl_from/$ssl_1 $ssl_to</span><br><span class="line">COPY $ssl_from/$ssl_2 $ssl_to</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line">EXPOSE 443</span><br><span class="line"></span><br><span class="line">WORKDIR $conf_dir</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>docker-compose.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  blogweb:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"80:80"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"443:443"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"/home/cc/blog:/home/www/blog"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>blog.conf</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="comment">#	root /home/www/blog;</span></span><br><span class="line">        <span class="attribute">rewrite</span><span class="regexp"> ^(.*)</span> https://<span class="variable">$host</span><span class="variable">$1</span> <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">        <span class="attribute">server_name</span> grassc.cn; <span class="comment">#填写绑定证书的域名</span></span><br><span class="line">        </span><br><span class="line">        <span class="attribute">ssl_certificate</span> ssl/1_grassc.cn_bundle.crt;</span><br><span class="line">        <span class="attribute">ssl_certificate_key</span> ssl/2_grassc.cn.key;</span><br><span class="line">        <span class="attribute">ssl_session_timeout</span> <span class="number">5m</span>;</span><br><span class="line">        <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>; <span class="comment">#按照这个协议配置</span></span><br><span class="line">        <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<span class="comment">#按照这个套件配置</span></span><br><span class="line">        <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>   /home/www/blog/public; <span class="comment">#站点目录</span></span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://grassc.cn/2018/10/19/jdk-AbstractStringBuilder-StringBuilder-StringBuffer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1083,7 +1282,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
