@@ -108,13 +108,16 @@
 
 
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="step by step,one by one">
+<meta property="og:type" content="website">
 <meta property="og:title" content="小草窝">
 <meta property="og:url" content="http://grassc.cn/page/2/index.html">
 <meta property="og:site_name" content="小草窝">
+<meta property="og:description" content="step by step,one by one">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小草窝">
+<meta name="twitter:description" content="step by step,one by one">
 
 
 
@@ -131,7 +134,7 @@
   };
 </script>
 
-  <title>小草窝 -  </title>
+  <title>小草窝 - step by step,one by one </title>
   
 
 
@@ -204,6 +207,10 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">ci饭，碎觉，输入，输出</h1>
+      
     
   </div>
 
@@ -306,8 +313,8 @@
     <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-AbstractList-ArrayList-LinkedList.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cc">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="step by step,one by one">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -320,14 +327,14 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/jdk-AbstractList-ArrayList-LinkedList.html" itemprop="url">
                   java系列——ArrayList与LinkedList
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -366,7 +373,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-01 21:09:58" itemprop="dateModified" datetime="2019-03-01T21:09:58+08:00">2019-03-01</time>
+                <time title="修改时间：2019-04-01 21:26:08" itemprop="dateModified" datetime="2019-04-01T21:26:08+08:00">2019-04-01</time>
               
             
           </span>
@@ -400,6 +407,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jdk-AbstractList-ArrayList-LinkedList.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-AbstractList-ArrayList-LinkedList.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -426,36 +443,17 @@
       
         
           
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对不少人来说，List恐怕是最常用的集合了。java中，List作为接口，其下有两个常见的实现类：ArrayList和LinkedList。除此之外，还提供了AbstractList抽象类，用来帮助自定义List的实现类。本文先从AbstractList入手，再对比ArrayList和LinkedList，从而将这两个常用的集合做一个大体的介绍。</p>
-<p>在具体的介绍之前，笔者希望先讨论一个概念：fail-fast。</p>
-<p>fail-fast是java集合框架中，一个可以通过快速抛出ConcurrentModificationException、来通知某不支持并发的集合被多个线程、进行了修改的机制。既然命名为”fast”，往往意味着作为一个快速通道，并不涵盖所有的情况。事实也正是如此。在许多集合的实现中，只有发生了结构化修改（集合的结构产生了变动，如增加、减少了结点）时，才会触发fail-fast机制。因此，fail-fast的相关资料通常会有这样的表述：</p>
-<blockquote>
-<p>注意，迭代器的快速失败行为不能得到保证，一般来说，存在非同步的并发修改时，不可能作出任何坚决的保证。快速失败迭代器尽最大努力抛出 ConcurrentModificationException。因此，编写依赖于此异常的程序的做法是错误的，正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
-</blockquote>
-<h2 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h2><ul>
-<li><a href="#AbstractList">AbstractList</a></li>
-<li><a href="#ArrayListAndLinkedList">ArrayList与LinkedList</a></li>
-</ul>
-<div id="AbstractList">
-
-<h2 id="AbstractList"><a href="#AbstractList" class="headerlink" title="AbstractList"></a>AbstractList</h2><p>AbstractList作为许多List实现类的祖先类，它的fail-fast实现规则也被一些子类所继承（如ArrayList与LinkedList）。我们先来看一下AbstractList中迭代器触发fail-fast的机制：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Itr</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (lastRet &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">        checkForComodification();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            AbstractList.<span class="keyword">this</span>.remove(lastRet);</span><br><span class="line">            <span class="keyword">if</span> (lastRet &lt; cursor)</span><br><span class="line">                cursor--;</span><br><span class="line">            lastRet = -<span class="number">1</span>;</span><br><span class="line">            expectedModCount = modCount;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 触发fail-fast</span></span><br><span class="line">        <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看到，触发的关键在于modCount与Itr中的字段expectedModCount。由于AbstractList默认实现是不可修改的，因此讨论modCount什么时候被修改、fail-fast什么时候被触发，还得放到它的子类当中来看。</p>
-<p>除了fail-fast，AbstractList还涉及到了另一个概念：视图。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以原list为底，返回sublist</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;E&gt; <span class="title">subList</span><span class="params">(<span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> <span class="keyword">instanceof</span> RandomAccess ?</span><br><span class="line">            <span class="keyword">new</span> RandomAccessSubList&lt;&gt;(<span class="keyword">this</span>, fromIndex, toIndex) :</span><br><span class="line">            <span class="keyword">new</span> SubList&lt;&gt;(<span class="keyword">this</span>, fromIndex, toIndex));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 被随机访问接口RandomAccess标识的SubList</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomAccessSubList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">SubList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">RandomAccess</span> </span>&#123;</span><br><span class="line">    RandomAccessSubList(AbstractList&lt;E&gt; list, <span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex) &#123;</span><br><span class="line">        <span class="keyword">super</span>(list, fromIndex, toIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;E&gt; <span class="title">subList</span><span class="params">(<span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RandomAccessSubList&lt;&gt;(<span class="keyword">this</span>, fromIndex, toIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>subList方法返回原list的一部分，称之为视图。需要注意的是，视图以原list为底操作，任何对视图的修改都会反应到原list上，原list的任何变动也会对相关视图造成影响。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>));</span><br><span class="line">    List&lt;Integer&gt; sub1 = list.subList(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">    List&lt;Integer&gt; sub2 = list.subList(<span class="number">2</span>, <span class="number">5</span>);</span><br><span class="line">    System.out.println(sub1); <span class="comment">// [1, 2, 3]</span></span><br><span class="line">    System.out.println(sub2); <span class="comment">// [3, 4, 5]</span></span><br><span class="line"></span><br><span class="line">    sub1.set(<span class="number">2</span>,-<span class="number">1</span>);</span><br><span class="line">    System.out.println(sub1); <span class="comment">// [1, 2, -1]</span></span><br><span class="line">    System.out.println(sub2); <span class="comment">// [-1, 4, 5]</span></span><br><span class="line">    System.out.println(list); <span class="comment">// [1, 2, -1, 4, 5]</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">&lt;div id=<span class="string">"ArrayListAndLinkedList"</span> /&gt;</span><br><span class="line"></span><br><span class="line">说到ArrayList和LinkedList的区别，各种资料非常多。我们暂时先不管各种说法，单纯看看它们各自在java中的类定义：</span><br><span class="line">``` java</span><br><span class="line"><span class="comment">// ArrayList实现随机访问接口RandomAccess</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// LinkedList继承AbstractList的子类AbstractSequentialList——顺序列表</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">AbstractSequentialList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">Deque</span>&lt;<span class="title">E</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>于是，两者最明显的区别就显而易见了：ArrayList支持随机访问（通过下标随机访问元素），而LinkedList不行，只能通过顺序访问。<br>那么问题来了，实际使用中，LinkedList显然是可以通过get(int index)获取元素的，那为什么说LinkedList只支持顺序访问呢？</p>
-<p>为了回答这个问题，先来看看两者get(int index)方法的实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ArrayList</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    Objects.checkIndex(index, size);</span><br><span class="line">    <span class="keyword">return</span> elementData(index);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">E <span class="title">elementData</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 返回下标对应值</span></span><br><span class="line">    <span class="keyword">return</span> (E) elementData[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// LinkedList</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    checkElementIndex(index);</span><br><span class="line">    <span class="keyword">return</span> node(index).item;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node&lt;E&gt; <span class="title">node</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// assert isElementIndex(index);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (index &lt; (size &gt;&gt; <span class="number">1</span>)) &#123;</span><br><span class="line">        Node&lt;E&gt; x = first;</span><br><span class="line">        <span class="comment">// 从头部开始遍历，直至index</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">            x = x.next;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Node&lt;E&gt; x = last;</span><br><span class="line">        <span class="comment">// 从尾部开始遍历，直至index</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = size - <span class="number">1</span>; i &gt; index; i--)</span><br><span class="line">            x = x.prev;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>原来LinkedList的get(int index)是通过遍历并计算下标才实现的，get方法的随机访问只是一个假象，ArrayList才是真正的随机访问。</p>
-<p>接着，我们可以来看看ArrayList和LinkedList为什么会有这个区别了。总的来说，因为两者实现的数据结构不同：ArrayList采用数组实现，而LinkedList采取双向链表实现。数组实现的优势在于支持通过下标进行随机访问，通常情况下的顺序遍历速度也快于链表，但在发生结构化变动、尤其是从中间删除元素之时，整个数组的变动调整将会很大。而链表就没有这个风险了，只需要改动几个结点的引用罢了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ArrayList</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    Objects.checkIndex(index, size);</span><br><span class="line">    <span class="keyword">final</span> Object[] es = elementData;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>) E oldValue = (E) es[index];</span><br><span class="line">    fastRemove(es, index);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> oldValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fastRemove</span><span class="params">(Object[] es, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> newSize;</span><br><span class="line">    <span class="keyword">if</span> ((newSize = size - <span class="number">1</span>) &gt; i)</span><br><span class="line">        <span class="comment">// i后部分前移一位</span></span><br><span class="line">        System.arraycopy(es, i + <span class="number">1</span>, es, i, newSize - i);</span><br><span class="line">    es[size = newSize] = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LinkedList</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    checkElementIndex(index);</span><br><span class="line">    <span class="keyword">return</span> unlink(node(index));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Unlinks non-null node x.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">E <span class="title">unlink</span><span class="params">(Node&lt;E&gt; x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// assert x != null;</span></span><br><span class="line">    <span class="keyword">final</span> E element = x.item;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; next = x.next;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; prev = x.prev;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (prev == <span class="keyword">null</span>) &#123;</span><br><span class="line">        first = next;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        prev.next = next;</span><br><span class="line">        x.prev = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (next == <span class="keyword">null</span>) &#123;</span><br><span class="line">        last = prev;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        next.prev = prev;</span><br><span class="line">        x.next = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    x.item = <span class="keyword">null</span>;</span><br><span class="line">    size--;</span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="keyword">return</span> element;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有点读者可能注意到了，上面的代码出现了一个前文提到过的字段：modcount。实际上，在ArrayList与LinkedList之中，只有发生了结构化的修改（如add、remove、sort方法），modcount才会更改。</p>
-<p>现在，我们来仔细看看，Itr中的remove方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lastRet &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">    checkForComodification();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 改变modcount</span></span><br><span class="line">        AbstractList.<span class="keyword">this</span>.remove(lastRet);</span><br><span class="line">        <span class="keyword">if</span> (lastRet &lt; cursor)</span><br><span class="line">            cursor--;</span><br><span class="line">        lastRet = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// expectedModCount更新</span></span><br><span class="line">        expectedModCount = modCount;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通常，我们使用List而不是Array的主要原因，在于List几乎不需要在意容量大小。某种程度上，List可以看做自动扩容的数组，尤其是本身就以数组实现的ArrayList。在ArrayList中，自动扩容的方案为：当不满足所需的最小容量时，将会先扩展至原容量的1.5倍。仍然不足，才会扩展至需求的最小容量。也因此，ArrayList的空间占用，往往是大于LinkedList的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">    <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?</span><br><span class="line">        Integer.MAX_VALUE :</span><br><span class="line">        MAX_ARRAY_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</div>
-          
+          ArrayList与LinkedList  前言对不少人来说，List恐怕是最常用的集合了。java中，List作为接口，其下有两个常见的实现类：ArrayList和LinkedList。除此之外，还提供了AbstractList抽象类，用来帮助自定义List的实现类。本文先从AbstractList入手，再对比ArrayList和LinkedList，从而将这两个常用的集合做一个大体的介绍。
+在具体的介绍之前，笔者希望先讨论一个概念：fail-fast。
+fail-fast是java集合框架中
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/jdk-AbstractList-ArrayList-LinkedList.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -510,8 +508,8 @@
     <link itemprop="mainEntityOfPage" href="http://grassc.cn/Hexo+Nginx+Docker_InstallNotes.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cc">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="step by step,one by one">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -524,14 +522,14 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/Hexo+Nginx+Docker_InstallNotes.html" itemprop="url">
                   Hexo+Nginx+Docker搭建记录
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -570,7 +568,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-03 06:48:10" itemprop="dateModified" datetime="2019-03-03T06:48:10+08:00">2019-03-03</time>
+                <time title="修改时间：2019-04-01 22:15:50" itemprop="dateModified" datetime="2019-04-01T22:15:50+08:00">2019-04-01</time>
               
             
           </span>
@@ -596,6 +594,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Hexo+Nginx+Docker_InstallNotes.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/Hexo+Nginx+Docker_InstallNotes.html" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -623,38 +631,22 @@
       
         
           
-            <p>本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。</p>
-<p>Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：</p>
-<ul>
-<li>采用腾讯云主机部署，如果要迁移可能有些麻烦</li>
-<li>每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可？</li>
-<li>hexo似乎不支持https？</li>
-</ul>
-<p>Hexo支持git部署，将hexo部署到git上看起来是个不错的选择。github pages甚至已经支持了自定义域名使用https协议，关于hexo+github pages的教程也有大把。看似一切都很简单美好，自己部署时却出现了问题：</p>
-<ul>
-<li>访问速度。这虽然有点慢，暂时也没多大事。</li>
-<li>github pages的文档上，DNS解析的A记录一共需配置4条ip，自己的腾讯云套餐只支持2个负载均衡。可能是由于这个原因，引发了下一个严重的问题：</li>
-<li>http://域名 无法访问。www.和https:都可以访问，而首次采用http:访问却不行。只有通过www./https访问之后，才可以通过http访问。</li>
-</ul>
-<p>第三点我仔仔细细看了官方文档、网上各种教程，都没有找出原因和解决方法。so，hexo+github pages方案对我来说，暂时不可行。</p>
-<p>于是采取了另一办法，hexo+Nginx。nginx虽只闻其名不知其用，但也意识到，为了日后方便，还是用docker为好。因此，磕磕绊绊的完成dockerfile、docker-compose.yml、nginx的配置文件blog.conf之后，通过http终于可以正常访问了。</p>
-<p>下一步就是配置https了，没想到自己在这却卡了很久：无论是http跳转至https、还是直接通过https访问，浏览器都显示“连接超时”，调试窗口的network中一直是peeding状态。</p>
-<p>反反复复改了多次blog.conf，最后找到的真实原因却很简单：云服务器安全组的443端口没开放，emmm…</p>
-<p>不过最终还是完成了目标：hexo g -d，一条命令即可。</p>
-<p>以下是几个配置文件：</p>
-<ul>
-<li><p>Dockerfile</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> web_home=/home/www</span><br><span class="line"><span class="keyword">ARG</span> conf_path=/etc/nginx/conf.d</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_to=/etc/nginx/ssl</span><br><span class="line"></span><br><span class="line"><span class="comment"># local</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_from=ssl-grassc.cn/Nginx</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_1=<span class="number">1</span>_grassc.cn_bundle.crt</span><br><span class="line"><span class="keyword">ARG</span> ssl_2=<span class="number">2</span>_grassc.cn.key</span><br><span class="line"><span class="keyword">ARG</span> conf=blog.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN apt-get update \</span></span><br><span class="line"><span class="comment">#    &amp;&amp; apt-get install vim -y \</span></span><br><span class="line"><span class="keyword">RUN</span> mkdir $web_home \</span><br><span class="line">    &amp;&amp; mkdir $ssl_to</span><br><span class="line"></span><br><span class="line">COPY $conf $conf_path</span><br><span class="line">COPY $ssl_from/$ssl_1 $ssl_to</span><br><span class="line">COPY $ssl_from/$ssl_2 $ssl_to</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line">EXPOSE 443</span><br><span class="line"></span><br><span class="line">WORKDIR $conf_dir</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>docker-compose.yml</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  blogweb:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"80:80"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"443:443"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"/home/cc/blog:/home/www/blog"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>blog.conf</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="comment">#	root /home/www/blog;</span></span><br><span class="line">        <span class="attribute">rewrite</span><span class="regexp"> ^(.*)</span> https://<span class="variable">$host</span><span class="variable">$1</span> <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">        <span class="attribute">server_name</span> grassc.cn; <span class="comment">#填写绑定证书的域名</span></span><br><span class="line">        </span><br><span class="line">        <span class="attribute">ssl_certificate</span> ssl/1_grassc.cn_bundle.crt;</span><br><span class="line">        <span class="attribute">ssl_certificate_key</span> ssl/2_grassc.cn.key;</span><br><span class="line">        <span class="attribute">ssl_session_timeout</span> <span class="number">5m</span>;</span><br><span class="line">        <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>; <span class="comment">#按照这个协议配置</span></span><br><span class="line">        <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<span class="comment">#按照这个套件配置</span></span><br><span class="line">        <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>   /home/www/blog/public; <span class="comment">#站点目录</span></span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+          本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。
+Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：
 
-          
+采用腾讯云主机部署，如果要迁移可能有些麻烦
+每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可？
+hexo似乎不支持https？
+
+Hexo支持git部署，将hexo部署到git上看起来是个不错
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Hexo+Nginx+Docker_InstallNotes.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -709,8 +701,8 @@
     <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cc">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="step by step,one by one">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -723,14 +715,14 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html" itemprop="url">
                   java系列——StringBuilder与StringBuffer
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -769,7 +761,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-01 22:17:02" itemprop="dateModified" datetime="2019-03-01T22:17:02+08:00">2019-03-01</time>
+                <time title="修改时间：2019-04-01 22:11:54" itemprop="dateModified" datetime="2019-04-01T22:11:54+08:00">2019-04-01</time>
               
             
           </span>
@@ -803,6 +795,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -829,29 +831,16 @@
       
         
           
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>字符串作为最常用的类型之一，java除了提供不可变的String类之外，还拥有可变字符串StringBuilder与StringBuffer。两者最大的区别在于StringBuilder不保证线程安全，而StringBuffer则将方法以synchronized修饰。所以可以保证线程安全。</p>
-<p>除此之外，两者都继承了AbstractStringBuilder类，所拥有的方法近乎完全相同。作为抽象类，AbstractStringBuilder实现了Appendable与CharSequence接口。</p>
-<p>值得注意的是，与StringBuilder相比，StringBuffer中的toString方法，利用了char[] toStringCache缓存来提高性能。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A cache of the last value returned by toString. Cleared</span></span><br><span class="line"><span class="comment"> * whenever the StringBuffer is modified.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">char</span>[] toStringCache;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> StringBuffer <span class="title">append</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    toStringCache = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">super</span>.append(String.valueOf(obj));</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果上次toString之后字符串没有变化，则利用缓存直接返回</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (toStringCache == <span class="keyword">null</span>) &#123;</span><br><span class="line">        toStringCache = Arrays.copyOfRange(value, <span class="number">0</span>, count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(toStringCache, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>为什么StringBuilder不采用toStringCache呢？参考<a href="https://stackoverflow.com/questions/46294579/why-stringbuffer-has-a-tostringcache-while-stringbuilder-not" target="_blank" rel="noopener">stackoverflow</a>,大意是StringBuiler不提供线程同步，而在保持线程不同步的性能优势下，提供缓存极难实现。并且，这种缓存优化现实中使用很少。</p>
-<h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><p>由于StringBuilder与StringBuffer的差别很小，所以两者很多方法的具体实现，都放在了共同的父类AbstractStringBuilder中。本文姑且从AbstractStringBuilder入手，对字符串操作略作分析。</p>
-<h3 id="AbstractStringBuilder"><a href="#AbstractStringBuilder" class="headerlink" title="AbstractStringBuilder"></a>AbstractStringBuilder</h3><ul>
-<li><a href="#append">append(String str)</a></li>
-<li><a href="#ensureCapacity">ensureCapacity(int minimumCapacity)</a></li>
-<li><a href="#replace">replace(int start, int end, String str)</a></li>
-<li><a href="#reverse">reverse()</a></li>
-</ul>
-<p><div id="append"><br>AbstractStringBuilder中重载了大量的append方法，这里暂且只以常用的append(String)举例。</div></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符存放，一个字符2-byte</span></span><br><span class="line"><span class="keyword">byte</span>[] value;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编码（实际值由JVM注入）,LATIN1(=0) or UTF16(=1)</span></span><br><span class="line"><span class="keyword">byte</span> coder;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符数</span></span><br><span class="line"><span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链式方法，可以 stringBuilder.append().append()</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> AbstractStringBuilder <span class="title">append</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> appendNull();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> len = str.length();</span><br><span class="line">    ensureCapacityInternal(count + len); <span class="comment">// 保证value数组的最小容量（字符数），见下文</span></span><br><span class="line">    putStringAt(count, str); <span class="comment">// append字符串</span></span><br><span class="line">    count += len;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">putStringAt</span><span class="params">(<span class="keyword">int</span> index, String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (getCoder() != str.coder()) &#123; <span class="comment">// this.coder与str.coder不等</span></span><br><span class="line">        inflate(); <span class="comment">// value膨胀byte[]至utf16编码</span></span><br><span class="line">    &#125;</span><br><span class="line">    str.getBytes(value, index, coder); <span class="comment">// str添加至value[index]后</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">inflate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isLatin1()) &#123; <span class="comment">// utf16直接返回</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">byte</span>[] buf = StringUTF16.newBytesFor(value.length);</span><br><span class="line">    StringLatin1.inflate(value, <span class="number">0</span>, buf, <span class="number">0</span>, count); <span class="comment">// Latin1-&gt;utf16</span></span><br><span class="line">    <span class="keyword">this</span>.value = buf;</span><br><span class="line">    <span class="keyword">this</span>.coder = UTF16;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div id="ensureCapacity">
-
-<h2 id="ensureCapacity-int-minimumCapacity"><a href="#ensureCapacity-int-minimumCapacity" class="headerlink" title="ensureCapacity(int minimumCapacity)"></a>ensureCapacity(int minimumCapacity)</h2><p>Array在添加元素的时候，免不了容量的限制。所以以byte[]来保存value，也需要对容量进行额外的保证。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123; <span class="comment">// 最少字符（2-byte）数</span></span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = value.length &gt;&gt; coder; <span class="comment">// utf16一个单元占1或2字符，这里算value可能的最少字符数</span></span><br><span class="line">    <span class="keyword">if</span> (minimumCapacity - oldCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        value = Arrays.copyOf(value,</span><br><span class="line">                newCapacity(minimumCapacity) &lt;&lt; coder); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回字符数</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">newCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = value.length &gt;&gt; coder; <span class="comment">// 同ensureCapacityInternal中</span></span><br><span class="line">    <span class="keyword">int</span> newCapacity = (oldCapacity &lt;&lt; <span class="number">1</span>) + <span class="number">2</span>; <span class="comment">// 扩至2n+2=2*(n+1)</span></span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> SAFE_BOUND = MAX_ARRAY_SIZE &gt;&gt; coder; <span class="comment">// 稳定安全状态下，最大字符数</span></span><br><span class="line">    <span class="keyword">return</span> (newCapacity &lt;= <span class="number">0</span> || SAFE_BOUND - newCapacity &lt; <span class="number">0</span>) <span class="comment">// newCapacity过大</span></span><br><span class="line">        ? hugeCapacity(minCapacity)</span><br><span class="line">        : newCapacity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> SAFE_BOUND = MAX_ARRAY_SIZE &gt;&gt; coder;</span><br><span class="line">    <span class="keyword">int</span> UNSAFE_BOUND = Integer.MAX_VALUE &gt;&gt; coder;</span><br><span class="line">    <span class="keyword">if</span> (UNSAFE_BOUND - minCapacity &lt; <span class="number">0</span>) &#123; <span class="comment">// overflow</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (minCapacity &gt; SAFE_BOUND)</span><br><span class="line">        ? minCapacity : SAFE_BOUND;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div id="reverse">
-
-<h2 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h2><p>直接上代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> AbstractStringBuilder <span class="title">reverse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] val = <span class="keyword">this</span>.value;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="keyword">this</span>.count;</span><br><span class="line">    <span class="keyword">int</span> coder = <span class="keyword">this</span>.coder;</span><br><span class="line">    <span class="keyword">int</span> n = count - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (COMPACT_STRINGS &amp;&amp; coder == LATIN1) &#123;</span><br><span class="line">        <span class="comment">// 以中间为分界线，调换左右两边</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = (n-<span class="number">1</span>) &gt;&gt; <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">int</span> k = n - j;</span><br><span class="line">            <span class="keyword">byte</span> cj = val[j];</span><br><span class="line">            val[j] = val[k];</span><br><span class="line">            val[k] = cj;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        StringUTF16.reverse(val, count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div></div>
-          
+          StringBuilder与StringBuffer  概述字符串作为最常用的类型之一，java除了提供不可变的String类之外，还拥有可变字符串StringBuilder与StringBuffer。两者最大的区别在于StringBuilder不保证线程安全，而StringBuffer则将方法以synchronized修饰。所以可以保证线程安全。
+除此之外，两者都继承了AbstractStringBuilder类，所拥有的方法近乎完全相同。作为抽象类，AbstractStringBuilder
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -906,8 +895,8 @@
     <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-String.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cc">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="step by step,one by one">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -920,14 +909,14 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/jdk-String.html" itemprop="url">
                   java系列——String
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -966,7 +955,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-01 21:09:51" itemprop="dateModified" datetime="2019-03-01T21:09:51+08:00">2019-03-01</time>
+                <time title="修改时间：2019-04-01 21:17:59" itemprop="dateModified" datetime="2019-04-01T21:17:59+08:00">2019-04-01</time>
               
             
           </span>
@@ -1000,6 +989,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jdk-String.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-String.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1026,26 +1025,16 @@
       
         
           
-            <h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>String是我们非常常用的一个类，尤其是length()方法。而要清晰地理解length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是0,1。0,1显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为1-bit，以不同bit的排列组合来代表不同的字符。于是，一个采用8-bit、也就是1-byte来的表示字符的字符集：ASCII字符集诞生了。<br>8bit的排列组合，最多可以有2^8=256种形式，也就是说ASCII字符集至多可以表示256中字符。这对英文字母来说绰绰有余，但在世界范围内，这个表示范围显然是远远不够的。于是，为了能表示所有文字，Unicode字符集应运而生。<br>最初，Unicode字符集被设计成2-byte，可以表示2^16=65536个字符。而后随着内容的增加，这6万多个字符也不够用了。于是，unicode规范将这65536个字符合集便被作为基本多文种平面（Basic Multilingual Plane,BMP），并添加了同样要求以2-byte实现的辅助平面（Supplementary Planes）。这样，BMP与SP相结合，unicode字符集可以表示2^32次方个字符。<br>4-byte的虽然暂时解决了表示字符数量问题，但实际使用中，绝大多数的字符还是可以用1-byte或者2-byte表示。如果一律以4-byte处理，无疑会造成巨大的空间浪费。于是，可以经过某种转换实现unicode字符集的编码规范出现了，常见的有utf-8/utf-16等。<br>我们将一个unicode字符编码称为1-code point。在java中，.class采用utf-8,JVM采用utf-16。而utf-16中，2-byte称为1-code unit，而1-code point，或用1-code unit表示，或用2-code unit表示。</p>
-<p>所以length()返回的长度，实际上是code unit数量。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">String str=<span class="string">"\uD835\uDD6B"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//compile-time error</span></span><br><span class="line"><span class="keyword">char</span> c=<span class="string">'\uD835\uDD6B'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//print ��</span></span><br><span class="line">System.out.println(str);</span><br><span class="line"></span><br><span class="line"><span class="comment">//print 2</span></span><br><span class="line">System.out.println(str.length());</span><br><span class="line"></span><br><span class="line"><span class="comment">//print 1</span></span><br><span class="line">System.out.println(str.codePointCount(<span class="number">0</span>,str.length()));</span><br></pre></td></tr></table></figure></p>
-<p>char的包装类Character实现了遵循utf-16的各种方法，而在String类中，以char[] value表示string的值，并调用Character中各种方法，如进行code point判断、大小写转换等。</p>
-<h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[];</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><a href="#contentEquals">contentEquals(CharSequence cs)</a></li>
-<li><a href="#indexOf">indexOf(String str, int fromIndex)</a></li>
-<li><a href="#split">split(String regex, int limit)</a></li>
-</ul>
-<div id="contentEquals"></div>
-
-<h2 id="contentEquals-CharSequence-cs"><a href="#contentEquals-CharSequence-cs" class="headerlink" title="contentEquals(CharSequence cs)"></a>contentEquals(CharSequence cs)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//StringBuffer/StringBuilder extends AbstractStringBuilder</span></span><br><span class="line"><span class="comment">//abstract class AbstractStringBuilder implements Appendable, CharSequence</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contentEquals</span><span class="params">(CharSequence cs)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Argument is a StringBuffer, StringBuilder</span></span><br><span class="line">    <span class="keyword">if</span> (cs <span class="keyword">instanceof</span> AbstractStringBuilder) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cs <span class="keyword">instanceof</span> StringBuffer) &#123;</span><br><span class="line">            <span class="comment">// StringBuffer被synchronized修饰，这里进行是同样的处理</span></span><br><span class="line">            <span class="keyword">synchronized</span>(cs) &#123;</span><br><span class="line">                <span class="comment">// 根据char[] value比较</span></span><br><span class="line">                <span class="keyword">return</span> nonSyncContentEquals((AbstractStringBuilder)cs);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// StringBuilder无需synchronized修饰</span></span><br><span class="line">            <span class="keyword">return</span> nonSyncContentEquals((AbstractStringBuilder)cs);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Argument is a String</span></span><br><span class="line">    <span class="keyword">if</span> (cs <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        <span class="keyword">return</span> equals(cs);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Argument is a generic CharSequence</span></span><br><span class="line">    <span class="keyword">char</span> v1[] = value;</span><br><span class="line">    <span class="keyword">int</span> n = v1.length;</span><br><span class="line">    <span class="keyword">if</span> (n != cs.length()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v1[i] != cs.charAt(i)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div id="indexOf"></div>
-
-<h2 id="indexOf-String-str-int-fromIndex"><a href="#indexOf-String-str-int-fromIndex" class="headerlink" title="indexOf(String str, int fromIndex)"></a>indexOf(String str, int fromIndex)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(String str, <span class="keyword">int</span> fromIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> indexOf(value, <span class="number">0</span>, value.length,</span><br><span class="line">            str.value, <span class="number">0</span>, str.value.length, fromIndex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(<span class="keyword">char</span>[] source, <span class="keyword">int</span> sourceOffset, <span class="keyword">int</span> sourceCount,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">char</span>[] target, <span class="keyword">int</span> targetOffset, <span class="keyword">int</span> targetCount,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span> fromIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (fromIndex &gt;= sourceCount) &#123;</span><br><span class="line">        <span class="keyword">return</span> (targetCount == <span class="number">0</span> ? sourceCount : -<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (fromIndex &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        fromIndex = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (targetCount == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> fromIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> first = target[targetOffset];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//最大offset</span></span><br><span class="line">    <span class="keyword">int</span> max = sourceOffset + (sourceCount - targetCount);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = sourceOffset + fromIndex; i &lt;= max; i++) &#123;</span><br><span class="line">        <span class="comment">/* Look for first character. */</span></span><br><span class="line">        <span class="keyword">if</span> (source[i] != first) &#123;</span><br><span class="line">            <span class="keyword">while</span> (++i &lt;= max &amp;&amp; source[i] != first);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Found first character, now look at the rest of v2 */</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt;= max) &#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> end = j + targetCount - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = targetOffset + <span class="number">1</span>; j &lt; end &amp;&amp; source[j]</span><br><span class="line">                    == target[k]; j++, k++);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (j == end) &#123;</span><br><span class="line">                <span class="comment">/* Found whole string. */</span></span><br><span class="line">                <span class="keyword">return</span> i - sourceOffset;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div id="split"></div>
-
-<h2 id="split-String-regex-int-limit"><a href="#split-String-regex-int-limit" class="headerlink" title="split(String regex, int limit)"></a>split(String regex, int limit)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 以单个原义字符分割时，快速处理，否则调用Pattern.compile(regex).split(this, limit);</span></span><br><span class="line"><span class="keyword">public</span> String[] split(String regex, <span class="keyword">int</span> limit) &#123;</span><br><span class="line">    <span class="comment">/* fastpath if the regex is a</span></span><br><span class="line"><span class="comment">     (1)one-char String and this character is not one of the</span></span><br><span class="line"><span class="comment">        RegEx's meta characters ".$|()[&#123;^?*+\\", or</span></span><br><span class="line"><span class="comment">     (2)two-char String and the first char is the backslash and</span></span><br><span class="line"><span class="comment">        the second is not the ascii digit or ascii letter.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> ch = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 以单个原义字符分割</span></span><br><span class="line">    <span class="keyword">if</span> (((regex.value.length == <span class="number">1</span> &amp;&amp;</span><br><span class="line">         <span class="string">".$|()[&#123;^?*+\\"</span>.indexOf(ch = regex.charAt(<span class="number">0</span>)) == -<span class="number">1</span>) ||</span><br><span class="line">         (regex.length() == <span class="number">2</span> &amp;&amp;</span><br><span class="line">          regex.charAt(<span class="number">0</span>) == <span class="string">'\\'</span> &amp;&amp;</span><br><span class="line">          (((ch = regex.charAt(<span class="number">1</span>))-<span class="string">'0'</span>)|(<span class="string">'9'</span>-ch)) &lt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">          ((ch-<span class="string">'a'</span>)|(<span class="string">'z'</span>-ch)) &lt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">          ((ch-<span class="string">'A'</span>)|(<span class="string">'Z'</span>-ch)) &lt; <span class="number">0</span>)) &amp;&amp;</span><br><span class="line">        (ch &lt; Character.MIN_HIGH_SURROGATE ||</span><br><span class="line">         ch &gt; Character.MAX_LOW_SURROGATE))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> off = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> next = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">boolean</span> limited = limit &gt; <span class="number">0</span>;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">// 未处理不存在分割符的情况</span></span><br><span class="line">        <span class="keyword">while</span> ((next = indexOf(ch, off)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!limited || list.size() &lt; limit - <span class="number">1</span>) &#123;</span><br><span class="line">                list.add(substring(off, next));</span><br><span class="line">                off = next + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;    <span class="comment">// last one</span></span><br><span class="line">                <span class="comment">// assert (list.size() == limit - 1);</span></span><br><span class="line">                <span class="comment">// 最后一个元素</span></span><br><span class="line">                list.add(substring(off, value.length));</span><br><span class="line">                off = value.length;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// If no match was found, return this</span></span><br><span class="line">        <span class="keyword">if</span> (off == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;<span class="keyword">this</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add remaining segment</span></span><br><span class="line">        <span class="comment">// 不存在分割符时的处理</span></span><br><span class="line">        <span class="keyword">if</span> (!limited || list.size() &lt; limit)</span><br><span class="line">            list.add(substring(off, value.length));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Construct result</span></span><br><span class="line">        <span class="comment">// limit数量限制</span></span><br><span class="line">        <span class="keyword">int</span> resultSize = list.size();</span><br><span class="line">        <span class="keyword">if</span> (limit == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (resultSize &gt; <span class="number">0</span> &amp;&amp; list.get(resultSize - <span class="number">1</span>).length() == <span class="number">0</span>) &#123;</span><br><span class="line">                resultSize--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        String[] result = <span class="keyword">new</span> String[resultSize];</span><br><span class="line">        <span class="keyword">return</span> list.subList(<span class="number">0</span>, resultSize).toArray(result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Pattern.compile(regex).split(<span class="keyword">this</span>, limit);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          String 前言String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASCII 字符集诞生了。
+8bit 的排列组合，最多可以有 2^8=256 种形式，也就是说 ASCI
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/jdk-String.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1100,8 +1089,8 @@
     <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-Object.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cc">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="step by step,one by one">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1114,14 +1103,14 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/jdk-Object.html" itemprop="url">
                   java系列——Object
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -1160,7 +1149,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-01 21:11:07" itemprop="dateModified" datetime="2019-03-01T21:11:07+08:00">2019-03-01</time>
+                <time title="修改时间：2019-04-01 22:07:53" itemprop="dateModified" datetime="2019-04-01T22:07:53+08:00">2019-04-01</time>
               
             
           </span>
@@ -1194,6 +1183,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jdk-Object.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-Object.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1220,60 +1219,26 @@
       
         
           
-            <h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Object作为所有类的祖先类，所拥有的方法很多实用native、也就是调用本地方法实现。本文集合了一些资料，权做记录与了解。</p>
-<h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><ul>
-<li><a href="#registerNative">registerNative()</a></li>
-<li><a href="#getClass">getClass()</a></li>
-<li><a href="#clone">clone()</a></li>
-<li><a href="#notify/wait">notify()</a></li>
-<li><a href="#notify/wait">wait()</a></li>
-<li><a href="#finalize">finalize()</a></li>
-</ul>
-<div id="registerNative"></div>
+          Object 前言Object 作为所有类的祖先类，所拥有的方法很多使用 native、也就是调用本地方法实现。本文集合了一些资料，权做记录与了解。
+导航 
+前言
+registerNative
+getClass()
+clone()
+notify()/wait()
+finalize()
 
-<h2 id="registerNative"><a href="#registerNative" class="headerlink" title="registerNative"></a>registerNative</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">registerNatives</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    registerNatives();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>通过JNI(Java native interface)调用本地代码，将在类的初始化运行。</li>
-<li>关于static运行时间，参考资料如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">static块真正的执行时机。如果了解JVM原理，我们知道，一个类的运行分为以下步骤：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">装载</span><br><span class="line">连接</span><br><span class="line">初始化</span><br><span class="line">    其中装载阶段又三个基本动作组成：</span><br><span class="line"></span><br><span class="line">    通过类型的完全限定名，产生一个代表该类型的二进制数据流</span><br><span class="line">    解析这个二进制数据流为方法区内的内部数据结</span><br><span class="line">    构创建一个表示该类型的java.lang.Class类的实例</span><br><span class="line">    另外如果一个类装载器在预先装载的时遇到缺失或错误的class文件，它需要等到程序首次主动使用该类时才报告错误。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">    连接阶段又分为三部分：</span><br><span class="line"></span><br><span class="line">验证，确认类型符合Java语言的语义，检查各个类之间的二进制兼容性(比如final的类不用拥有子类等)，另外还需要进行符号引用的验证。</span><br><span class="line">准备，Java虚拟机为类变量分配内存，设置默认初始值。</span><br><span class="line">解析(可选的) ，在类型的常量池中寻找类，接口，字段和方法的符号引用，把这些符号引用替换成直接引用的过程。</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">　　当一个类被主动使用时，Java虚拟就会对其初始化，如下六种情况为主动使用：</span><br><span class="line"></span><br><span class="line">当创建某个类的新实例时（如通过new或者反射，克隆，反序列化等）</span><br><span class="line">当调用某个类的静态方法时</span><br><span class="line">当使用某个类或接口的静态字段时</span><br><span class="line">当调用Java API中的某些反射方法时，比如类Class中的方法，或者java.lang.reflect中的类的方法时</span><br><span class="line">当初始化某个子类时</span><br><span class="line">当虚拟机启动某个被标明为启动类的类（即包含main方法的那个类）</span><br><span class="line">    Java编译器会收集所有的类变量初始化语句和类型的静态初始化器，将这些放到一个特殊的方法中：clinit。 </span><br><span class="line"></span><br><span class="line">　</span><br><span class="line">实际上，static块的执行发生在“初始化”的阶段。初始化阶段，jvm主要完成对静态变量的初始化，静态块执行等工作。</span><br><span class="line"></span><br><span class="line">下面我们看看执行static块的几种情况：</span><br><span class="line"></span><br><span class="line">1、第一次new A()的过程会打印&quot;&quot;；因为这个过程包括了初始化</span><br><span class="line"></span><br><span class="line">2、第一次Class.forName(&quot;A&quot;)的过程会打印&quot;&quot;；因为这个过程相当于Class.forName(&quot;A&quot;,true,this.getClass().getClassLoader());</span><br><span class="line"></span><br><span class="line">3、第一次Class.forName(&quot;A&quot;,false,this.getClass().getClassLoader())的过程则不会打印&quot;&quot;。因为false指明了装载类的过程中，不进行初始化。不初始化则不会执行static块。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> 参考资料：《深入Java虚拟机》</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<div id="getClass"></div>
+registerNative1234private static native void registerNatives();static &#123;    registerNatives();&#125;
 
-<h2 id="getClass"><a href="#getClass" class="headerlink" title="getClass()"></a>getClass()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> Class&lt;?&gt; getClass();</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>返回运行时class：Class&lt;? extends |X|&gt;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Number n = <span class="number">0</span>;</span><br><span class="line">Class&lt;? extends Number&gt; c = n.getClass();</span><br><span class="line"><span class="comment">//输出class java.lang.Integer</span></span><br><span class="line">System.out.println(c);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>getClass()与 .class语法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//The Java™ Tutorials</span></span><br><span class="line"><span class="keyword">boolean</span> b;</span><br><span class="line">Class c = b.getClass();   <span class="comment">// compile-time error</span></span><br><span class="line">Class c = <span class="keyword">boolean</span>.getClass()  <span class="comment">// compile-time error</span></span><br><span class="line">Class c = <span class="keyword">boolean</span>.class;  <span class="comment">// correct</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<div id="clone"></div>
 
-<h2 id="clone"><a href="#clone" class="headerlink" title="clone()"></a>clone()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">native</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>成员变量是基本数据类型、不可变对象，clone对象修改不影响原对象</li>
-<li>成员变量是可变对象，clone对象修改影响原对象——需要”deep copy”</li>
-</ul>
-<div id="notify/wait"></div>
-
-<h2 id="notify-wait"><a href="#notify-wait" class="headerlink" title="notify()/wait()"></a>notify()/wait()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    wait(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在JAVA中，是没有类似于PV操作、进程互斥等相关的方法的。JAVA的进程同步是通过synchronized()来实现的，需要说明的是，JAVA的synchronized()方法类似于操作系统概念中的互斥内存块，在JAVA中的Object类型中，都是带有一个内存锁的，在有线程获取该内存锁后，其它线程无法访问该内存，从而实现JAVA中简单的同步、互斥操作。明白这个原理，就能理解为什么synchronized(this)与synchronized(static XXX)的区别了，synchronized就是针对内存区块申请内存锁，this关键字代表类的一个对象，所以其内存锁是针对相同对象的互斥操作，而static成员属于类专有，其内存空间为该类所有成员共有，这就导致synchronized()对static成员加锁，相当于对类加锁，也就是在该类的所有成员间实现互斥，在同一时间只有一个线程可访问该类的实例。如果只是简单的想要实现在JAVA中的线程互斥，明白这些基本就已经够了。但如果需要在线程间相互唤醒的话就需要借助Object.wait(), Object.nofity()了。</p>
-</blockquote>
-<blockquote>
-<p>Obj.wait()，与Obj.notify()必须要与synchronized(Obj)一起使用，也就是wait,与notify是针对已经获取了Obj锁进行操作，从语法角度来说就是Obj.wait(),Obj.notify必须在synchronized(Obj){…}语句块内。从功能上来说wait就是说线程在获取对象锁后，主动释放对象锁，同时本线程休眠。直到有其它线程调用对象的notify()唤醒该线程，才能继续获取对象锁，并继续执行。相应的notify()就是对对象锁的唤醒操作。但有一点需要注意的是notify()调用后，并不是马上就释放对象锁的，而是在相应的synchronized(){}语句块执行结束，自动释放锁后，JVM会在wait()对象锁的线程中随机选取一线程，赋予其对象锁，唤醒线程，继续执行。这样就提供了在线程间同步、唤醒的操作。Thread.sleep()与Object.wait()二者都可以暂停当前线程，释放CPU控制权，主要的区别在于Object.wait()在释放CPU同时，释放了对象锁的控制。</p>
-</blockquote>
-<div id="finalize"></div>
-
-<h2 id="finalize"><a href="#finalize" class="headerlink" title="finalize()"></a>finalize()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>JVM判断该对象不可到达且未死亡时调用</li>
-<li>调用完成后，JVM再次扫描，该对象仍不可到达且未死亡才可能被回收</li>
-<li>抛出异常，该异常将会无视，并且finalize（）终止</li>
-</ul>
-
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/jdk-Object.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1328,8 +1293,8 @@
     <link itemprop="mainEntityOfPage" href="http://grassc.cn/hello.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cc">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="step by step,one by one">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1342,14 +1307,14 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/hello.html" itemprop="url">
                   hello
                 </a>
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -1385,6 +1350,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hello.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/hello.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1411,8 +1386,15 @@
       
         
           
-            <h1 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h1>
+          hello world
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/hello.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1485,8 +1467,8 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">cc</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-author-name" itemprop="name">JL Wang</p>
+              <p class="site-description motion-element" itemprop="description">step by step,one by one</p>
           </div>
 
           
@@ -1552,12 +1534,12 @@
             <div class="links-of-author motion-element">
               
                 <span class="links-of-author-item">
-                  <a href="https://github.com/grasscy" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  <a href="https://github.com/grasscy" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
                   
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="mailto:grassc@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  <a href="mailto:grassc@qq.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   
                 </span>
               
@@ -1596,7 +1578,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">cc</span>
+  <span class="author" itemprop="copyrightHolder">JL Wang</span>
 
   
 
@@ -1604,17 +1586,13 @@
 </div>
 
 
-
-
-  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
-
-
-
-  <span class="post-meta-divider">|</span>
+  
 
 
 
-  <div class="theme-info">主题 – <a rel="external nofollow" class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
+
+
+
 
 
 
@@ -1735,6 +1713,31 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'vWikNYTtsWrE6IRNuCuifo2R-gzGzoHsz',
+        appKey: '4ogvOHcn0KqyBmOXRTWh0nbo',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
 
 
 
