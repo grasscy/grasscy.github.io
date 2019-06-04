@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://grassc.cn/jdk-AbstractQueuedSynchronizer.html</loc>
-    <lastmod>2019-04-02</lastmod>
+    <lastmod>2019-06-04</lastmod>
   </url>  <url>
-    <loc>http://grassc.cn/jdk-CopyOnWriteArray.html</loc>
+    <loc>http://grassc.cn/jdk-CopyOnWriteArrayList.html</loc>
     <lastmod>2019-04-02</lastmod>
   </url>  <url>
     <loc>http://grassc.cn/jdk-ConcurrentHashMap.html</loc>
