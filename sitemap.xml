@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://grassc.cn/java-intro2IO_NIO.html</loc>
+    
+    <lastmod>2019-06-10T14:58:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://grassc.cn/jdk-ReentrantLock.html</loc>
     
     <lastmod>2019-06-06T15:11:40.914Z</lastmod>
