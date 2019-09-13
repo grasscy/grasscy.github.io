@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://grassc.cn/spring-ioc.html</loc>
+    <lastmod>2019-09-13</lastmod>
+  </url>  <url>
     <loc>http://grassc.cn/intro2Mybatis.html</loc>
     <lastmod>2019-06-18</lastmod>
   </url>  <url>
