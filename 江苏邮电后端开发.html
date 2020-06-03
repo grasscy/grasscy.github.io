@@ -108,24 +108,24 @@
 
 
 
-  <meta name="description" content="hello world">
+  <meta name="description" content="中高级后端开发1、 Activiti 工作流中，如果要实现根据工作负荷来安排任务，有什么思路？ 2、 采用 SprigngCloud 之后，代码开发，日志，异常链，管理，排除故障等方面应有什么调整？ 3、 实体类为未来参与排序等集合的操作操作，一般要重新哪些方法？有哪些注意点？实现 Comparable 接口，重写 compareTo,注意点：  x.compareTo(y) == -y.comp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello">
-<meta property="og:url" content="http://grassc.cn/hello.html">
+<meta property="og:title" content="小草窝">
+<meta property="og:url" content="http://grassc.cn/江苏邮电后端开发.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="hello world">
+<meta property="og:description" content="中高级后端开发1、 Activiti 工作流中，如果要实现根据工作负荷来安排任务，有什么思路？ 2、 采用 SprigngCloud 之后，代码开发，日志，异常链，管理，排除故障等方面应有什么调整？ 3、 实体类为未来参与排序等集合的操作操作，一般要重新哪些方法？有哪些注意点？实现 Comparable 接口，重写 compareTo,注意点：  x.compareTo(y) == -y.comp">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-30T14:06:06.000Z">
+<meta property="og:updated_time" content="2020-06-03T09:04:38.928Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hello">
-<meta name="twitter:description" content="hello world">
+<meta name="twitter:title" content="小草窝">
+<meta name="twitter:description" content="中高级后端开发1、 Activiti 工作流中，如果要实现根据工作负荷来安排任务，有什么思路？ 2、 采用 SprigngCloud 之后，代码开发，日志，异常链，管理，排除故障等方面应有什么调整？ 3、 实体类为未来参与排序等集合的操作操作，一般要重新哪些方法？有哪些注意点？实现 Comparable 接口，重写 compareTo,注意点：  x.compareTo(y) == -y.comp">
 
 
 
 
 
 
-  <link rel="canonical" href="http://grassc.cn/hello.html"/>
+  <link rel="canonical" href="http://grassc.cn/江苏邮电后端开发.html"/>
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>hello | 小草窝</title>
+  <title> | 小草窝</title>
   
 
 
@@ -310,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/hello.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/江苏邮电后端开发.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -327,7 +327,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">hello
+          <h2 class="post-title" itemprop="name headline">
               
             
           </h2>
@@ -352,7 +352,7 @@
                 
               
 
-              <time title="创建时间：2018-09-30 21:17:28 / 修改时间：22:06:06" itemprop="dateCreated datePublished" datetime="2018-09-30T21:17:28+08:00">2018-09-30</time>
+              <time title="创建时间：2020-06-03 17:05:03 / 修改时间：17:04:38" itemprop="dateCreated datePublished" datetime="2020-06-03T17:05:03+08:00">2020-06-03</time>
             
 
             
@@ -371,8 +371,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/hello.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/hello.html" itemprop="commentCount"></span>
+                <a href="/江苏邮电后端开发.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/江苏邮电后端开发.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,7 +400,38 @@
       
 
       
-        <h1 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h1>
+        <h1 id="中高级后端开发"><a href="#中高级后端开发" class="headerlink" title="中高级后端开发"></a>中高级后端开发</h1><p>1、 Activiti 工作流中，如果要实现根据工作负荷来安排任务，有什么思路？</p>
+<p>2、 采用 SprigngCloud 之后，代码开发，日志，异常链，管理，排除故障等方面应有什么调整？</p>
+<p>3、 实体类为未来参与排序等集合的操作操作，一般要重新哪些方法？有哪些注意点？<br>实现 Comparable 接口，重写 compareTo,<br>注意点：</p>
+<ul>
+<li>x.compareTo(y) == -y.compareTo(x)，若抛异常则同时抛</li>
+<li>建议满足 (x.compareTo(y)==0) == (x.equals(y))</li>
+</ul>
+<p>4、 Java Serializable 的作用, Equals ，== 的区别？</p>
+<ul>
+<li>Serializable：序列化接口，实现此接口则表示支持序列化</li>
+<li>Equals ，== 的区别<ul>
+<li>equals 是 Object 类的一个方法，==是符号</li>
+<li>equals 判断对象是否满足人为定义的相等条件，==判断是否同一对象</li>
+</ul>
+</li>
+</ul>
+<p>5、 是否有自己的 Git 地址</p>
+<ul>
+<li><a href="https://github.com/grasscy" target="_blank" rel="noopener">https://github.com/grasscy</a></li>
+</ul>
+<p>6、 前后端分离开发，日志应该如何进行记录，在出现问题的时候，方便定位问题？</p>
+<ul>
+<li>后台进入方法与出方法、异常等均记录日志，可以采用aop框架进行统一管理</li>
+</ul>
+<p>7、 数据库访问的时候，在一个项目中是否可以同时使用 Mybatis，JPA，JDBC 等多种持久化技术？如可以，事务如何处理？</p>
+<ul>
+<li>可以</li>
+<li>整合一些框架如spring进行事务管理的话，单数据源时支持不同持久层框架的事务性</li>
+</ul>
+<p>9、算法设计题目<br>给出正整数 n，则 1 到 n 这 n 个数可以构成 n！种排列，把这些排列按照从小到大的顺序（字典顺序）列出，如 n=3 时，列出 1 2 3，1 3 2，2 1 3，2 3 1，3 1 2，3 2 1 六个排列。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayDeque;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Deque;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Deque&lt;Integer&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> n = scanner.nextInt();</span><br><span class="line">        <span class="keyword">int</span>[] ns = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">int</span> all = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            ns[i] = i + <span class="number">1</span>;</span><br><span class="line">            all *= (i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Arrays.toString(ns));</span><br><span class="line">        <span class="keyword">while</span> (all-- != <span class="number">1</span>) &#123;</span><br><span class="line">            ns = next(ns);</span><br><span class="line">            System.out.println(Arrays.toString(ns));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] next(<span class="keyword">int</span>[] ss) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] ns = ss.clone();</span><br><span class="line">        <span class="keyword">int</span> i = ns.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (; i &gt;= <span class="number">1</span> &amp;&amp; ns[i] &lt; ns[i - <span class="number">1</span>]; i--) &#123;</span><br><span class="line">            ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; ns.length; j++) &#123;</span><br><span class="line">                ns[j] = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> m = i;</span><br><span class="line">            <span class="keyword">int</span> min = ns[i];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; ns.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ns[i - <span class="number">1</span>] &lt; ns[j] &amp;&amp; ns[j] &lt; min) &#123;</span><br><span class="line">                    min = ns[j];</span><br><span class="line">                    m = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ns[m] = ns[i - <span class="number">1</span>];</span><br><span class="line">            ns[i - <span class="number">1</span>] = min;</span><br><span class="line">            Arrays.sort(ns, i, ns.length);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ns;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -427,15 +458,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/spring-aop.html" rel="next" title="spring系列之aop">
+                <i class="fa fa-chevron-left"></i> spring系列之aop
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/jdk-Object.html" rel="prev" title="java系列——Object">
-                java系列——Object <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -606,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hello-world"><span class="nav-number">1.</span> <span class="nav-text">hello world</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#中高级后端开发"><span class="nav-number">1.</span> <span class="nav-text">中高级后端开发</span></a></li></ol></div>
             
 
           </div>
