@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="前言导航 前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。">
-<meta name="keywords" content="java源码,java">
+  <meta name="description" content="前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。这里网上的">
+<meta name="keywords" content="samba,nfs,内外网访问">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu&#x2F;win10文件共享：samba、nfs、内外网访问">
 <meta property="og:url" content="http://grassc.cn/build-samba-nfs.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="前言导航 前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。">
+<meta property="og:description" content="前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。这里网上的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-24T14:21:29.384Z">
+<meta property="og:updated_time" content="2021-03-24T14:24:40.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu&#x2F;win10文件共享：samba、nfs、内外网访问">
-<meta name="twitter:description" content="前言导航 前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。">
+<meta name="twitter:description" content="前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。这里网上的">
 
 
 
@@ -353,9 +353,13 @@
                 
               
 
-              <time title="创建时间：2021-03-24 22:21:29" itemprop="dateCreated datePublished" datetime="2021-03-24T22:21:29+08:00">2021-03-24</time>
+              <time title="创建时间：2021-03-24 22:21:29 / 修改时间：22:24:40" itemprop="dateCreated datePublished" datetime="2021-03-24T22:21:29+08:00">2021-03-24</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -371,14 +375,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/随笔/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a></span>
 
                 
                 
@@ -422,7 +419,7 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><h2 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h2><p>很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———</p>
 <ul>
 <li>效果<ul>
 <li>公司电脑（A）与家中电脑（B）共享文件夹</li>
@@ -433,7 +430,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="导航-1"><a href="#导航-1" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
 <li><a href="#前言">前言</a></li>
 </ul>
 <h2 id="nfs"><a href="#nfs" class="headerlink" title="nfs"></a>nfs</h2><p>简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。这里网上的教程有很多，记录几个坑点：</p>
@@ -471,9 +468,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java源码/" rel="tag"># java源码</a>
+            <a href="/tags/samba/" rel="tag"># samba</a>
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/nfs/" rel="tag"># nfs</a>
+          
+            <a href="/tags/内外网访问/" rel="tag"># 内外网访问</a>
           
         </div>
       
@@ -615,7 +614,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -665,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言-1"><span class="nav-number">3.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航-1"><span class="nav-number">4.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nfs"><span class="nav-number">5.</span> <span class="nav-text">nfs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#samba"><span class="nav-number">6.</span> <span class="nav-text">samba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内外网"><span class="nav-number">7.</span> <span class="nav-text">内外网</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nfs"><span class="nav-number">3.</span> <span class="nav-text">nfs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#samba"><span class="nav-number">4.</span> <span class="nav-text">samba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内外网"><span class="nav-number">5.</span> <span class="nav-text">内外网</span></a></li></ol></div>
             
 
           </div>
