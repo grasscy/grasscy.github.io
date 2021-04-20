@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="前言导航 前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。 导航  前言 java部分——信息管理 go部分——监测 总结  java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，">
+  <meta name="description" content="前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。 导航  前言 java部分——信息管理 go部分——监测 总结  java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，但代码重复">
 <meta name="keywords" content="java源码,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="总结——对项目代码的重构重写">
 <meta property="og:url" content="http://grassc.cn/rewrite-xiya-monitor.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="前言导航 前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。 导航  前言 java部分——信息管理 go部分——监测 总结  java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，">
+<meta property="og:description" content="前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。 导航  前言 java部分——信息管理 go部分——监测 总结  java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，但代码重复">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-04-20T08:35:55.147Z">
+<meta property="og:updated_time" content="2021-04-20T08:52:02.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结——对项目代码的重构重写">
-<meta name="twitter:description" content="前言导航 前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。 导航  前言 java部分——信息管理 go部分——监测 总结  java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，">
+<meta name="twitter:description" content="前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。 导航  前言 java部分——信息管理 go部分——监测 总结  java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，但代码重复">
 
 
 
@@ -353,9 +353,13 @@
                 
               
 
-              <time title="创建时间：2021-04-20 16:35:55" itemprop="dateCreated datePublished" datetime="2021-04-20T16:35:55+08:00">2021-04-20</time>
+              <time title="创建时间：2021-04-20 16:35:55 / 修改时间：16:52:02" itemprop="dateCreated datePublished" datetime="2021-04-20T16:35:55+08:00">2021-04-20</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -422,8 +426,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><h2 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h2><p>今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。</p>
-<h2 id="导航-1"><a href="#导航-1" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。</p>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
 <li><a href="#前言">前言</a></li>
 <li><a href="#java部分信息管理">java部分——信息管理</a></li>
 <li><a href="#go部分监测">go部分——监测</a></li>
@@ -431,25 +435,25 @@
 </ul>
 <h2 id="java部分——信息管理"><a href="#java部分——信息管理" class="headerlink" title="java部分——信息管理"></a>java部分——信息管理</h2><p>刚入职的时候接手java，常见的springboot+mybatis组合，但代码重复率很高。而导致重复率高的主要理由居然是代码结构设计：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">原来的目录结构：</span><br><span class="line">- src</span><br><span class="line">  - moudleToB</span><br><span class="line">    - webToB</span><br><span class="line">    - service</span><br><span class="line">      - serviceA</span><br><span class="line">      - serviceB</span><br><span class="line">    - dao</span><br><span class="line">      - daoA</span><br><span class="line">      - daoB</span><br><span class="line">  - moudleToC</span><br><span class="line">    - webToC</span><br><span class="line">    - service</span><br><span class="line">      - serviceA</span><br><span class="line">      - serviceB</span><br><span class="line">    - dao</span><br><span class="line">      - daoA</span><br><span class="line">      - daoB</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，这如此的目录结构下，看似满足了所谓的分层，实际上却带来了大量了ctrl+v代码。所以先将共同的service抽出、不同的web切分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">修改后的目录结构</span><br><span class="line">- src</span><br><span class="line">  - web</span><br><span class="line">    - webToB</span><br><span class="line">    - webToC</span><br><span class="line">  - moudle</span><br><span class="line">    - moudleA</span><br><span class="line">      - serviceA</span><br><span class="line">      - daoA</span><br><span class="line">    - moudleB</span><br><span class="line">      - serviceB</span><br><span class="line">      - daoB</span><br></pre></td></tr></table></figure></p>
-<h2 id="go部分——监测"><a href="#go部分——监测" class="headerlink" title="go部分——监测"></a>go部分——监测</h2><p>作为一个javaer，上手go不需要很久，但同时在基本没有交接的情况下去接手没有文档的核心业务还是有些挑战的。不过真正出乎意料的是，原来的监测流程之“精巧”：</p>
+<h2 id="go部分——监测"><a href="#go部分——监测" class="headerlink" title="go部分——监测"></a>go部分——监测</h2><p>作为一个javaer，上手go不需要很久，但同时在基本没有交接的情况下去接手没有文档的核心业务还是有些挑战的。不过没有想到最大的麻烦来源于监测流程之“精巧”：</p>
 <ul>
 <li>服务器通过mqtt收到的开始消息更改监测状态</li>
 <li>服务器通过mqtt收到的结束消息更改监测状态并通知监测完成</li>
 <li>app上传监测数据</li>
 <li>app通过http接口通知生成报告</li>
 </ul>
-<p>如果要成功完成监测后需要报告，那么移动端app需要确保：</p>
+<p>看起来没有啥问题，但分析下来，发现如果要成功完成监测后需要报告，那么移动端app需要确保：</p>
 <ol>
 <li>服务器收且只收一次通过mqtt发送的开始监测消息</li>
 <li>服务器收且只收一次通过mqtt发送的结束监测消息</li>
 <li>成功将监测数据上传至文件服务器</li>
 <li>成功调用生成报告接口</li>
 </ol>
-<p>设计本身也许没有问题，但在网络不可控的情况下，报告数据难找、找不到的问题经常出现。</p>
-<p>此事恰逢新需求出现，原有的设计并不能很好的满足，于是有了重新设计的机会。而新架构的第一步，当然是确保报告的正常生成，优选的解显而易见：让生成报告的client去扫描文件服务器。这样的话，只要app把监测数据上传，那就可以出报告。</p>
+<p>所以原先的设计本身也许没有问题，但在网络不可控的情况下，报告数据难找、找不到等问题经常出现也是可以预计的了。</p>
+<p>此时恰逢新需求出现，原有的设计并不能很好的满足，于是有了重新设计的机会。而新架构的第一步，当然是确保报告的正常生成，优选的解显而易见：让生成报告的client去扫描文件服务器。这样的话，只要app把监测数据上传，那么就可以出报告，免去了不是那么必要的接口、数据依赖。</p>
 <p>而为了支持多节点，client处理监测文件的过程则参考了concurrentHashMap的一些思路：每次从 /to_generate获取文件，移至 /{clientId}/generating，生成完成再移至 /generated。</p>
 <p>这样，在新版本上线后，报告数据丢失的情况没有再次出现，监测业务稳定性获得提升，顺带将一些状态数据从数据库移动到了redis存储。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中具体的细节就不在多言，最大感受就是分分合合，无论是业务、结构还是并发的切入点。而与比起去从众多业务中寻找切入点，我更倾向于从数据流的角度拆分。而写go的一段时间，不得不说go比java更加简洁简单，而为了语言的简单性也少了很多选择。与之相反的则是不完全的oop与过程式的结合又增加了代码设计的灵活性，恰到好处的优雅难得。但java的宝藏太多，比如给了这次编写大量思路的concurrentHashMap。也许对于学习来说，java更加合适吧，至少目前ide的支持更好，O(∩_∩)O哈哈~</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中具体的细节就不在多言，最大感受就是分分合合，无论是业务、结构还是并发的切入点。而就个人来说，与比起去从众多业务中寻找切入点，我更倾向于从数据、数据流的角度拆分。在写go了一段时间后，不得不说go比java更加简洁简单，但为了语言的简单性也少了go也限制了很多选择，比如jdk中的阻塞队列就有多种，而go sdk可能现成的只有chan关键字。不过也正因为这种限制，go写并发才会显得简单吧~而相对于语法的简单性，不完全oop与过程式的结合又增加了代码设计的灵活性，恰到好处的优雅恐怕更加难得。而java的宝藏太多，比如给了这次编写大量思路的concurrentHashMap。也许对于学习来说，java更加合适吧，至少目前ide的支持更好，O(∩_∩)O哈哈~</p>
 
       
     </div>
@@ -670,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言-1"><span class="nav-number">3.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航-1"><span class="nav-number">4.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java部分——信息管理"><span class="nav-number">5.</span> <span class="nav-text">java部分——信息管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go部分——监测"><span class="nav-number">6.</span> <span class="nav-text">go部分——监测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java部分——信息管理"><span class="nav-number">3.</span> <span class="nav-text">java部分——信息管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go部分——监测"><span class="nav-number">4.</span> <span class="nav-text">go部分——监测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
