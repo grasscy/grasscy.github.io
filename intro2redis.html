@@ -124,7 +124,7 @@
 <meta property="og:image" content="http://grassc.cn/intro2redis/iomuti.png">
 <meta property="og:image" content="http://grassc.cn/intro2redis/sigio.png">
 <meta property="og:image" content="http://grassc.cn/intro2redis/aio.png">
-<meta property="og:updated_time" content="2021-04-26T07:08:07.582Z">
+<meta property="og:updated_time" content="2021-04-26T08:17:02.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis之初窥">
 <meta name="twitter:description" content="前言redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。这里，我们来见到了解一下redis。 导航  前言 概述 主函数（v1.2.6版本） 事件驱动与io多路复用  概述一般认为redis属于key-value 内存数据库。这里有两个关键值：一个是key-value，一个是内存数据库。key-value是非关系型数据库（NoSQL）的一种。非关系型数据库（NoSQL）全称">
@@ -362,7 +362,7 @@
                 
               
 
-              <time title="创建时间：2021-04-26 15:00:36 / 修改时间：15:08:07" itemprop="dateCreated datePublished" datetime="2021-04-26T15:00:36+08:00">2021-04-26</time>
+              <time title="创建时间：2021-04-26 15:00:36 / 修改时间：16:17:02" itemprop="dateCreated datePublished" datetime="2021-04-26T15:00:36+08:00">2021-04-26</time>
             
 
             
@@ -487,7 +487,7 @@
 </ul>
 <p>一个数据输入通常包括两个阶段，一是等待数据到达内核并且内核准备好复制数据，二是从内核将数据复制到进程。</p>
 <p><img src="/intro2redis/blockio.png" alt="blockio"></p>
-<p>对于应用来说，到内核准备好数据的时间是没有必要等待的，而阻塞式io完全等待了这个时间，所以使用阻塞式io的效率较低。非阻塞式io将这个等待的过程改为了轮询：</p>
+<p>对于应用来说，阻塞式io完全等待了内核准备数据与数据复制的时间，所以使用阻塞式io的效率较低。非阻塞式io将这个等待的过程改为了轮询：</p>
 <p><img src="/intro2redis/unblockio.png" alt="unblockio"></p>
 <p>应用使用非阻塞式io时，需要采用轮询的方法去确定数据有没有准备好。而轮询往往会耗费大量的cpu时间。如果将应用程序主动询问内核数据是否准备好改成由内核通知应用程序是否准备好，那么就可以大量减少cpu消耗。io复用与信号驱动式io就是如此：</p>
 <p><img src="/intro2redis/iomuti.png" alt="iomuti"></p>
