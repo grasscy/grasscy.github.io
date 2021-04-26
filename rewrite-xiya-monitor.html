@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="小草窝">
 <meta property="og:description" content="前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。 导航  前言 java部分——信息管理 go部分——监测 总结  java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，但代码重复">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-04-20T08:52:02.798Z">
+<meta property="og:updated_time" content="2021-04-26T07:15:09.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结——对项目代码的重构重写">
 <meta name="twitter:description" content="前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。 导航  前言 java部分——信息管理 go部分——监测 总结  java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，但代码重复">
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="创建时间：2021-04-20 16:35:55 / 修改时间：16:52:02" itemprop="dateCreated datePublished" datetime="2021-04-20T16:35:55+08:00">2021-04-20</time>
+              <time title="创建时间：2021-04-20 16:35:55" itemprop="dateCreated datePublished" datetime="2021-04-20T16:35:55+08:00">2021-04-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-04-26 15:15:09" itemprop="dateModified" datetime="2021-04-26T15:15:09+08:00">2021-04-26</time>
               
             
           </span>
@@ -453,7 +465,7 @@
 <p>此时恰逢新需求出现，原有的设计并不能很好的满足，于是有了重新设计的机会。而新架构的第一步，当然是确保报告的正常生成，优选的解显而易见：让生成报告的client去扫描文件服务器。这样的话，只要app把监测数据上传，那么就可以出报告，免去了不是那么必要的接口、数据依赖。</p>
 <p>而为了支持多节点，client处理监测文件的过程则参考了concurrentHashMap的一些思路：每次从 /to_generate获取文件，移至 /{clientId}/generating，生成完成再移至 /generated。</p>
 <p>这样，在新版本上线后，报告数据丢失的情况没有再次出现，监测业务稳定性获得提升，顺带将一些状态数据从数据库移动到了redis存储。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中具体的细节就不在多言，最大感受就是分分合合，无论是业务、结构还是并发的切入点。而就个人来说，与比起去从众多业务中寻找切入点，我更倾向于从数据、数据流的角度拆分。在写go了一段时间后，不得不说go比java更加简洁简单，但为了语言的简单性也少了go也限制了很多选择，比如jdk中的阻塞队列就有多种，而go sdk可能现成的只有chan关键字。不过也正因为这种限制，go写并发才会显得简单吧~而相对于语法的简单性，不完全oop与过程式的结合又增加了代码设计的灵活性，恰到好处的优雅恐怕更加难得。而java的宝藏太多，比如给了这次编写大量思路的concurrentHashMap。也许对于学习来说，java更加合适吧，至少目前ide的支持更好，O(∩_∩)O哈哈~</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中具体的细节就不在多言，最大感受就是分分合合，无论是业务、结构还是并发的切入点。而比起去从众多业务中寻找切入点，笔者更倾向于从数据、数据流的角度拆分。在写go了一段时间后，不得不说go比java更加简洁简单，但为了语言的简单性也少了go也限制了很多选择，比如jdk中的阻塞队列就有多种，而go sdk可能现成的只有chan关键字。不过也正因为这种限制，go写并发才会显得简单吧~而相对于语法的简单性，不完全oop与过程式的结合又增加了代码设计的灵活性，恰到好处的优雅恐怕更加难得。不过也许对于学习来说，java更加合适吧，至少目前ide的支持更好，O(∩_∩)O哈哈~</p>
 
       
     </div>
