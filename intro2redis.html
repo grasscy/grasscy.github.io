@@ -108,13 +108,13 @@
 
 
 
-  <meta name="description" content="前言redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。说来惭愧，对于redis，笔者一直处于“仅限使用”阶段。故此有了这篇，以大体了解、介绍redis。 导航  前言 概述 主函数（v1.2.6版本） 事件驱动与io多路复用  概述一般认为redis属于key-value 内存数据库。这里有两个关键值：一个是key-value，一个是内存数据库。key-value是非关系">
-<meta name="keywords" content="java源码,java">
+  <meta name="description" content="前言redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。这里，我们来见到了解一下redis。 导航  前言 概述 主函数（v1.2.6版本） 事件驱动与io多路复用  概述一般认为redis属于key-value 内存数据库。这里有两个关键值：一个是key-value，一个是内存数据库。key-value是非关系型数据库（NoSQL）的一种。非关系型数据库（NoSQL）全称">
+<meta name="keywords" content="db,redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis之初窥">
 <meta property="og:url" content="http://grassc.cn/intro2redis.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="前言redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。说来惭愧，对于redis，笔者一直处于“仅限使用”阶段。故此有了这篇，以大体了解、介绍redis。 导航  前言 概述 主函数（v1.2.6版本） 事件驱动与io多路复用  概述一般认为redis属于key-value 内存数据库。这里有两个关键值：一个是key-value，一个是内存数据库。key-value是非关系">
+<meta property="og:description" content="前言redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。这里，我们来见到了解一下redis。 导航  前言 概述 主函数（v1.2.6版本） 事件驱动与io多路复用  概述一般认为redis属于key-value 内存数据库。这里有两个关键值：一个是key-value，一个是内存数据库。key-value是非关系型数据库（NoSQL）的一种。非关系型数据库（NoSQL）全称">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://grassc.cn/intro2redis/mediator.png">
 <meta property="og:image" content="http://grassc.cn/intro2redis/broker.png">
@@ -124,10 +124,10 @@
 <meta property="og:image" content="http://grassc.cn/intro2redis/iomuti.png">
 <meta property="og:image" content="http://grassc.cn/intro2redis/sigio.png">
 <meta property="og:image" content="http://grassc.cn/intro2redis/aio.png">
-<meta property="og:updated_time" content="2021-04-26T07:00:36.726Z">
+<meta property="og:updated_time" content="2021-04-26T07:08:07.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis之初窥">
-<meta name="twitter:description" content="前言redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。说来惭愧，对于redis，笔者一直处于“仅限使用”阶段。故此有了这篇，以大体了解、介绍redis。 导航  前言 概述 主函数（v1.2.6版本） 事件驱动与io多路复用  概述一般认为redis属于key-value 内存数据库。这里有两个关键值：一个是key-value，一个是内存数据库。key-value是非关系">
+<meta name="twitter:description" content="前言redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。这里，我们来见到了解一下redis。 导航  前言 概述 主函数（v1.2.6版本） 事件驱动与io多路复用  概述一般认为redis属于key-value 内存数据库。这里有两个关键值：一个是key-value，一个是内存数据库。key-value是非关系型数据库（NoSQL）的一种。非关系型数据库（NoSQL）全称">
 <meta name="twitter:image" content="http://grassc.cn/intro2redis/mediator.png">
 
 
@@ -362,9 +362,13 @@
                 
               
 
-              <time title="创建时间：2021-04-26 15:00:36" itemprop="dateCreated datePublished" datetime="2021-04-26T15:00:36+08:00">2021-04-26</time>
+              <time title="创建时间：2021-04-26 15:00:36 / 修改时间：15:08:07" itemprop="dateCreated datePublished" datetime="2021-04-26T15:00:36+08:00">2021-04-26</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -380,14 +384,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/" itemprop="url" rel="index"><span itemprop="name">db</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -431,7 +435,7 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。说来惭愧，对于redis，笔者一直处于“仅限使用”阶段。故此有了这篇，以大体了解、介绍redis。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。这里，我们来见到了解一下redis。</p>
 <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
 <li><a href="#前言">前言</a></li>
 <li><a href="#概述">概述</a></li>
@@ -488,7 +492,7 @@
 <p>应用使用非阻塞式io时，需要采用轮询的方法去确定数据有没有准备好。而轮询往往会耗费大量的cpu时间。如果将应用程序主动询问内核数据是否准备好改成由内核通知应用程序是否准备好，那么就可以大量减少cpu消耗。io复用与信号驱动式io就是如此：</p>
 <p><img src="/intro2redis/iomuti.png" alt="iomuti"></p>
 <p><img src="/intro2redis/sigio.png" alt="sigio"></p>
-<p>至于异步io，则更进一步，不在通知应用程序可以进行io操作了，而是直接通知整个io是否完成：</p>
+<p>至于异步io，则更进一步，不再通知应用程序可以进行io操作了，而是直接通知整个io是否完成：</p>
 <p><img src="/intro2redis/aio.png" alt="aio"></p>
 <p>将目光放回io复用上，其中的select函数除了返回可读条件之外，还可以返回可写、异常、超时等，并且可以同时等待多个fd，和事件驱动中负责分发事件的mediator非常相似。事实上，redis也是如此来实现事件驱动的。而io复用的函数，除了select之外，还有epoll与kqueque。对于select来说，如果没有相关时间产生，那么就会阻塞。select虽然能监听多个fd，但并不知道是哪个fd产生了事件，应用程序只能通过无差别轮询所有fd才能对齐操作。epoll(linux)、kqueue(BSD)函数改进了这点，让应用程序可以知晓是哪个fd产生的。</p>
 <p>了解了这些，再看aeProcessEvents()中的文件事件处理，就很容易理解了：</p>
@@ -515,9 +519,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java源码/" rel="tag"># java源码</a>
+            <a href="/tags/db/" rel="tag"># db</a>
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/redis/" rel="tag"># redis</a>
           
         </div>
       
@@ -632,7 +636,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -659,7 +667,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
