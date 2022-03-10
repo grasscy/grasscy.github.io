@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://grassc.cn/mysql-base.html</loc>
+    
+    <lastmod>2022-03-10T13:16:12.707Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://grassc.cn/java-base.html</loc>
     
     <lastmod>2022-03-02T14:19:21.371Z</lastmod>
