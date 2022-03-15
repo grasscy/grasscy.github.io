@@ -878,7 +878,7 @@ drop、delete 与 truncate 区别？
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/hello.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-Set.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -897,8 +897,8 @@ drop、delete 与 truncate 区别？
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/hello.html" itemprop="url">
-                  hello
+                <a class="post-title-link" href="/jdk-Set.html" itemprop="url">
+                  java系列——HashSet
                 </a>
               
             
@@ -924,7 +924,7 @@ drop、delete 与 truncate 区别？
                 
               
 
-              <time title="创建时间：2021-11-20 21:17:28" itemprop="dateCreated datePublished" datetime="2021-11-20T21:17:28+08:00">2021-11-20</time>
+              <time title="创建时间：2021-08-25 19:32:34" itemprop="dateCreated datePublished" datetime="2021-08-25T19:32:34+08:00">2021-08-25</time>
             
 
             
@@ -941,11 +941,36 @@ drop、delete 与 truncate 区别？
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-03-15 11:20:43" itemprop="dateModified" datetime="2022-03-15T11:20:43+08:00">2022-03-15</time>
+                <time title="修改时间：2022-03-15 11:31:08" itemprop="dateModified" datetime="2022-03-15T11:31:08+08:00">2022-03-15</time>
               
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -955,8 +980,8 @@ drop、delete 与 truncate 区别？
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/hello.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/hello.html" itemprop="commentCount"></span>
+                <a href="/jdk-Set.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-Set.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -986,11 +1011,399 @@ drop、delete 与 truncate 区别？
       
         
           
-          hello world
-          
+          HashSetjava中的HashSet的实现依托于HashMap。从代码实现的角度来说，HashSet每个结点都是拥有真实key与虚拟value的map键值对。
+1234567891011121314151617181920private transient HashMap&lt;E,Object&gt; map;// Dummy value to associate with an Object in the backing Mapprivate static final Object PR
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/hello.html#more" rel="contents">
+            <a class="btn" href="/jdk-Set.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-HashMap-Hashtable.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="好好学习，天天向上">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小草窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/jdk-HashMap-Hashtable.html" itemprop="url">
+                  HashMap——兼以Hashtable
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-08-10 20:25:43" itemprop="dateCreated datePublished" datetime="2021-08-10T20:25:43+08:00">2021-08-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-03-15 11:30:23" itemprop="dateModified" datetime="2022-03-15T11:30:23+08:00">2022-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jdk-HashMap-Hashtable.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-HashMap-Hashtable.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          HashMap——兼以 Hashtable 概述HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值对 Entry，array[i]事实上存储了一个 list 的头结点。但是，相对于 Hashtabl
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/jdk-HashMap-Hashtable.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-AbstractMap-LinkedHashMap.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="好好学习，天天向上">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小草窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/jdk-AbstractMap-LinkedHashMap.html" itemprop="url">
+                  java系列——LinkedHashMap
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-08-01 20:02:08" itemprop="dateCreated datePublished" datetime="2021-08-01T20:02:08+08:00">2021-08-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-03-15 11:29:37" itemprop="dateModified" datetime="2022-03-15T11:29:37+08:00">2022-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jdk-AbstractMap-LinkedHashMap.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-AbstractMap-LinkedHashMap.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          LinkedHashMap  概述LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。
+大体来说，相对于HashMap，LinkedHashMap的每个节点都额外增加了before与after两个链接，来记录顺
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/jdk-AbstractMap-LinkedHashMap.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1236,7 +1649,7 @@ drop、delete 与 truncate 区别？
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/redis-basemain.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-Hashtable.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -1255,8 +1668,8 @@ drop、delete 与 truncate 区别？
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/redis-basemain.html" itemprop="url">
-                  redis基本结构
+                <a class="post-title-link" href="/jdk-Hashtable.html" itemprop="url">
+                  java系列——Hashtable
                 </a>
               
             
@@ -1282,205 +1695,7 @@ drop、delete 与 truncate 区别？
                 
               
 
-              <time title="创建时间：2021-04-28 17:29:19" itemprop="dateCreated datePublished" datetime="2021-04-28T17:29:19+08:00">2021-04-28</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/" itemprop="url" rel="index"><span itemprop="name">db</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/redis-basemain.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/redis-basemain.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前言上一篇大概介绍了redis属于内存数据库，采用了事件驱动模式并通过io复用来实现。除此之外，redis还可以以AOF与RDB两种方式进行持久化等。接下来，我们继续从redis的早期版本入手，了解redis基本结构。
-导航 
-前言
-从文件名出发……
-redis.c
-
-从文件名出发……
-文件并不多，大体如下：
-
-数据结构
-adlist:双向链表
-dict:哈希表
-
-
-事件驱动
-ae,ae_epoll,ae_kqueue,aeselect
-
-
-辅助
-压缩：lzf
-排序：pqsort
-字符串：sds
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/redis-basemain.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/intro2redis.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JL Wang">
-      <meta itemprop="description" content="好好学习，天天向上">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小草窝">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/intro2redis.html" itemprop="url">
-                  redis之初窥
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2021-04-26 15:00:36" itemprop="dateCreated datePublished" datetime="2021-04-26T15:00:36+08:00">2021-04-26</time>
+              <time title="创建时间：2021-07-22 20:53:02" itemprop="dateCreated datePublished" datetime="2021-07-22T20:53:02+08:00">2021-07-22</time>
             
 
             
@@ -1497,209 +1712,7 @@ ae,ae_epoll,ae_kqueue,aeselect
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-05-02 12:02:01" itemprop="dateModified" datetime="2021-05-02T12:02:01+08:00">2021-05-02</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/" itemprop="url" rel="index"><span itemprop="name">db</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/intro2redis.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/intro2redis.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前言redis作为目前流行的一个非关系数据库，在许多项目中承当着系统缓存等角色。这里，我们先来简单了解一下redis。
-导航 
-前言
-概述
-主函数（v1.2.6版本）
-事件驱动与io多路复用
-
-概述一般认为redis属于key-value 内存数据库。这里有两个关键值：一个是key-value，一个是内存数据库。key-value是非关系型数据库（NoSQL）的一种。非关系型数据库（NoSQL）全称Not Only SQL：
-
-2009年，Last.fm的Johan Oskarsson发起了一次
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/intro2redis.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/rewrite-xiya-monitor.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JL Wang">
-      <meta itemprop="description" content="好好学习，天天向上">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小草窝">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/rewrite-xiya-monitor.html" itemprop="url">
-                  总结——对项目代码的重构重写
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2021-04-20 16:35:55" itemprop="dateCreated datePublished" datetime="2021-04-20T16:35:55+08:00">2021-04-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2021-04-26 15:15:09" itemprop="dateModified" datetime="2021-04-26T15:15:09+08:00">2021-04-26</time>
+                <time title="修改时间：2022-03-15 11:29:04" itemprop="dateModified" datetime="2022-03-15T11:29:04+08:00">2022-03-15</time>
               
             
           </span>
@@ -1738,8 +1751,8 @@ ae,ae_epoll,ae_kqueue,aeselect
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/rewrite-xiya-monitor.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/rewrite-xiya-monitor.html" itemprop="commentCount"></span>
+                <a href="/jdk-Hashtable.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-Hashtable.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1769,18 +1782,11 @@ ae,ae_epoll,ae_kqueue,aeselect
       
         
           
-          前言今天谷雨，也是时候做个总结了。入职新公司的快一年间，也算是对项目有了基本了解。总体来说，业务可以分为三部分：信息管理、设备监测、问答交流。其中，最核心的业务是通过自研以及第三方合作的硬件设备来进行监测与监测后的报告生成。
-导航 
-前言
-java部分——信息管理
-go部分——监测
-总结
-
-java部分——信息管理刚入职的时候接手java，常见的springboot+mybatis组合，但代码重复率很高。而导致重复率高的主要理由居然是代码结构设计：123456789101112131415161
+          Hashtable  概述Hashtable作为早期的集合，在非并发的情况下，Hashtable已经基本被HashMap取代。而在有同步需求的时候，也可以使用效率更高的ConcurrentHashMap，而不是每个方法都用synchronize修饰的Hashtable。但同时，Hashtbale相对于HashMap与ConcurrentHashMap的来说，实现非常简单。通过Hashtable。我们可以大致了解java中散列表实现的基本原理，为HashMap与ConcurrentHashMap的
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/rewrite-xiya-monitor.html#more" rel="contents">
+            <a class="btn" href="/jdk-Hashtable.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1836,7 +1842,7 @@ java部分——信息管理刚入职的时候接手java，常见的springboot+m
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/build-samba-nfs.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-AbstractList-ArrayList-LinkedList.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -1855,8 +1861,8 @@ java部分——信息管理刚入职的时候接手java，常见的springboot+m
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/build-samba-nfs.html" itemprop="url">
-                  ubuntu/win10文件共享：samba、nfs、内外网访问
+                <a class="post-title-link" href="/jdk-AbstractList-ArrayList-LinkedList.html" itemprop="url">
+                  java系列——ArrayList与LinkedList
                 </a>
               
             
@@ -1882,7 +1888,7 @@ java部分——信息管理刚入职的时候接手java，常见的springboot+m
                 
               
 
-              <time title="创建时间：2021-03-24 22:21:29" itemprop="dateCreated datePublished" datetime="2021-03-24T22:21:29+08:00">2021-03-24</time>
+              <time title="创建时间：2021-07-17 22:35:12" itemprop="dateCreated datePublished" datetime="2021-07-17T22:35:12+08:00">2021-07-17</time>
             
 
             
@@ -1899,7 +1905,202 @@ java部分——信息管理刚入职的时候接手java，常见的springboot+m
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-03-25 13:24:27" itemprop="dateModified" datetime="2021-03-25T13:24:27+08:00">2021-03-25</time>
+                <time title="修改时间：2022-03-15 11:28:14" itemprop="dateModified" datetime="2022-03-15T11:28:14+08:00">2022-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jdk-AbstractList-ArrayList-LinkedList.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-AbstractList-ArrayList-LinkedList.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          ArrayList与LinkedList  前言对不少人来说，List恐怕是最常用的集合了。java中，List作为接口，其下有两个常见的实现类：ArrayList和LinkedList。除此之外，还提供了AbstractList抽象类，用来帮助自定义List的实现类。本文先从AbstractList入手，再对比ArrayList和LinkedList，从而将这两个常用的集合做一个大体的介绍。
+在具体的介绍之前，笔者希望先讨论一个概念：fail-fast。
+fail-fast是java集合框架中
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/jdk-AbstractList-ArrayList-LinkedList.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/Hexo+Nginx+Docker_InstallNotes.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="好好学习，天天向上">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小草窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Hexo+Nginx+Docker_InstallNotes.html" itemprop="url">
+                  Hexo+Nginx+Docker搭建记录
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-07-09 17:15:51" itemprop="dateCreated datePublished" datetime="2021-07-09T17:15:51+08:00">2021-07-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-03-15 11:27:15" itemprop="dateModified" datetime="2022-03-15T11:27:15+08:00">2022-03-15</time>
               
             
           </span>
@@ -1931,8 +2132,8 @@ java部分——信息管理刚入职的时候接手java，常见的springboot+m
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/build-samba-nfs.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/build-samba-nfs.html" itemprop="commentCount"></span>
+                <a href="/Hexo+Nginx+Docker_InstallNotes.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/Hexo+Nginx+Docker_InstallNotes.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1962,208 +2163,18 @@ java部分——信息管理刚入职的时候接手java，常见的springboot+m
       
         
           
-          前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———
+          本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。
+Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：
 
-效果
-公司电脑（A）与家中电脑（B）共享文件夹
+采用腾讯云主机部署，如果要迁移可能有些麻烦
+每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可？
+hexo似乎不支持https？
 
-
-所需设备
-一台有公网 ip 的主机（笔者使用的是台云主机）
-
-
-
-导航 
-前言
-nfs
-samba
-内外网
-
-nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。这里网上的教程有很多，记录几个坑点：
-
-linux 机器可以成功 mount nf
+Hexo支持git部署，将hexo部署到git上看起来是个不错
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/build-samba-nfs.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/spring-aop.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JL Wang">
-      <meta itemprop="description" content="好好学习，天天向上">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小草窝">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/spring-aop.html" itemprop="url">
-                  spring系列之aop
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-14 10:54:23" itemprop="dateCreated datePublished" datetime="2019-09-14T10:54:23+08:00">2019-09-14</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/spring-aop.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/spring-aop.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前言导航 前言aop（面向切面编程）作为 oop（面对对象编程）的补充，将一些与对象业务不怎么相关的处理，统一成另外的模块，从而在对象执行某一行为时切入执行。使业务对象专注于业务，减少类似“一行业务代码十行校验”的情况。从某种角度来说，aop 可以算是代理模式的扩展。若说代理模式关注于一个个“点”的话，aop 则是连点成线、以至于面。
-具体到代码层面也是如此，aop 通过创建代理对象来实现“围绕”原对象各种方法的处理。接下来，本文以 simple-spring 举例，尝试介绍 spring 中的
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/spring-aop.html#more" rel="contents">
+            <a class="btn" href="/Hexo+Nginx+Docker_InstallNotes.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

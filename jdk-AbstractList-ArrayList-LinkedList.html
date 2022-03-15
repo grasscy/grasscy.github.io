@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="小草窝">
 <meta property="og:description" content="ArrayList与LinkedList  前言对不少人来说，List恐怕是最常用的集合了。java中，List作为接口，其下有两个常见的实现类：ArrayList和LinkedList。除此之外，还提供了AbstractList抽象类，用来帮助自定义List的实现类。本文先从AbstractList入手，再对比ArrayList和LinkedList，从而将这两个常用的集合做一个大体的介绍。 在">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-01T13:26:08.000Z">
+<meta property="og:updated_time" content="2022-03-15T03:28:14.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java系列——ArrayList与LinkedList">
 <meta name="twitter:description" content="ArrayList与LinkedList  前言对不少人来说，List恐怕是最常用的集合了。java中，List作为接口，其下有两个常见的实现类：ArrayList和LinkedList。除此之外，还提供了AbstractList抽象类，用来帮助自定义List的实现类。本文先从AbstractList入手，再对比ArrayList和LinkedList，从而将这两个常用的集合做一个大体的介绍。 在">
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2018-10-20 22:35:12" itemprop="dateCreated datePublished" datetime="2018-10-20T22:35:12+08:00">2018-10-20</time>
+              <time title="创建时间：2021-07-17 22:35:12" itemprop="dateCreated datePublished" datetime="2021-07-17T22:35:12+08:00">2021-07-17</time>
             
 
             
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-01 21:26:08" itemprop="dateModified" datetime="2019-04-01T21:26:08+08:00">2019-04-01</time>
+                <time title="修改时间：2022-03-15 11:28:14" itemprop="dateModified" datetime="2022-03-15T11:28:14+08:00">2022-03-15</time>
               
             
           </span>
@@ -471,6 +471,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lastRet &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">    checkForComodification();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 改变modcount</span></span><br><span class="line">        AbstractList.<span class="keyword">this</span>.remove(lastRet);</span><br><span class="line">        <span class="keyword">if</span> (lastRet &lt; cursor)</span><br><span class="line">            cursor--;</span><br><span class="line">        lastRet = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// expectedModCount更新</span></span><br><span class="line">        expectedModCount = modCount;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通常，我们使用List而不是Array的主要原因，在于List几乎不需要在意容量大小。某种程度上，List可以看做自动扩容的数组，尤其是本身就以数组实现的ArrayList。在ArrayList中，自动扩容的方案为：当不满足所需的最小容量时，将会先扩展至原容量的1.5倍。仍然不足，才会扩展至需求的最小容量。也因此，ArrayList的空间占用，往往是大于LinkedList的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">    <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?</span><br><span class="line">        Integer.MAX_VALUE :</span><br><span class="line">        MAX_ARRAY_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
