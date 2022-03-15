@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>http://grassc.cn/hello.html</loc>
+    
+    <lastmod>2021-12-01T05:22:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://grassc.cn/intro2redis.html</loc>
     
     <lastmod>2021-05-02T04:02:01.000Z</lastmod>
@@ -215,13 +222,6 @@
     <loc>http://grassc.cn/tags/index.html</loc>
     
     <lastmod>2018-10-17T15:04:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://grassc.cn/hello.html</loc>
-    
-    <lastmod>2018-09-30T14:06:06.000Z</lastmod>
     
   </url>
   

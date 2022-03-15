@@ -10,6 +10,9 @@
     <loc>http://grassc.cn/java-base.html</loc>
     <lastmod>2022-03-02</lastmod>
   </url>  <url>
+    <loc>http://grassc.cn/hello.html</loc>
+    <lastmod>2021-12-01</lastmod>
+  </url>  <url>
     <loc>http://grassc.cn/intro2redis.html</loc>
     <lastmod>2021-05-02</lastmod>
   </url>  <url>
@@ -84,8 +87,5 @@
   </url>  <url>
     <loc>http://grassc.cn/java-SyncLock.html</loc>
     <lastmod>2019-03-14</lastmod>
-  </url>  <url>
-    <loc>http://grassc.cn/hello.html</loc>
-    <lastmod>2018-09-30</lastmod>
   </url>
 </urlset>
