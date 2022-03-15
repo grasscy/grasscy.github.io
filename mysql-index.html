@@ -108,24 +108,25 @@
 
 
 
-  <meta name="description" content="好好学习，天天向上">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://grassc.cn/categories/index.html">
+  <meta name="description" content="前言一些关于 mysql 索引的知识点。 导航 b 树与 b+树 B 树的所有节点既存放键(key) 也存放 数据(data)，而 B+树只有叶子节点存放 key 和 data，其他内节点只存放 key。 B 树的叶子节点都是独立的;B+树的叶子节点有一条引用链指向与它相邻的叶子节点。 B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了。而 B+树的">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小记之mysql索引">
+<meta property="og:url" content="http://grassc.cn/mysql-index.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="好好学习，天天向上">
+<meta property="og:description" content="前言一些关于 mysql 索引的知识点。 导航 b 树与 b+树 B 树的所有节点既存放键(key) 也存放 数据(data)，而 B+树只有叶子节点存放 key 和 data，其他内节点只存放 key。 B 树的叶子节点都是独立的;B+树的叶子节点有一条引用链指向与它相邻的叶子节点。 B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了。而 B+树的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-17T15:05:13.000Z">
+<meta property="og:updated_time" content="2022-03-15T08:59:31.936Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="好好学习，天天向上">
+<meta name="twitter:title" content="小记之mysql索引">
+<meta name="twitter:description" content="前言一些关于 mysql 索引的知识点。 导航 b 树与 b+树 B 树的所有节点既存放键(key) 也存放 数据(data)，而 B+树只有叶子节点存放 key 和 data，其他内节点只存放 key。 B 树的叶子节点都是独立的;B+树的叶子节点有一条引用链指向与它相邻的叶子节点。 B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了。而 B+树的">
 
 
 
 
 
 
-  <link rel="canonical" href="http://grassc.cn/categories/"/>
+  <link rel="canonical" href="http://grassc.cn/mysql-"/>
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title>categories | 小草窝</title>
+  <title>小记之mysql索引 | 小草窝</title>
   
 
 
@@ -249,7 +250,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
   </li>
@@ -290,109 +291,244 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/mysql-index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="好好学习，天天向上">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小草窝">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h2 class="post-title" itemprop="name headline">categories</h2>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                目前共计 8 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/db/">db</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/db/mysql/">mysql</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/db/redis/">redis</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/java源码/">java源码</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/并发/">并发</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/小记/">小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li></ul>
-            </div>
-          </div>
+          <h2 class="post-title" itemprop="name headline">小记之mysql索引
+              
+            
+          </h2>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2022-03-15 16:59:31" itemprop="dateCreated datePublished" datetime="2022-03-15T16:59:31+08:00">2022-03-15</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/" itemprop="url" rel="index"><span itemprop="name">db</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/mysql-index.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/mysql-index.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一些关于 mysql 索引的知识点。</p>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><h2 id="b-树与-b-树"><a href="#b-树与-b-树" class="headerlink" title="b 树与 b+树"></a>b 树与 b+树</h2><ul>
+<li>B 树的所有节点既存放键(key) 也存放 数据(data)，而 B+树只有叶子节点存放 key 和 data，其他内节点只存放 key。</li>
+<li>B 树的叶子节点都是独立的;B+树的叶子节点有一条引用链指向与它相邻的叶子节点。</li>
+<li>B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了。而 B+树的检索效率就很稳定了，任何查找都是从根节点到叶子节点的过程，叶子节点的顺序检索很明显。</li>
+</ul>
+<h2 id="聚簇索引与非聚簇索引"><a href="#聚簇索引与非聚簇索引" class="headerlink" title="聚簇索引与非聚簇索引"></a>聚簇索引与非聚簇索引</h2><ul>
+<li>聚簇索引：索引对应的data即是数据<ul>
+<li>依赖有序数据，无序数据插入或查找的速度慢</li>
+<li>更新代价大</li>
+</ul>
+</li>
+<li>非聚簇索引：索引对应的data不是直接的数据，需要继续查找（指针，主键……）<ul>
+<li>依赖有序数据</li>
+<li>可能会二次查询（回表）<ul>
+<li>也可能不回表，比如查索引本身值或主键<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一个索引包含（或者说覆盖）所有需要查询的字段的值</li>
+</ul>
+<h2 id="myisam-与-innodb-均采用-b-树"><a href="#myisam-与-innodb-均采用-b-树" class="headerlink" title="myisam 与 innodb 均采用 b+树"></a>myisam 与 innodb 均采用 b+树</h2><ul>
+<li>myisam:非聚簇索引<blockquote>
+<p>MyISAM 引擎中，索引文件和数据文件分离，B+Tree 叶节点的 data 域存放的是数据记录的地址。</p>
+</blockquote>
+</li>
+<li>innodb:聚簇索引<blockquote>
+<p>InnoDB 引擎中，其数据文件本身就是索引文件，其表数据文件本身就是按 B+Tree 组织的一个索引结构，树的叶节点 data 域保存了完整的数据记录。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="主键索引与二级索引（辅助索引）"><a href="#主键索引与二级索引（辅助索引）" class="headerlink" title="主键索引与二级索引（辅助索引）"></a>主键索引与二级索引（辅助索引）</h2><ul>
+<li>主键索引：聚簇索引</li>
+<li>二级索引：非聚簇索引<ul>
+<li>唯一索引</li>
+<li>普通索引</li>
+<li>前缀索引：只适用于字符串</li>
+<li>全文索引：大文本数据中的关键字信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="创建索引的注意事项"><a href="#创建索引的注意事项" class="headerlink" title="创建索引的注意事项"></a>创建索引的注意事项</h2><ul>
+<li>不为null：数据库难优化</li>
+<li>频繁查询、作为条件查询、排序、频繁用于连接</li>
+<li>慎重：频繁更新</li>
+<li>联合索引&gt;单列索引：空间</li>
+<li>扩展索引&gt;创建索引</li>
+<li>字符串：前缀索引&gt;普通索引</li>
+</ul>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/java-intro2IO_NIO.html" rel="next" title="java系列之IO、NIO简述">
+                <i class="fa fa-chevron-left"></i> java系列之IO、NIO简述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -425,8 +561,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -543,6 +688,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#b-树与-b-树"><span class="nav-number">3.</span> <span class="nav-text">b 树与 b+树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚簇索引与非聚簇索引"><span class="nav-number">4.</span> <span class="nav-text">聚簇索引与非聚簇索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖索引"><span class="nav-number">5.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#myisam-与-innodb-均采用-b-树"><span class="nav-number">6.</span> <span class="nav-text">myisam 与 innodb 均采用 b+树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主键索引与二级索引（辅助索引）"><span class="nav-number">7.</span> <span class="nav-text">主键索引与二级索引（辅助索引）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建索引的注意事项"><span class="nav-number">8.</span> <span class="nav-text">创建索引的注意事项</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
