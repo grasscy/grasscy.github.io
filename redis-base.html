@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言 nfs samba 内外网  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件">
-<meta name="keywords" content="samba,nfs,内外网访问">
+  <meta name="description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 事务   指令 rdb   命令 aof   AOF 重写缓存区： 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu&#x2F;win10文件共享：samba、nfs、内外网访问">
-<meta property="og:url" content="http://grassc.cn/build-samba-nfs.html">
+<meta property="og:title" content="小记职redis基础">
+<meta property="og:url" content="http://grassc.cn/redis-base.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言 nfs samba 内外网  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件">
+<meta property="og:description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 事务   指令 rdb   命令 aof   AOF 重写缓存区： 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-03-15T05:58:58.439Z">
+<meta property="og:updated_time" content="2022-03-24T15:01:40.145Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu&#x2F;win10文件共享：samba、nfs、内外网访问">
-<meta name="twitter:description" content="前言很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———  效果 公司电脑（A）与家中电脑（B）共享文件夹   所需设备 一台有公网 ip 的主机（笔者使用的是台云主机）    导航  前言 nfs samba 内外网  nfs简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件">
+<meta name="twitter:title" content="小记职redis基础">
+<meta name="twitter:description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 事务   指令 rdb   命令 aof   AOF 重写缓存区： 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实">
 
 
 
 
 
 
-  <link rel="canonical" href="http://grassc.cn/build-samba-nfs.html"/>
+  <link rel="canonical" href="http://grassc.cn/redis-base.html"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>ubuntu/win10文件共享：samba、nfs、内外网访问 | 小草窝</title>
+  <title>小记职redis基础 | 小草窝</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/build-samba-nfs.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/redis-base.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -328,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ubuntu/win10文件共享：samba、nfs、内外网访问
+          <h2 class="post-title" itemprop="name headline">小记职redis基础
               
             
           </h2>
@@ -353,25 +353,9 @@
                 
               
 
-              <time title="创建时间：2022-02-05 22:21:29" itemprop="dateCreated datePublished" datetime="2022-02-05T22:21:29+08:00">2022-02-05</time>
+              <time title="创建时间：2022-03-24 23:01:40" itemprop="dateCreated datePublished" datetime="2022-03-24T23:01:40+08:00">2022-03-24</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2022-03-15 13:58:58" itemprop="dateModified" datetime="2022-03-15T13:58:58+08:00">2022-03-15</time>
-              
             
           </span>
 
@@ -387,7 +371,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/随笔/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/" itemprop="url" rel="index"><span itemprop="name">db</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -402,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/build-samba-nfs.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/build-samba-nfs.html" itemprop="commentCount"></span>
+                <a href="/redis-base.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/redis-base.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -431,38 +422,153 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>很多资料都放在了公司电脑上，而自己又懒得来回背电脑，心血来潮折腾了一下文件共享———</p>
-<ul>
-<li>效果<ul>
-<li>公司电脑（A）与家中电脑（B）共享文件夹</li>
-</ul>
-</li>
-<li>所需设备<ul>
-<li>一台有公网 ip 的主机（笔者使用的是台云主机）</li>
-</ul>
-</li>
-</ul>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于 redis 的一些知识点。</p>
 <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
 <li><a href="#前言">前言</a></li>
-<li><a href="#nfs">nfs</a></li>
-<li><a href="#samba">samba</a></li>
-<li><a href="#内外网">内外网</a></li>
-</ul>
-<h2 id="nfs"><a href="#nfs" class="headerlink" title="nfs"></a>nfs</h2><p>简单的来说，文件共享的方案即是将云主机作为 nfs 服务器，配置共享文件夹，在公司电脑 A 与家庭电脑 B 中分别挂载该共享文件夹，达到文件夹同步共享的效果。这里网上的教程有很多，记录几个坑点：</p>
-<ul>
-<li>linux 机器可以成功 mount nfs 共享目录，win10 提示 rpc 超时：<ul>
-<li>nfs service 执行 rpcinfo -p localhost，查看防火墙是否放开了 portmapper、nfs、mountd 相关端口（ubuntu 下须放开 portmapper、nfs，win10 下还需要放开 mountd）</li>
-<li>如果是云主机的话，还需要开放安全组相关端口</li>
+<li><a href="#正文">正文</a><ul>
+<li><a href="#功能">功能</a><ul>
+<li><a href="#数据类型">数据类型</a></li>
+<li><a href="#底层数据结构">底层数据结构</a></li>
+<li><a href="#配置">配置</a></li>
+<li><a href="#多路-io-复用">多路 io 复用</a></li>
+<li><a href="#事务">事务</a></li>
 </ul>
 </li>
-<li>win10 下 showmount -e [server ip]可成功返回，mount [server…] 提示 网络错误 - 53<ul>
-<li>Windows NFS 客户端经常使用的是大的端口号，需要 nfs server 添加 insecure 选项（允许更高的端口号）。如：echo “/data *(insecure,rw)” &gt;&gt; /etc/exports</li>
-<li>更新配置 exportfs -rv</li>
+<li><a href="#指令">指令</a><ul>
+<li><a href="#rdb">rdb</a></li>
+</ul>
+</li>
+<li><a href="#命令">命令</a><ul>
+<li><a href="#aof">aof</a></li>
+</ul>
+</li>
+<li><a href="#aof-重写缓存区">AOF 重写缓存区：</a><ul>
+<li><a href="#过期回收">过期回收</a></li>
+<li><a href="#内存淘汰">内存淘汰</a></li>
 </ul>
 </li>
 </ul>
-<h2 id="samba"><a href="#samba" class="headerlink" title="samba"></a>samba</h2><p>笔者一开始用的是 samba 协议，配置也不困难，但遇到上了一个不可见字符集的问题：从 win 复制过来的配置文件中，空格里面多了大概是 M- MB-的字符，导致 session closed，最后查看日志+vi 显示不可见字符才排查出问题。所以看配置文件的时候，也可以注意下 vim 的语法检查以及高亮。</p>
-<h2 id="内外网"><a href="#内外网" class="headerlink" title="内外网"></a>内外网</h2><p>要使用外网访问内网机器的话，可以使用 frp，文档很详细。</p>
+</li>
+</ul>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
+<li>分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。</li>
+<li>限流：一般是通过 Redis + Lua 脚本的方式来实现限流。</li>
+<li>消息队列：Redis 自带的 list 数据结构可以作为一个简单的队列使用。Redis5.0 中增加的 Stream 类型的数据结构更加适合用来做消息队列。它比较类似于 Kafka，有主题和消费组的概念，支持消息持久化以及 ACK 机制。</li>
+<li>复杂业务场景：通过 Redis 以及 Redis 扩展（比如 Redisson）提供的数据结构，我们可以很方便地完成很多复杂的业务场景比如通过 bitmap 统计活跃用户、通过 sorted set 维护排行榜</li>
+</ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul>
+<li>string</li>
+<li>list</li>
+<li>set</li>
+<li>sorted set</li>
+<li>hash</li>
+<li>bitmap、geo、HyperLogLog</li>
+</ul>
+<h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><ul>
+<li>简单动态字符串<ul>
+<li>获取字符串长度 O(1)</li>
+<li>api安全，不会造成缓冲区溢出</li>
+</ul>
+</li>
+<li>双向链表</li>
+<li>字典</li>
+<li>跳表</li>
+<li>整数集合</li>
+<li>压缩列表</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>network</li>
+<li>general：日志</li>
+<li>snapshotting：持久化配置信息</li>
+<li>replacation：集群</li>
+<li>memory management:内存管理，包括数据过期删除策略信息等</li>
+<li>append only mode：持久化方式</li>
+</ul>
+<h3 id="多路-io-复用"><a href="#多路-io-复用" class="headerlink" title="多路 io 复用"></a>多路 io 复用</h3><ul>
+<li>select<ul>
+<li>修改入参数组</li>
+<li>最大监听 1024</li>
+<li>需要轮询返回数据的 socket</li>
+<li>线程不安全</li>
+<li>文件描述符被另一个线程关闭的话，结果不唯一</li>
+</ul>
+</li>
+<li>poll<ul>
+<li>去掉 1024 的限制（链表）</li>
+<li>不修改入参数组</li>
+<li>线程不安全</li>
+</ul>
+</li>
+<li>epoll<ul>
+<li>可确定那个 socket 有数据</li>
+<li>线程安全</li>
+</ul>
+</li>
+</ul>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><ul>
+<li>隔离性：redis 是单进程的程序，保证在执行事务时，不会对事务进行中断，事务可以运<br>行直到执行完所有事务队列中的命令为止。所以 redis 的事务支持隔离性。</li>
+<li>redis 会将一个事务中的所有命令序列化，然后按顺序执行。redis 不可能在一个事务的执<br>行过程中插入执行另一个客户端发出的请求。可以保证 Redis 将这些命令作为一个单独的<br>隔离操作执行。</li>
+<li>不支持回滚</li>
+</ul>
+<h4 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h4><ul>
+<li>multi:标记开始</li>
+<li>exec：执行</li>
+<li>discard:取消</li>
+<li>watch:监视一个或多个 key，当事务执行之前 key 别其他命令改动时，事务奖杯打断</li>
+<li>unwatch</li>
+</ul>
+<h3 id="rdb"><a href="#rdb" class="headerlink" title="rdb"></a>rdb</h3><ul>
+<li>fork 子进程，将数据集写到临时的 rdb 文件中</li>
+<li>子进程完成写入时，redis 替换旧文件并删除旧文件</li>
+</ul>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><ul>
+<li>save:阻塞，拒绝客户端指令</li>
+<li>bgsave：异步；可通过配置文件自动执行：满足“ N 秒内数据集至少有 M 个改<br>动”</li>
+</ul>
+<h3 id="aof"><a href="#aof" class="headerlink" title="aof"></a>aof</h3><ul>
+<li>若开启了 aof 持久化，启动时优先 aof 还原数据</li>
+<li>过程<ul>
+<li>append 命令追加：完成写命令，按格式追加至 aof_buf 缓冲区的末尾</li>
+<li>append 追加后，调用 flushAppendOnluFile 函数确定是否写入文件</li>
+</ul>
+</li>
+<li>策略<ul>
+<li>always：每次追加到 aof 文件时都 fsync 到磁盘</li>
+<li>everysec：默认</li>
+<li>no：何时 fsync 由 os 决定</li>
+</ul>
+</li>
+</ul>
+<h4 id="AOF-重写缓存区："><a href="#AOF-重写缓存区：" class="headerlink" title="AOF 重写缓存区："></a>AOF 重写缓存区：</h4><ul>
+<li>redis 是单线程工作，当 AOF 文件较大时重写时间会比较长，在重写 AOF 期间，redis 将长时间无法处<br>理客户端请求。为了解决这个问题，可以将 AOF 重写程序放到子进程中执行，好处如下：<ul>
+<li>子进程进行 AOF 重写期间，服务器进程(父进程)可以继续处理其它客户端请求。</li>
+<li>子进程带有父进程的数据副本，使用子进程而不是线程，可以在避免使用锁的情况下，保<br>证数据的安全性。</li>
+</ul>
+</li>
+<li>子进程中 AOF 重写导致的问题：<ul>
+<li>子进程在进行 AOF 重写期间，服务器进程依然可以处理其它客户端请求，这就会导致数<br>据库状态已经发生了改变，使得当前数据库数据状态和重写后的 AOF 文件中的数据不一<br>致。</li>
+<li>也就是出现了 AOF 文件和数据库中数据不一致的问题。</li>
+</ul>
+</li>
+<li>数据状态不一致解决办法：<ul>
+<li>redis 服务器设置了一个 AOF 重写缓冲区。这个缓冲区在创建子进程后开始使用，当 redis<br>服务器执行一个客户端的写请求命令，之后将这个写命令也发送到 AOF 重写缓冲区（同时将命令追加到 AOF 缓冲区和 AOF 重写缓冲区<br>）</li>
+<li>当子进程完成 AOF 日志重写之后，给父进程发送信号，父进程接收此信号后，将 AOF<br>重写缓冲区的内容写到新的 AOF 文件中，保持数据的一致性。</li>
+<li>改名覆盖</li>
+</ul>
+</li>
+</ul>
+<h3 id="过期回收"><a href="#过期回收" class="headerlink" title="过期回收"></a>过期回收</h3><ul>
+<li>定期</li>
+<li>惰性</li>
+</ul>
+<h3 id="内存淘汰"><a href="#内存淘汰" class="headerlink" title="内存淘汰"></a>内存淘汰</h3><ul>
+<li>volatile-lru：利用 LRU 算法移除设置过过期时间的 key(LRU:Least Recently Used)</li>
+<li>allkeys-lru：利用 LRU 算法移除任何 key</li>
+<li>volatile-random：移除设置过过期时间的随机 key</li>
+<li>allkeys-random：移除随机 key</li>
+<li>volatile-ttl：移除即将过期的 key(minor TTL)</li>
+<li>noeviction ：不移除任何 key，只是返回一个写错误，默认选项</li>
+</ul>
 
       
     </div>
@@ -483,11 +589,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/samba/" rel="tag"># samba</a>
-          
-            <a href="/tags/nfs/" rel="tag"># nfs</a>
-          
-            <a href="/tags/内外网访问/" rel="tag"># 内外网访问</a>
+            <a href="/tags/redis/" rel="tag"># redis</a>
           
         </div>
       
@@ -500,8 +602,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/spring-aop.html" rel="next" title="spring系列之aop">
-                <i class="fa fa-chevron-left"></i> spring系列之aop
+              <a href="/mysql-index.html" rel="next" title="小记之mysql索引">
+                <i class="fa fa-chevron-left"></i> 小记之mysql索引
               </a>
             
           </div>
@@ -509,10 +611,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/intro2redis.html" rel="prev" title="redis之初窥">
-                redis之初窥 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -697,7 +795,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nfs"><span class="nav-number">3.</span> <span class="nav-text">nfs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#samba"><span class="nav-number">4.</span> <span class="nav-text">samba</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内外网"><span class="nav-number">5.</span> <span class="nav-text">内外网</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">3.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">3.0.1.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">3.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底层数据结构"><span class="nav-number">3.2.</span> <span class="nav-text">底层数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多路-io-复用"><span class="nav-number">3.4.</span> <span class="nav-text">多路 io 复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">3.5.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指令"><span class="nav-number">3.5.1.</span> <span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rdb"><span class="nav-number">3.6.</span> <span class="nav-text">rdb</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令"><span class="nav-number">3.6.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aof"><span class="nav-number">3.7.</span> <span class="nav-text">aof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF-重写缓存区："><span class="nav-number">3.7.1.</span> <span class="nav-text">AOF 重写缓存区：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过期回收"><span class="nav-number">3.8.</span> <span class="nav-text">过期回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存淘汰"><span class="nav-number">3.9.</span> <span class="nav-text">内存淘汰</span></a></li></ol></li></ol></div>
             
 
           </div>
