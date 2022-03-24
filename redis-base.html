@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 事务   指令 rdb   命令 aof   AOF 重写缓存区： 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实">
+  <meta name="description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 单线程与多线程 事务   指令 rdb   命令 aof   AOF 重写缓存区： 4.0 后混合持久化 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小记之redis基础">
 <meta property="og:url" content="http://grassc.cn/redis-base.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 事务   指令 rdb   命令 aof   AOF 重写缓存区： 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实">
+<meta property="og:description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 单线程与多线程 事务   指令 rdb   命令 aof   AOF 重写缓存区： 4.0 后混合持久化 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-03-24T15:03:22.666Z">
+<meta property="og:updated_time" content="2022-03-24T23:37:59.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记之redis基础">
-<meta name="twitter:description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 事务   指令 rdb   命令 aof   AOF 重写缓存区： 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实">
+<meta name="twitter:description" content="前言关于 redis 的一些知识点。 导航  前言 正文 功能 数据类型 底层数据结构 配置 多路 io 复用 单线程与多线程 事务   指令 rdb   命令 aof   AOF 重写缓存区： 4.0 后混合持久化 过期回收 内存淘汰      正文功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过">
 
 
 
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="创建时间：2022-03-24 23:01:40 / 修改时间：23:03:22" itemprop="dateCreated datePublished" datetime="2022-03-24T23:01:40+08:00">2022-03-24</time>
+              <time title="创建时间：2022-03-24 23:01:40" itemprop="dateCreated datePublished" datetime="2022-03-24T23:01:40+08:00">2022-03-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-03-25 07:37:59" itemprop="dateModified" datetime="2022-03-25T07:37:59+08:00">2022-03-25</time>
               
             
           </span>
@@ -435,6 +447,7 @@
 <li><a href="#底层数据结构">底层数据结构</a></li>
 <li><a href="#配置">配置</a></li>
 <li><a href="#多路-io-复用">多路 io 复用</a></li>
+<li><a href="#单线程与多线程">单线程与多线程</a></li>
 <li><a href="#事务">事务</a></li>
 </ul>
 </li>
@@ -447,6 +460,7 @@
 </ul>
 </li>
 <li><a href="#aof-重写缓存区">AOF 重写缓存区：</a><ul>
+<li><a href="#40-后混合持久化">4.0 后混合持久化</a></li>
 <li><a href="#过期回收">过期回收</a></li>
 <li><a href="#内存淘汰">内存淘汰</a></li>
 </ul>
@@ -463,15 +477,23 @@
 <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul>
 <li>string</li>
 <li>list</li>
-<li>set</li>
+<li>set<ul>
+<li>可以基于 set 轻易实现交集、并集、差集的操作。</li>
+</ul>
+</li>
 <li>sorted set</li>
 <li>hash</li>
-<li>bitmap、geo、HyperLogLog</li>
+<li>bitmap<ul>
+<li>bitmap 存储的是连续的二进制数字（0 和 1），通过 bitmap, 只需要一个 bit 位来表示某个元素对应的值或者状态，key 就是对应元素本身。</li>
+<li>适合需要保存状态信息（比如是否签到、是否登录…）并需要进一步对这些信息进行分析的场景。比如用户签到情况、活跃用户情况、用户行为统计（比如是否点赞过某个视频）。</li>
+</ul>
+</li>
+<li>geo、HyperLogLog</li>
 </ul>
 <h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><ul>
 <li>简单动态字符串<ul>
 <li>获取字符串长度 O(1)</li>
-<li>api安全，不会造成缓冲区溢出</li>
+<li>api 安全，不会造成缓冲区溢出</li>
 </ul>
 </li>
 <li>双向链表</li>
@@ -488,7 +510,8 @@
 <li>memory management:内存管理，包括数据过期删除策略信息等</li>
 <li>append only mode：持久化方式</li>
 </ul>
-<h3 id="多路-io-复用"><a href="#多路-io-复用" class="headerlink" title="多路 io 复用"></a>多路 io 复用</h3><ul>
+<h3 id="多路-io-复用"><a href="#多路-io-复用" class="headerlink" title="多路 io 复用"></a>多路 io 复用</h3><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; Redis 基于 Reactor 模式开发了自己的网络事件处理器：这个处理器被称为文件事件处理器（file event handler）。文件事件处理器使用 I/O 多路复用（multiplexing）程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器。</span></span><br><span class="line">&gt;</span><br><span class="line"><span class="quote">&gt; 当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。</span></span><br><span class="line">&gt;</span><br><span class="line"><span class="quote">&gt; **虽然文件事件处理器以单线程方式运行，但通过使用 I/O 多路复用程序来监听多个套接字**，文件事件处理器既实现了高性能的网络通信模型，又可以很好地与 Redis 服务器中其他同样以单线程方式运行的模块进行对接，这保持了 Redis 内部单线程设计的简单性。</span></span><br><span class="line"></span><br><span class="line">可以看出，文件事件处理器（file event handler）主要是包含 4 个部分：</span><br><span class="line"></span><br><span class="line"><span class="bullet">- </span>多个 socket（客户端连接）</span><br><span class="line"><span class="bullet">- </span>IO 多路复用程序（支持多个客户端连接的关键）</span><br><span class="line"><span class="bullet">- </span>文件事件分派器（将 socket 关联到相应的事件处理器）</span><br><span class="line"><span class="bullet">- </span>事件处理器（连接应答处理器、命令请求处理器、命令回复处理器）</span><br></pre></td></tr></table></figure>
+<ul>
 <li>select<ul>
 <li>修改入参数组</li>
 <li>最大监听 1024</li>
@@ -509,9 +532,22 @@
 </ul>
 </li>
 </ul>
+<h3 id="单线程与多线程"><a href="#单线程与多线程" class="headerlink" title="单线程与多线程"></a>单线程与多线程</h3><ul>
+<li>4.0 后增加了对多线程的支持<ul>
+<li>主要是针对一些大键值对的删除操作的命令，使用这些命令就会使用主处理之外的其他线程来“异步处理”。</li>
+</ul>
+</li>
+<li>6.0 之后为何引入了多线程<ul>
+<li>主要是为了提高网络 IO 读写性能</li>
+<li>只是在网络数据的读写这类耗时操作上使用了，执行命令仍然是单线程顺序执行。</li>
+<li>默认是禁用的，只使用主线程。如需开启需要修改 redis 配置文件 <code>redis.conf</code></li>
+<li>开启多线程后，还需要设置线程数，否则是不生效的。同样需要修改 redis 配置文件 <code>redis.conf</code> :</li>
+</ul>
+</li>
+</ul>
 <h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><ul>
-<li>隔离性：redis 是单进程的程序，保证在执行事务时，不会对事务进行中断，事务可以运<br>行直到执行完所有事务队列中的命令为止。所以 redis 的事务支持隔离性。</li>
-<li>redis 会将一个事务中的所有命令序列化，然后按顺序执行。redis 不可能在一个事务的执<br>行过程中插入执行另一个客户端发出的请求。可以保证 Redis 将这些命令作为一个单独的<br>隔离操作执行。</li>
+<li>隔离性：redis 是单进程的程序，保证在执行事务时，不会对事务进行中断，事务可以运行直到执行完所有事务队列中的命令为止。所以 redis 的事务支持隔离性。</li>
+<li>redis 会将一个事务中的所有命令序列化，然后按顺序执行。redis 不可能在一个事务的执行过程中插入执行另一个客户端发出的请求。可以保证 Redis 将这些命令作为一个单独的隔离操作执行。</li>
 <li>不支持回滚</li>
 </ul>
 <h4 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h4><ul>
@@ -522,6 +558,7 @@
 <li>unwatch</li>
 </ul>
 <h3 id="rdb"><a href="#rdb" class="headerlink" title="rdb"></a>rdb</h3><ul>
+<li>默认</li>
 <li>fork 子进程，将数据集写到临时的 rdb 文件中</li>
 <li>子进程完成写入时，redis 替换旧文件并删除旧文件</li>
 </ul>
@@ -536,7 +573,7 @@
 <li>append 追加后，调用 flushAppendOnluFile 函数确定是否写入文件</li>
 </ul>
 </li>
-<li>策略<ul>
+<li>策略：appendfsync 配置<ul>
 <li>always：每次追加到 aof 文件时都 fsync 到磁盘</li>
 <li>everysec：默认</li>
 <li>no：何时 fsync 由 os 决定</li>
@@ -544,25 +581,27 @@
 </li>
 </ul>
 <h4 id="AOF-重写缓存区："><a href="#AOF-重写缓存区：" class="headerlink" title="AOF 重写缓存区："></a>AOF 重写缓存区：</h4><ul>
-<li>redis 是单线程工作，当 AOF 文件较大时重写时间会比较长，在重写 AOF 期间，redis 将长时间无法处<br>理客户端请求。为了解决这个问题，可以将 AOF 重写程序放到子进程中执行，好处如下：<ul>
+<li>redis 是单线程工作，当 AOF 文件较大时重写时间会比较长，在重写 AOF 期间，redis 将长时间无法处理客户端请求。为了解决这个问题，可以将 AOF 重写程序放到子进程中执行，好处如下：<ul>
 <li>子进程进行 AOF 重写期间，服务器进程(父进程)可以继续处理其它客户端请求。</li>
-<li>子进程带有父进程的数据副本，使用子进程而不是线程，可以在避免使用锁的情况下，保<br>证数据的安全性。</li>
+<li>子进程带有父进程的数据副本，使用子进程而不是线程，可以在避免使用锁的情况下，保证数据的安全性。</li>
 </ul>
 </li>
 <li>子进程中 AOF 重写导致的问题：<ul>
-<li>子进程在进行 AOF 重写期间，服务器进程依然可以处理其它客户端请求，这就会导致数<br>据库状态已经发生了改变，使得当前数据库数据状态和重写后的 AOF 文件中的数据不一<br>致。</li>
+<li>子进程在进行 AOF 重写期间，服务器进程依然可以处理其它客户端请求，这就会导致数据库状态已经发生了改变，使得当前数据库数据状态和重写后的 AOF 文件中的数据不一致。</li>
 <li>也就是出现了 AOF 文件和数据库中数据不一致的问题。</li>
 </ul>
 </li>
 <li>数据状态不一致解决办法：<ul>
-<li>redis 服务器设置了一个 AOF 重写缓冲区。这个缓冲区在创建子进程后开始使用，当 redis<br>服务器执行一个客户端的写请求命令，之后将这个写命令也发送到 AOF 重写缓冲区（同时将命令追加到 AOF 缓冲区和 AOF 重写缓冲区<br>）</li>
-<li>当子进程完成 AOF 日志重写之后，给父进程发送信号，父进程接收此信号后，将 AOF<br>重写缓冲区的内容写到新的 AOF 文件中，保持数据的一致性。</li>
+<li>redis 服务器设置了一个 AOF 重写缓冲区。这个缓冲区在创建子进程后开始使用，当 redis 服务器执行一个客户端的写请求命令，之后将这个写命令也发送到 AOF 重写缓冲区（同时将命令追加到 AOF 缓冲区和 AOF 重写缓冲区）</li>
+<li>当子进程完成 AOF 日志重写之后，给父进程发送信号，父进程接收此信号后，将 AOF 重写缓冲区的内容写到新的 AOF 文件中，保持数据的一致性。</li>
 <li>改名覆盖</li>
 </ul>
 </li>
 </ul>
-<h3 id="过期回收"><a href="#过期回收" class="headerlink" title="过期回收"></a>过期回收</h3><ul>
-<li>定期</li>
+<h3 id="4-0-后混合持久化"><a href="#4-0-后混合持久化" class="headerlink" title="4.0 后混合持久化"></a>4.0 后混合持久化</h3><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Redis 4.0 开始支持 RDB 和 AOF 的混合持久化（默认关闭，可以通过配置项 <span class="code">`aof-use-rdb-preamble`</span> 开启）。</span><br><span class="line"></span><br><span class="line">如果把混合持久化打开，AOF 重写的时候就直接把 RDB 的内容写到 AOF 文件开头。这样做的好处是可以结合 RDB 和 AOF 的优点, 快速加载同时避免丢失过多的数据。当然缺点也是有的， AOF 里面的 RDB 部分是压缩格式不再是 AOF 格式，可读性较差。</span><br></pre></td></tr></table></figure>
+<h3 id="过期回收"><a href="#过期回收" class="headerlink" title="过期回收"></a>过期回收</h3><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Redis 通过一个叫做过期字典（可以看作是 hash 表）来保存数据过期的时间。过期字典的键指向 Redis 数据库中的某个 key(键)，过期字典的值是一个 long long 类型的整数，这个整数保存了 key 所指向的数据库键的过期时间（毫秒精度的 UNIX 时间戳）。</span><br><span class="line"></span><br><span class="line">typedef struct redisDb &#123;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="code">    dict *dict;     //数据库键空间,保存着数据库中所有键值对</span></span><br><span class="line"><span class="code">    dict *expires   // 过期字典,保存着键的过期时间</span></span><br><span class="line"><span class="code">    ...</span></span><br><span class="line"></span><br><span class="line">&#125; redisDb;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定期:每隔一段时间抽取一批 key 执行删除过期 key 操作。并且，Redis 底层会通过限制删除操作执行的时长和频率来减少删除操作对 CPU 时间的影响。</li>
 <li>惰性</li>
 </ul>
 <h3 id="内存淘汰"><a href="#内存淘汰" class="headerlink" title="内存淘汰"></a>内存淘汰</h3><ul>
@@ -572,6 +611,11 @@
 <li>allkeys-random：移除随机 key</li>
 <li>volatile-ttl：移除即将过期的 key(minor TTL)</li>
 <li>noeviction ：不移除任何 key，只是返回一个写错误，默认选项</li>
+<li>4.0 后增加<ul>
+<li>volatile-lfu（least frequently used）：从已设置过期时间的数据集（server.db[i].expires）中挑选最不经常使用的数据淘汰</li>
+<li>allkeys-lfu（least frequently used）：当内存不足以容纳新写入数据时，在键空间中，移除最不经常使用的 key</li>
+</ul>
+</li>
 </ul>
 
       
@@ -799,7 +843,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">3.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">3.0.1.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">3.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底层数据结构"><span class="nav-number">3.2.</span> <span class="nav-text">底层数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多路-io-复用"><span class="nav-number">3.4.</span> <span class="nav-text">多路 io 复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">3.5.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指令"><span class="nav-number">3.5.1.</span> <span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rdb"><span class="nav-number">3.6.</span> <span class="nav-text">rdb</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令"><span class="nav-number">3.6.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aof"><span class="nav-number">3.7.</span> <span class="nav-text">aof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF-重写缓存区："><span class="nav-number">3.7.1.</span> <span class="nav-text">AOF 重写缓存区：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过期回收"><span class="nav-number">3.8.</span> <span class="nav-text">过期回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存淘汰"><span class="nav-number">3.9.</span> <span class="nav-text">内存淘汰</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">3.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">3.0.1.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">3.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底层数据结构"><span class="nav-number">3.2.</span> <span class="nav-text">底层数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多路-io-复用"><span class="nav-number">3.4.</span> <span class="nav-text">多路 io 复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单线程与多线程"><span class="nav-number">3.5.</span> <span class="nav-text">单线程与多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">3.6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指令"><span class="nav-number">3.6.1.</span> <span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rdb"><span class="nav-number">3.7.</span> <span class="nav-text">rdb</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令"><span class="nav-number">3.7.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aof"><span class="nav-number">3.8.</span> <span class="nav-text">aof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF-重写缓存区："><span class="nav-number">3.8.1.</span> <span class="nav-text">AOF 重写缓存区：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-0-后混合持久化"><span class="nav-number">3.9.</span> <span class="nav-text">4.0 后混合持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过期回收"><span class="nav-number">3.10.</span> <span class="nav-text">过期回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存淘汰"><span class="nav-number">3.11.</span> <span class="nav-text">内存淘汰</span></a></li></ol></li></ol></div>
             
 
           </div>
