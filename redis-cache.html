@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。 Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：  采用腾讯云主机部署，如果要迁移可能有些麻烦 每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可">
-<meta name="keywords" content="Hexo">
+  <meta name="description" content="前言关于 redis 缓存的一些知识点。 导航  前言 读写策略 cache aside pattern（旁路缓存模式）：读较多 写 先删再写？ 先写再删一定没问题？   读 问题   read/write through pattern(读写穿透模式) 写 读 问题   write behind pattern（异步缓存写入）   问题  读写策略cache aside pattern（旁路缓存">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo+Nginx+Docker搭建记录">
-<meta property="og:url" content="http://grassc.cn/Hexo+Nginx+Docker_InstallNotes.html">
+<meta property="og:title" content="小记之redis缓存">
+<meta property="og:url" content="http://grassc.cn/redis-cache.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。 Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：  采用腾讯云主机部署，如果要迁移可能有些麻烦 每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可">
+<meta property="og:description" content="前言关于 redis 缓存的一些知识点。 导航  前言 读写策略 cache aside pattern（旁路缓存模式）：读较多 写 先删再写？ 先写再删一定没问题？   读 问题   read/write through pattern(读写穿透模式) 写 读 问题   write behind pattern（异步缓存写入）   问题  读写策略cache aside pattern（旁路缓存">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-03-15T05:58:58.439Z">
+<meta property="og:updated_time" content="2022-03-25T07:30:59.482Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo+Nginx+Docker搭建记录">
-<meta name="twitter:description" content="本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。 Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：  采用腾讯云主机部署，如果要迁移可能有些麻烦 每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可">
+<meta name="twitter:title" content="小记之redis缓存">
+<meta name="twitter:description" content="前言关于 redis 缓存的一些知识点。 导航  前言 读写策略 cache aside pattern（旁路缓存模式）：读较多 写 先删再写？ 先写再删一定没问题？   读 问题   read/write through pattern(读写穿透模式) 写 读 问题   write behind pattern（异步缓存写入）   问题  读写策略cache aside pattern（旁路缓存">
 
 
 
 
 
 
-  <link rel="canonical" href="http://grassc.cn/Hexo+Nginx+Docker_InstallNotes.html"/>
+  <link rel="canonical" href="http://grassc.cn/redis-cache.html"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>Hexo+Nginx+Docker搭建记录 | 小草窝</title>
+  <title>小记之redis缓存 | 小草窝</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/Hexo+Nginx+Docker_InstallNotes.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/redis-cache.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -328,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Hexo+Nginx+Docker搭建记录
+          <h2 class="post-title" itemprop="name headline">小记之redis缓存
               
             
           </h2>
@@ -353,25 +353,9 @@
                 
               
 
-              <time title="创建时间：2021-07-09 17:15:51" itemprop="dateCreated datePublished" datetime="2021-07-09T17:15:51+08:00">2021-07-09</time>
+              <time title="创建时间：2022-03-25 15:30:59" itemprop="dateCreated datePublished" datetime="2022-03-25T15:30:59+08:00">2022-03-25</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2022-03-15 13:58:58" itemprop="dateModified" datetime="2022-03-15T13:58:58+08:00">2022-03-15</time>
-              
             
           </span>
 
@@ -387,7 +371,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/随笔/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/" itemprop="url" rel="index"><span itemprop="name">db</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -402,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/Hexo+Nginx+Docker_InstallNotes.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/Hexo+Nginx+Docker_InstallNotes.html" itemprop="commentCount"></span>
+                <a href="/redis-cache.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/redis-cache.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -431,37 +422,139 @@
       
 
       
-        <p>本想搭建一个动态博客，可是考虑了自己的需求之后，发现自己需要的仅仅是一个拥有支持markdown、展示文章这两个基本功能的网站，因此最终选择了静态博客，也是近来流行的搭配：Hexo+next主题。</p>
-<p>Hexo和next的搭建都很顺利，可是随着使用，渐渐产生了一些想法：</p>
-<ul>
-<li>采用腾讯云主机部署，如果要迁移可能有些麻烦</li>
-<li>每次hexo generate，hexo server还是有些繁琐，能不能一条命令即可？</li>
-<li>hexo似乎不支持https？</li>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于 redis 缓存的一些知识点。</p>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#读写策略">读写策略</a><ul>
+<li><a href="#cache-aside-pattern旁路缓存模式读较多">cache aside pattern（旁路缓存模式）：读较多</a><ul>
+<li><a href="#写">写</a><ul>
+<li><a href="#先删再写">先删再写？</a></li>
+<li><a href="#先写再删一定没问题">先写再删一定没问题？</a></li>
 </ul>
-<p>Hexo支持git部署，将hexo部署到git上看起来是个不错的选择。github pages甚至已经支持了自定义域名使用https协议，关于hexo+github pages的教程也有大把。看似一切都很简单美好，自己部署时却出现了问题：</p>
-<ul>
-<li>访问速度。这虽然有点慢，暂时也没多大事。</li>
-<li>github pages的文档上，DNS解析的A记录一共需配置4条ip，自己的腾讯云套餐只支持2个负载均衡。可能是由于这个原因，引发了下一个严重的问题：</li>
-<li>http://域名 无法访问。www.和https:都可以访问，而首次采用http:访问却不行。只有通过www./https访问之后，才可以通过http访问。</li>
+</li>
+<li><a href="#读">读</a></li>
+<li><a href="#问题">问题</a></li>
 </ul>
-<p>第三点我仔仔细细看了官方文档、网上各种教程，都没有找出原因和解决方法。so，hexo+github pages方案对我来说，暂时不可行。</p>
-<p>于是采取了另一办法，hexo+Nginx。nginx虽只闻其名不知其用，但也意识到，为了日后方便，还是用采用docker安装为好。因此，磕磕绊绊的完成dockerfile、docker-compose.yml、nginx的配置文件blog.conf之后，通过http终于可以正常访问了。</p>
-<p>下一步就是配置https了，没想到自己在这却卡了很久：无论是http跳转至https、还是直接通过https访问，浏览器都显示“连接超时”，调试窗口的network中一直是peeding状态。</p>
-<p>反反复复改了多次blog.conf，最后找到的真实原因却很简单：云服务器安全组的443端口没开放，emmm…</p>
-<p>不过最终还是完成了目标：hexo g -d，一条命令即可。</p>
-<p>以下是几个配置文件：</p>
-<ul>
-<li>Dockerfile</li>
+</li>
+<li><a href="#readwrite-through-pattern读写穿透模式">read/write through pattern(读写穿透模式)</a><ul>
+<li><a href="#写-1">写</a></li>
+<li><a href="#读-1">读</a></li>
+<li><a href="#问题-1">问题</a></li>
 </ul>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> web_home=/home/www</span><br><span class="line"><span class="keyword">ARG</span> conf_path=/etc/nginx/conf.d</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_to=/etc/nginx/ssl</span><br><span class="line"></span><br><span class="line"><span class="comment"># local</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_from=ssl-grassc.cn/Nginx</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> ssl_1=<span class="number">1</span>_grassc.cn_bundle.crt</span><br><span class="line"><span class="keyword">ARG</span> ssl_2=<span class="number">2</span>_grassc.cn.key</span><br><span class="line"><span class="keyword">ARG</span> conf=blog.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN apt-get update \</span></span><br><span class="line"><span class="comment">#    &amp;&amp; apt-get install vim -y \</span></span><br><span class="line"><span class="keyword">RUN</span> mkdir $web_home \</span><br><span class="line">    &amp;&amp; mkdir $ssl_to</span><br><span class="line"></span><br><span class="line">COPY $conf $conf_path</span><br><span class="line">COPY $ssl_from/$ssl_1 $ssl_to</span><br><span class="line">COPY $ssl_from/$ssl_2 $ssl_to</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line">EXPOSE 443</span><br><span class="line"></span><br><span class="line">WORKDIR $conf_dir</span><br></pre></td></tr></table></figure>
-<ul>
-<li>docker-compose.yml</li>
+</li>
+<li><a href="#write-behind-pattern异步缓存写入">write behind pattern（异步缓存写入）</a></li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  blogweb:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"80:80"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"443:443"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"/home/cc/blog:/home/www/blog"</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>blog.conf</li>
+</li>
+<li><a href="#问题-2">问题</a></li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">        <span class="comment"># root /home/www/blog;</span></span><br><span class="line">        <span class="attribute">rewrite</span><span class="regexp"> ^(.*)</span> https://<span class="variable">$host</span><span class="variable">$1</span> <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">        <span class="attribute">server_name</span> grassc.cn; <span class="comment">#填写绑定证书的域名</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">ssl_certificate</span> ssl/1_grassc.cn_bundle.crt;</span><br><span class="line">        <span class="attribute">ssl_certificate_key</span> ssl/2_grassc.cn.key;</span><br><span class="line">        <span class="attribute">ssl_session_timeout</span> <span class="number">5m</span>;</span><br><span class="line">        <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>; <span class="comment">#按照这个协议配置</span></span><br><span class="line">        <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<span class="comment">#按照这个套件配置</span></span><br><span class="line">        <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>   /home/www/blog/public; <span class="comment">#站点目录</span></span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读写策略"><a href="#读写策略" class="headerlink" title="读写策略"></a>读写策略</h2><h3 id="cache-aside-pattern（旁路缓存模式）：读较多"><a href="#cache-aside-pattern（旁路缓存模式）：读较多" class="headerlink" title="cache aside pattern（旁路缓存模式）：读较多"></a>cache aside pattern（旁路缓存模式）：读较多</h3><h4 id="写"><a href="#写" class="headerlink" title="写"></a>写</h4><ul>
+<li>更新 db</li>
+<li>删除缓存</li>
+</ul>
+<h5 id="先删再写？"><a href="#先删再写？" class="headerlink" title="先删再写？"></a>先删再写？</h5><ul>
+<li>不行，会产生不一致<ul>
+<li>A 删数据</li>
+<li>B 从 db 读数据——脏数据存入了 cache</li>
+<li>A 更新数据</li>
+</ul>
+</li>
+</ul>
+<h5 id="先写再删一定没问题？"><a href="#先写再删一定没问题？" class="headerlink" title="先写再删一定没问题？"></a>先写再删一定没问题？</h5><ul>
+<li>否，几率很小，因为缓存写入速度比 db 写入快得多<ul>
+<li>A 从 db 读数据</li>
+<li>B 更新 db 并删 cache</li>
+<li>A 写 cache</li>
+</ul>
+</li>
+</ul>
+<h4 id="读"><a href="#读" class="headerlink" title="读"></a>读</h4><ul>
+<li>读 cache，读到则直接返回</li>
+<li>cache 无，之读 db</li>
+<li>把数据存入 cache</li>
+</ul>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul>
+<li>首次一定不在 cache<ul>
+<li>热点数据提前放入 cache</li>
+</ul>
+</li>
+<li>写操作频繁时，cache 被频繁更新，影响 cache 命中率<ul>
+<li>强一致场景：加锁</li>
+<li>允许不一致：给 cache 加个较短的过期时间</li>
+</ul>
+</li>
+</ul>
+<h3 id="read-write-through-pattern-读写穿透模式"><a href="#read-write-through-pattern-读写穿透模式" class="headerlink" title="read/write through pattern(读写穿透模式)"></a>read/write through pattern(读写穿透模式)</h3><h4 id="写-1"><a href="#写-1" class="headerlink" title="写"></a>写</h4><ul>
+<li>cache 中不存在，直接更新 db</li>
+<li>cache 中存在，先更新 cache，然后 cache 服务自己更新 db</li>
+</ul>
+<h4 id="读-1"><a href="#读-1" class="headerlink" title="读"></a>读</h4><ul>
+<li>cache 存在，读到直接返回</li>
+<li>cache 不存在，cache 服务自己从 db 加载，写入后返回</li>
+</ul>
+<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><ul>
+<li>首次一定不在 cache<ul>
+<li>热点数据提前放入 cache</li>
+</ul>
+</li>
+</ul>
+<h3 id="write-behind-pattern（异步缓存写入）"><a href="#write-behind-pattern（异步缓存写入）" class="headerlink" title="write behind pattern（异步缓存写入）"></a>write behind pattern（异步缓存写入）</h3><ul>
+<li>只更新缓存，异步批量的方式更新 db，如 redis 异步写入磁盘、innodb buffer pool</li>
+<li>有一致性问题</li>
+<li>写入性能高，适用数据经常变化有对一致性要求没那么高的场景，如浏览量、点赞量</li>
+</ul>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><ul>
+<li>缓存雪崩<ul>
+<li>缓存同一时间大面积的失效，请求打到数据库上</li>
+<li>解决办法<ul>
+<li>设置不同的缓存时间</li>
+<li>更新数据使用互斥锁</li>
+<li>通过双缓存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缓存击穿<ul>
+<li>高并发访问时缓存过期，请求打到数据库上</li>
+<li>解决办法<ul>
+<li>使用互斥锁，只让一个请求 load db，成功后写缓存；其余尝试重新获取缓存中数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缓存穿透<ul>
+<li>请求缓存中不存在的数据，请求打到数据库上</li>
+<li>解决办法<ul>
+<li>互斥锁</li>
+<li>无论是否取到结果都存缓存，过期时间较短（如 5min）</li>
+<li>采取机制（如布隆过滤器、bitmap）拦截非法 key<ul>
+<li>布隆过滤器：可以判断一定不存在，但无法 100%判断一定存在</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>双写一致性<ul>
+<li>要求强一致性，建议不要用缓存</li>
+<li>数据库中或缓存数据的删除和写入过程中，如果有失败的情况，会导致数据的不一致</li>
+<li>解决办法<ul>
+<li>双删延时+缓存超时：先删缓存，再更新数据库，最后再隔一定的时间删除缓存<ul>
+<li>确保读请求结束，写请求可以删除读请求造成的缓存脏数据。</li>
+<li>当然这种策略还要考虑 redis 和数据库主从同步的耗时。</li>
+<li>最后的的写数据的休眠时间：则在读数据业务逻辑的耗时基础上，加⼏百 ms 即可。⽐如：休眠 1 秒。</li>
+</ul>
+</li>
+<li>异步更新缓存：订阅 binlog 同步机制（canal）<ul>
+<li>binlog 增量（update,insert,delete)订阅消费</li>
+<li>消息队列</li>
+<li>增量数据更新到 redis</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -482,7 +575,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/redis/" rel="tag"># redis</a>
           
         </div>
       
@@ -495,8 +588,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html" rel="next" title="java系列——StringBuilder与StringBuffer">
-                <i class="fa fa-chevron-left"></i> java系列——StringBuilder与StringBuffer
+              <a href="/redis-base.html" rel="next" title="小记之redis基础">
+                <i class="fa fa-chevron-left"></i> 小记之redis基础
               </a>
             
           </div>
@@ -504,10 +597,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/jdk-AbstractList-ArrayList-LinkedList.html" rel="prev" title="java系列——ArrayList与LinkedList">
-                java系列——ArrayList与LinkedList <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -555,8 +644,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -673,6 +771,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写策略"><span class="nav-number">3.</span> <span class="nav-text">读写策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cache-aside-pattern（旁路缓存模式）：读较多"><span class="nav-number">3.1.</span> <span class="nav-text">cache aside pattern（旁路缓存模式）：读较多</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#写"><span class="nav-number">3.1.1.</span> <span class="nav-text">写</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#先删再写？"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">先删再写？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#先写再删一定没问题？"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">先写再删一定没问题？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读"><span class="nav-number">3.1.2.</span> <span class="nav-text">读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-number">3.1.3.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#read-write-through-pattern-读写穿透模式"><span class="nav-number">3.2.</span> <span class="nav-text">read/write through pattern(读写穿透模式)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#写-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write-behind-pattern（异步缓存写入）"><span class="nav-number">3.3.</span> <span class="nav-text">write behind pattern（异步缓存写入）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-2"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
