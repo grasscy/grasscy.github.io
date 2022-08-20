@@ -1,7 +1,0 @@
-@startuml
-    start
-    :**main**  AE_READABLE,acceptHandler：可读条件，client连接;
-    :**acceptHandler**  AE_READABLE,readQueryFromClient：可读条件，client执行命令;
-    :**readQueryFromClient**  redisCommand->redisCommandProc：从cmdTable找到redisCommand并执行命令;
-    stop
-@enduml
