@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="StringBuilder与StringBuffer  概述字符串作为最常用的类型之一，java除了提供不可变的String类之外，还拥有可变字符串StringBuilder与StringBuffer。两者最大的区别在于StringBuilder不保证线程安全，而StringBuffer则将方法以synchronized修饰。所以可以保证线程安全。 除此之外，两者都继承了AbstractStrin">
+<meta name="keywords" content="java,java源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java系列——StringBuilder与StringBuffer">
+<meta property="og:url" content="http://grassc.cn/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html">
+<meta property="og:site_name" content="小草窝">
+<meta property="og:description" content="StringBuilder与StringBuffer  概述字符串作为最常用的类型之一，java除了提供不可变的String类之外，还拥有可变字符串StringBuilder与StringBuffer。两者最大的区别在于StringBuilder不保证线程安全，而StringBuffer则将方法以synchronized修饰。所以可以保证线程安全。 除此之外，两者都继承了AbstractStrin">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-11-29T11:08:32.452Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java系列——StringBuilder与StringBuffer">
+<meta name="twitter:description" content="StringBuilder与StringBuffer  概述字符串作为最常用的类型之一，java除了提供不可变的String类之外，还拥有可变字符串StringBuilder与StringBuffer。两者最大的区别在于StringBuilder不保证线程安全，而StringBuffer则将方法以synchronized修饰。所以可以保证线程安全。 除此之外，两者都继承了AbstractStrin">
+
+
+
+
+
+
+  <link rel="canonical" href="http://grassc.cn/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java系列——StringBuilder与StringBuffer | 小草窝</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d78affd23549e479136d102febcb6b00";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小草窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">ci饭，碎觉，输入，输出</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JL Wang">
+      <meta itemprop="description" content="好好学习，天天向上">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小草窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">java系列——StringBuilder与StringBuffer
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2022-10-06 20:14:21" itemprop="dateCreated datePublished" datetime="2022-10-06T20:14:21+08:00">2022-10-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-11-29 19:08:32" itemprop="dateModified" datetime="2022-11-29T19:08:32+08:00">2022-11-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="StringBuilder与StringBuffer"><a href="#StringBuilder与StringBuffer" class="headerlink" title="StringBuilder与StringBuffer  "></a>StringBuilder与StringBuffer  <!-- omit in toc --></h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>字符串作为最常用的类型之一，java除了提供不可变的String类之外，还拥有可变字符串StringBuilder与StringBuffer。两者最大的区别在于StringBuilder不保证线程安全，而StringBuffer则将方法以synchronized修饰。所以可以保证线程安全。</p>
+<p>除此之外，两者都继承了AbstractStringBuilder类，所拥有的方法近乎完全相同。作为抽象类，AbstractStringBuilder实现了Appendable与CharSequence接口。</p>
+<p>值得注意的是，与StringBuilder相比，StringBuffer中的toString方法，利用了char[] toStringCache缓存来提高性能。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A cache of the last value returned by toString. Cleared</span></span><br><span class="line"><span class="comment"> * whenever the StringBuffer is modified.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">char</span>[] toStringCache;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> StringBuffer <span class="title">append</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    toStringCache = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">super</span>.append(String.valueOf(obj));</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果上次toString之后字符串没有变化，则利用缓存直接返回</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (toStringCache == <span class="keyword">null</span>) &#123;</span><br><span class="line">        toStringCache = Arrays.copyOfRange(value, <span class="number">0</span>, count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(toStringCache, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为什么StringBuilder不采用toStringCache呢？参考<a href="https://stackoverflow.com/questions/46294579/why-stringbuffer-has-a-tostringcache-while-stringbuilder-not" target="_blank" rel="noopener">stackoverflow</a>,大意是StringBuiler不提供线程同步，而在保持线程不同步的性能优势下，提供缓存极难实现。并且，这种缓存优化现实中使用很少。</p>
+<p>由于StringBuilder与StringBuffer的差别很小，所以两者很多方法的具体实现，都放在了共同的父类AbstractStringBuilder中。本文姑且从AbstractStringBuilder入手，对字符串操作略作分析。</p>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航  "></a>导航  <!-- omit in toc --></h2><ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#append">append</a></li>
+<li><a href="#ensurecapacityint-minimumcapacity">ensureCapacity(int minimumCapacity)</a></li>
+<li><a href="#reverse">reverse()</a></li>
+</ul>
+<h2 id="append"><a href="#append" class="headerlink" title="append"></a>append</h2><p>AbstractStringBuilder中重载了大量的append方法，这里暂且只以常用的append(String)举例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符存放，一个字符2-byte</span></span><br><span class="line"><span class="keyword">byte</span>[] value;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编码（实际值由JVM注入）,LATIN1(=0) or UTF16(=1)</span></span><br><span class="line"><span class="keyword">byte</span> coder;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符数</span></span><br><span class="line"><span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链式方法，可以 stringBuilder.append().append()</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> AbstractStringBuilder <span class="title">append</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> appendNull();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> len = str.length();</span><br><span class="line">    ensureCapacityInternal(count + len); <span class="comment">// 保证value数组的最小容量（字符数），见下文</span></span><br><span class="line">    putStringAt(count, str); <span class="comment">// append字符串</span></span><br><span class="line">    count += len;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">putStringAt</span><span class="params">(<span class="keyword">int</span> index, String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (getCoder() != str.coder()) &#123; <span class="comment">// this.coder与str.coder不等</span></span><br><span class="line">        inflate(); <span class="comment">// value膨胀byte[]至utf16编码</span></span><br><span class="line">    &#125;</span><br><span class="line">    str.getBytes(value, index, coder); <span class="comment">// str添加至value[index]后</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">inflate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isLatin1()) &#123; <span class="comment">// utf16直接返回</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">byte</span>[] buf = StringUTF16.newBytesFor(value.length);</span><br><span class="line">    StringLatin1.inflate(value, <span class="number">0</span>, buf, <span class="number">0</span>, count); <span class="comment">// Latin1-&gt;utf16</span></span><br><span class="line">    <span class="keyword">this</span>.value = buf;</span><br><span class="line">    <span class="keyword">this</span>.coder = UTF16;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ensureCapacity-int-minimumCapacity"><a href="#ensureCapacity-int-minimumCapacity" class="headerlink" title="ensureCapacity(int minimumCapacity)"></a>ensureCapacity(int minimumCapacity)</h2><p>Array在添加元素的时候，免不了容量的限制。所以以byte[]来保存value，也需要对容量进行额外的保证。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123; <span class="comment">// 最少字符（2-byte）数</span></span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = value.length &gt;&gt; coder; <span class="comment">// utf16一个单元占1或2字符，这里算value可能的最少字符数</span></span><br><span class="line">    <span class="keyword">if</span> (minimumCapacity - oldCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        value = Arrays.copyOf(value,</span><br><span class="line">                newCapacity(minimumCapacity) &lt;&lt; coder);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回字符数</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">newCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = value.length &gt;&gt; coder; <span class="comment">// 同ensureCapacityInternal中</span></span><br><span class="line">    <span class="keyword">int</span> newCapacity = (oldCapacity &lt;&lt; <span class="number">1</span>) + <span class="number">2</span>; <span class="comment">// 扩至2n+2=2*(n+1)</span></span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> SAFE_BOUND = MAX_ARRAY_SIZE &gt;&gt; coder; <span class="comment">// 稳定安全状态下，最大字符数</span></span><br><span class="line">    <span class="keyword">return</span> (newCapacity &lt;= <span class="number">0</span> || SAFE_BOUND - newCapacity &lt; <span class="number">0</span>) <span class="comment">// newCapacity过大</span></span><br><span class="line">        ? hugeCapacity(minCapacity)</span><br><span class="line">        : newCapacity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> SAFE_BOUND = MAX_ARRAY_SIZE &gt;&gt; coder;</span><br><span class="line">    <span class="keyword">int</span> UNSAFE_BOUND = Integer.MAX_VALUE &gt;&gt; coder;</span><br><span class="line">    <span class="keyword">if</span> (UNSAFE_BOUND - minCapacity &lt; <span class="number">0</span>) &#123; <span class="comment">// overflow</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (minCapacity &gt; SAFE_BOUND)</span><br><span class="line">        ? minCapacity : SAFE_BOUND;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h2><p>直接上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> AbstractStringBuilder <span class="title">reverse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] val = <span class="keyword">this</span>.value;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="keyword">this</span>.count;</span><br><span class="line">    <span class="keyword">int</span> coder = <span class="keyword">this</span>.coder;</span><br><span class="line">    <span class="keyword">int</span> n = count - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (COMPACT_STRINGS &amp;&amp; coder == LATIN1) &#123;</span><br><span class="line">        <span class="comment">// 以中间为分界线，调换左右两边</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = (n-<span class="number">1</span>) &gt;&gt; <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">int</span> k = n - j;</span><br><span class="line">            <span class="keyword">byte</span> cj = val[j];</span><br><span class="line">            val[j] = val[k];</span><br><span class="line">            val[k] = cj;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        StringUTF16.reverse(val, count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/java源码/" rel="tag"># java源码</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/jdk-String.html" rel="next" title="小记之字符编码">
+                <i class="fa fa-chevron-left"></i> 小记之字符编码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/jdk-AbstractList-ArrayList-LinkedList.html" rel="prev" title="java系列——ArrayList与LinkedList">
+                java系列——ArrayList与LinkedList <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">JL Wang</p>
+              <p class="site-description motion-element" itemprop="description">好好学习，天天向上</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/grasscy" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:grassc@qq.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#StringBuilder与StringBuffer"><span class="nav-number">1.</span> <span class="nav-text">StringBuilder与StringBuffer  </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.2.</span> <span class="nav-text">导航  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#append"><span class="nav-number">1.3.</span> <span class="nav-text">append</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ensureCapacity-int-minimumCapacity"><span class="nav-number">1.4.</span> <span class="nav-text">ensureCapacity(int minimumCapacity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number">1.5.</span> <span class="nav-text">reverse()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JL Wang</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'vWikNYTtsWrE6IRNuCuifo2R-gzGzoHsz',
+        appKey: '4ogvOHcn0KqyBmOXRTWh0nbo',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
