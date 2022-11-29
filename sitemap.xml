@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://grassc.cn/javacollections.html</loc>
+    
+    <lastmod>2022-11-29T12:23:22.391Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://grassc.cn/jdk-Intro2Char.html</loc>
+    
+    <lastmod>2022-11-29T11:33:39.285Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://grassc.cn/jdk-AbstractList-ArrayList-LinkedList.html</loc>
     
     <lastmod>2022-11-29T11:29:26.090Z</lastmod>
@@ -40,13 +54,6 @@
     <loc>http://grassc.cn/jdk-Object.html</loc>
     
     <lastmod>2022-11-29T11:28:12.656Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://grassc.cn/jdk-String.html</loc>
-    
-    <lastmod>2022-11-29T11:27:53.269Z</lastmod>
     
   </url>
   

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://grassc.cn/javacollections.html</loc>
+    <lastmod>2022-11-29</lastmod>
+  </url>  <url>
+    <loc>http://grassc.cn/jdk-Intro2Char.html</loc>
+    <lastmod>2022-11-29</lastmod>
+  </url>  <url>
     <loc>http://grassc.cn/jdk-AbstractList-ArrayList-LinkedList.html</loc>
     <lastmod>2022-11-29</lastmod>
   </url>  <url>
@@ -17,9 +23,6 @@
     <lastmod>2022-11-29</lastmod>
   </url>  <url>
     <loc>http://grassc.cn/jdk-Object.html</loc>
-    <lastmod>2022-11-29</lastmod>
-  </url>  <url>
-    <loc>http://grassc.cn/jdk-String.html</loc>
     <lastmod>2022-11-29</lastmod>
   </url>  <url>
     <loc>http://grassc.cn/jdk-CopyOnWriteArrayList.html</loc>

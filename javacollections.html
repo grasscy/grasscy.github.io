@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的参数个数、顺序、类型不同">
+  <meta name="description" content="前言java 的集合类主要在 util 包中，主要有三种，分别是 list、map 和 set。其中 list 和 set 的上层接口同是 Collection，map 则实现了 Map 接口。值得一提的是，Collection 接口下除了 list 和 set，还有 queue，也就是我们常说的队列了。队列的实现类主要 lindkedList。 下面，就让我们分别说明三大集合的特点吧。 导航">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java基础知识（一）">
-<meta property="og:url" content="http://grassc.cn/javabase1.html">
+<meta property="og:title" content="三大集合">
+<meta property="og:url" content="http://grassc.cn/javacollections.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的参数个数、顺序、类型不同">
+<meta property="og:description" content="前言java 的集合类主要在 util 包中，主要有三种，分别是 list、map 和 set。其中 list 和 set 的上层接口同是 Collection，map 则实现了 Map 接口。值得一提的是，Collection 接口下除了 list 和 set，还有 queue，也就是我们常说的队列了。队列的实现类主要 lindkedList。 下面，就让我们分别说明三大集合的特点吧。 导航">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-11-24T11:57:19.452Z">
+<meta property="og:updated_time" content="2022-11-29T12:23:22.391Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java基础知识（一）">
-<meta name="twitter:description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的参数个数、顺序、类型不同">
+<meta name="twitter:title" content="三大集合">
+<meta name="twitter:description" content="前言java 的集合类主要在 util 包中，主要有三种，分别是 list、map 和 set。其中 list 和 set 的上层接口同是 Collection，map 则实现了 Map 接口。值得一提的是，Collection 接口下除了 list 和 set，还有 queue，也就是我们常说的队列了。队列的实现类主要 lindkedList。 下面，就让我们分别说明三大集合的特点吧。 导航">
 
 
 
 
 
 
-  <link rel="canonical" href="http://grassc.cn/javabase1.html"/>
+  <link rel="canonical" href="http://grassc.cn/javacollections.html"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>java基础知识（一） | 小草窝</title>
+  <title>三大集合 | 小草窝</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/javabase1.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/javacollections.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -328,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">java基础知识（一）
+          <h2 class="post-title" itemprop="name headline">三大集合
               
             
           </h2>
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2022-11-24 19:57:19" itemprop="dateCreated datePublished" datetime="2022-11-24T19:57:19+08:00">2022-11-24</time>
+              <time title="创建时间：2022-11-29 20:23:22" itemprop="dateCreated datePublished" datetime="2022-11-29T20:23:22+08:00">2022-11-29</time>
             
 
             
@@ -386,8 +386,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/javabase1.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/javabase1.html" itemprop="commentCount"></span>
+                <a href="/javacollections.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/javacollections.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -415,75 +415,39 @@
       
 
       
-        <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
-<li><a href="#面向对象的特点">面向对象的特点</a></li>
-<li><a href="#类的初始化顺序">类的初始化顺序</a></li>
-<li><a href="#8-种基本数据类型">8 种基本数据类型</a></li>
-<li><a href="#注解">注解</a></li>
-<li><a href="#反射">反射</a></li>
-<li><a href="#泛型">泛型</a></li>
-<li><a href="#序列化与反序列化">序列化与反序列化</a></li>
-</ul>
-<h2 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h2><ul>
-<li>封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。</li>
-<li>继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。</li>
-<li>多态：本质是存在同名的不同方法，实现方式：<ul>
-<li>子类对父类的方法重写</li>
-<li>方法重载<ul>
-<li>方法的参数个数、顺序、类型不同</li>
-<li>修饰符、返回值、异常不同不构成重载</li>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>java 的集合类主要在 util 包中，主要有三种，分别是 list、map 和 set。其中 list 和 set 的上层接口同是 Collection，map 则实现了 Map 接口。值得一提的是，Collection 接口下除了 list 和 set，还有 queue，也就是我们常说的队列了。队列的实现类主要 lindkedList。</p>
+<p>下面，就让我们分别说明三大集合的特点吧。</p>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#list">List</a></li>
+<li><a href="#map">Map</a><ul>
+<li><a href="#hashmap-与-linkedhashmaptreemap">HashMap 与 LinkedHashMap、TreeMap</a></li>
+<li><a href="#concurenthashmap">ConcurentHashMap</a></li>
 </ul>
 </li>
+<li><a href="#set">Set</a></li>
 </ul>
-</li>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>List 是非常常见的使用类型，主要实现类有 ArrayList、LinkedList 和 Vector。其中 Vector 已经基本不再使用了，如果需要保证并发安全的话，可以使用并发包下的 CopyOnWriteList。而 ArrayList 和 LinkedList，常考察的点是两者的区别。而从名字上我们就可以看出来，ArrayList 的底层实现是数组，LinkedList 的底层实现是链表，具体来说是双向链表——而这，也为 LinkdedList 实现 Queue 与 Deque(双向队列)提供了可能。</p>
+<p>因为底层实现的不同，ArrayList 与 LinkedList 有如下区别：</p>
+<ul>
+<li>ArrayList 实现了 RandomAccess 接口，支持通过下标对元素进行快速访问，LinkedList 不支持。</li>
+<li>ArrayList 插入、删除操作可能触发数组扩容或者减容，代价较大，而 LinkedList 只需维护相关指针，代价很小</li>
 </ul>
-<h2 id="类的初始化顺序"><a href="#类的初始化顺序" class="headerlink" title="类的初始化顺序"></a>类的初始化顺序</h2><ul>
-<li>父类中的静态成员变量和静态代码块</li>
-<li>子类中的静态成员变量和静态代码块</li>
-<li>父类中的普通成员变量和代码块，执行父类的构造方法<ul>
-<li>所以父类的构造方法被 private 修饰的话，则无法被继承</li>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>Map 主要分为 Hashtable、HashMap、TreeMap 和 LinkedHashMap。Hashtable 虽是线程安全的，但是其内部方法均以 synchronized 修饰，同步代价较高，基本可以用支持并发的 ConcurentHashMap 代替。</p>
+<h3 id="HashMap-与-LinkedHashMap、TreeMap"><a href="#HashMap-与-LinkedHashMap、TreeMap" class="headerlink" title="HashMap 与 LinkedHashMap、TreeMap"></a>HashMap 与 LinkedHashMap、TreeMap</h3><p>HashMap 主要采用数组+链表/红黑树的方式实现。也就是初始化数组 table（初始容量为 16），然后根据哈希函数 hashCode()%table.length()确定元素在数组中的位置，转化为链表的节点进行存储。因为 table 始终是 2 的 n 次方，根据公式 a % (2^n) = a &amp; (2^n - 1)，哈希函数转变为了 hashCode() &amp; (table.length()-1)。而扩容时，也因为容量保持 2 的 n 次方，所以新散列位置等于原先的位置或者原先位置+原容量。</p>
+<p>为什么 table.length()始终是 2 的 n 次方呢？原因很简单，因为初始值为 2 的次方，而每次扩容都*2。</p>
+<p>当 table[i]的链表节点数大于等于 8 时，将会把链表转为红黑树以提升查找效率。而待数量小于等于 6 时，会把红黑树重新转换成链表。</p>
+<p>LinkedHashMap 继承了 HashMap，运用模板方法模式重写了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeAccess</span><span class="params">(Node&lt;K,V&gt; p)</span> </span>&#123; &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeInsertion</span><span class="params">(<span class="keyword">boolean</span> evict)</span> </span>&#123; &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">afterNodeRemoval</span><span class="params">(Node&lt;K,V&gt; p)</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>三个方法，从而维护了每个节点的 before、after 指针，以此来实现节点的顺序访问。</p>
+<p>除了 LinkedHashMap，TreeMap 也是有序的，但是两者有序的方式不同。根据上文可知，LinkedHashMap 主要依靠维护双向链表以实现按插入、最近最少使用顺序访问，而 TreeMap 的底层实现就与 LinkedHashMap 不同，是红黑树。所以 TreeMap 的有序是依靠 compareTo()方法的。所以，TreeMap 的存储对象必须实现 Comparable 接口，又或者创建时传入 Comparator 比较器。</p>
+<h3 id="ConcurentHashMap"><a href="#ConcurentHashMap" class="headerlink" title="ConcurentHashMap"></a>ConcurentHashMap</h3><p>ConcurentHashMap 作为支持并发的 HashMap，其底层数据结构和 HashMap 类似，但用了大量处理来支持并发。首先，get()方法是不加锁的，put()方法分为两种情况：</p>
+<ul>
+<li>如果 table[i]==null，那么将用 cas 操作使 table[i]=newNode</li>
+<li>如果 table[i]!=null,那么将会 syncronized(table[i])，将节点加入链表末尾或插入数</li>
 </ul>
-</li>
-<li>子类中的普通成员变量和代码块，执行子类的构造方法</li>
-</ul>
-<h2 id="8-种基本数据类型"><a href="#8-种基本数据类型" class="headerlink" title="8 种基本数据类型"></a>8 种基本数据类型</h2><p>byte(1 字节)，short(2 字节)，int(4 字节)，long(8 字节)，float(4 字节)，double(8 字节)，char(2 字节)，boolean</p>
-<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><ul>
-<li>元注解<ul>
-<li>Target，注解的作用范围</li>
-<li>Retention，注解的保留时间</li>
-<li>Document，注解可被 javadoc 文档化</li>
-<li>Inherited，注解可继承，也就是注解也应用于该 class 的子类</li>
-</ul>
-</li>
-<li>定义注解</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> A &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> -1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@A</span>(value = <span class="number">1</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        A a = T.class.getAnnotation(A.class);</span><br><span class="line">        System.out.println(a.value());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><ul>
-<li>运行时动态获取信息和动态调用方法的功能被称为反射</li>
-<li>相关的类<ul>
-<li>Class<ul>
-<li>类.class</li>
-<li>对象.getClass()</li>
-<li>Class.forName()</li>
-</ul>
-</li>
-<li>Method</li>
-<li>Field</li>
-<li>Constructor</li>
-</ul>
-</li>
-<li>动态代理</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserImpl</span> <span class="keyword">implements</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyHandler</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"enter ..."</span>);</span><br><span class="line">        Object invoke = method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">"exit ..."</span>);</span><br><span class="line">        <span class="keyword">return</span> invoke;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UserImpl userImpl = <span class="keyword">new</span> UserImpl();</span><br><span class="line">        ProxyHandler proxyHandler = <span class="keyword">new</span> ProxyHandler(userImpl);</span><br><span class="line">        User user = (User) Proxy.newProxyInstance(userImpl.getClass().getClassLoader(), userImpl.getClass().getInterfaces(), proxyHandler);</span><br><span class="line">        user.say(); </span><br><span class="line">        <span class="comment">// enter ...</span></span><br><span class="line">        <span class="comment">// hello</span></span><br><span class="line">        <span class="comment">// exit ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><ul>
-<li>是在编译器这个层次来实现的，在生成的java字节码中是不包含泛型中的类型信息的。</li>
-</ul>
-<h2 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h2><ul>
-<li>实现serializable接口</li>
-<li>ObjectOutputStream、ObjectInputStream</li>
-<li>writeObject()、readObject()</li>
-<li>transient</li>
-</ul>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>实现 Set 接口的类主要有 HashSet、LinkedHashSet、TreeSet。而因为 map 的 key 值定义完美满足了 set 的要求，所以借助于各种 map，set 的实现非常简单：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.put(e, PRESENT)==<span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -517,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/java-intro2IO_NIO.html" rel="next" title="IO、NIO简述">
-                <i class="fa fa-chevron-left"></i> IO、NIO简述
+              <a href="/rewrite-xiya-monitor.html" rel="next" title="工作小结">
+                <i class="fa fa-chevron-left"></i> 工作小结
               </a>
             
           </div>
@@ -526,10 +490,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/rewrite-xiya-monitor.html" rel="prev" title="工作小结">
-                工作小结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -700,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象的特点"><span class="nav-number">2.</span> <span class="nav-text">面向对象的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的初始化顺序"><span class="nav-number">3.</span> <span class="nav-text">类的初始化顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-种基本数据类型"><span class="nav-number">4.</span> <span class="nav-text">8 种基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解"><span class="nav-number">5.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射"><span class="nav-number">6.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number">7.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序列化与反序列化"><span class="nav-number">8.</span> <span class="nav-text">序列化与反序列化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">3.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">4.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap-与-LinkedHashMap、TreeMap"><span class="nav-number">4.1.</span> <span class="nav-text">HashMap 与 LinkedHashMap、TreeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurentHashMap"><span class="nav-number">4.2.</span> <span class="nav-text">ConcurentHashMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">5.</span> <span class="nav-text">Set</span></a></li></ol></div>
             
 
           </div>
