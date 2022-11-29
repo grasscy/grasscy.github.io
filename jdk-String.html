@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="字符编码 ## String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASC">
+  <meta name="description" content="String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASCII 字符集诞生">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小记之字符编码">
+<meta property="og:title" content="字符编码">
 <meta property="og:url" content="http://grassc.cn/jdk-String.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="字符编码 ## String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASC">
+<meta property="og:description" content="String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASCII 字符集诞生">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-11-29T11:08:32.928Z">
+<meta property="og:updated_time" content="2022-11-29T11:27:53.269Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小记之字符编码">
-<meta name="twitter:description" content="字符编码 ## String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASC">
+<meta name="twitter:title" content="字符编码">
+<meta name="twitter:description" content="String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASCII 字符集诞生">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>小记之字符编码 | 小草窝</title>
+  <title>字符编码 | 小草窝</title>
   
 
 
@@ -328,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">小记之字符编码
+          <h2 class="post-title" itemprop="name headline">字符编码
               
             
           </h2>
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-11-29 19:08:32" itemprop="dateModified" datetime="2022-11-29T19:08:32+08:00">2022-11-29</time>
+                <time title="修改时间：2022-11-29 19:27:53" itemprop="dateModified" datetime="2022-11-29T19:27:53+08:00">2022-11-29</time>
               
             
           </span>
@@ -431,8 +431,7 @@
       
 
       
-        <h1 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码 "></a>字符编码 <!-- omit in toc --></h1><p>##</p>
-<p>String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASCII 字符集诞生了。</p>
+        <p>String 是我们非常常用的一个类，尤其是 length()方法。而要清晰地理解 length，首先需要对字符编码有一定了解。众所周知，计算机只能识别高低电平——也就是 0,1。0,1 显然是无法表示现实中的字符的，所以后来，人们定义一个电平作为 1-bit，以不同 bit 的排列组合来代表不同的字符。于是，一个采用 8-bit、也就是 1-byte 来的表示字符的字符集：ASCII 字符集诞生了。</p>
 <p>8bit 的排列组合，最多可以有 2^8=256 种形式，也就是说 ASCII 字符集至多可以表示 256 种字符。这对英文字母来说绰绰有余，但在世界范围内，这个表示范围显然是远远不够的。于是，为了能表示所有文字，Unicode 字符集应运而生。</p>
 <p>最初，Unicode 字符集被设计成 2-byte，可以表示 2^16=65536 个字符。而后随着内容的增加，这 6 万多个字符也不够用了。于是，unicode 规范将这 65536 个字符合集便被作为基本多文种平面（Basic Multilingual Plane,BMP），并添加了同样要求以 2-byte 实现的辅助平面（Supplementary Planes）。这样，BMP 与 SP 相结合，unicode 字符集可以表示 2^32 次方个字符。</p>
 <p>4-byte 的虽然暂时解决了表示字符数量问题，但实际使用中，绝大多数的字符还是可以用 1-byte 或者 2-byte 表示。如果一律以 4-byte 处理，无疑会造成巨大的空间浪费。于是，可以经过某种转换实现 unicode 字符集的编码规范出现了，常见的有 utf-8/utf-16 等。</p>
@@ -474,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/jdk-Hashtable.html" rel="next" title="java系列——Hashtable">
-                <i class="fa fa-chevron-left"></i> java系列——Hashtable
+              <a href="/jdk-Hashtable.html" rel="next" title="Hashtable">
+                <i class="fa fa-chevron-left"></i> Hashtable
               </a>
             
           </div>
@@ -484,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html" rel="prev" title="java系列——StringBuilder与StringBuffer">
-                java系列——StringBuilder与StringBuffer <i class="fa fa-chevron-right"></i>
+              <a href="/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html" rel="prev" title="StringBuilder与StringBuffer">
+                StringBuilder与StringBuffer <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -534,17 +533,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -582,7 +572,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -594,6 +586,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
@@ -643,22 +637,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字符编码"><span class="nav-number">1.</span> <span class="nav-text">字符编码 </span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

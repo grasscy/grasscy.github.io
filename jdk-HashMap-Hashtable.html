@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="HashMap——兼以 Hashtable 概述HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值">
-<meta name="keywords" content="java,java源码">
+  <meta name="description" content="概述HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值对 Entry，array[i]事实上存储了">
+<meta name="keywords" content="java,源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap——兼以Hashtable">
 <meta property="og:url" content="http://grassc.cn/jdk-HashMap-Hashtable.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="HashMap——兼以 Hashtable 概述HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值">
+<meta property="og:description" content="概述HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值对 Entry，array[i]事实上存储了">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-11-29T11:08:32.700Z">
+<meta property="og:updated_time" content="2022-11-29T11:28:23.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap——兼以Hashtable">
-<meta name="twitter:description" content="HashMap——兼以 Hashtable 概述HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值">
+<meta name="twitter:description" content="概述HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值对 Entry，array[i]事实上存储了">
 
 
 
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-11-29 19:08:32" itemprop="dateModified" datetime="2022-11-29T19:08:32+08:00">2022-11-29</time>
+                <time title="修改时间：2022-11-29 19:28:23" itemprop="dateModified" datetime="2022-11-29T19:28:23+08:00">2022-11-29</time>
               
             
           </span>
@@ -394,7 +394,7 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/源码/" itemprop="url" rel="index"><span itemprop="name">源码</span></a></span>
 
                 
                 
@@ -438,7 +438,7 @@
       
 
       
-        <h1 id="HashMap——兼以-Hashtable"><a href="#HashMap——兼以-Hashtable" class="headerlink" title="HashMap——兼以 Hashtable "></a>HashMap——兼以 Hashtable <!-- omit in toc --></h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值对 Entry，array[i]事实上存储了一个 list 的头结点。但是，相对于 Hashtable，HashMap 会在 array.length(称为 capacity)和 list.size()都达到一定程度之后，将 list 转换成红黑树；而红黑树的结点低于一定数量的时候，也会重新转换成 list。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>HashMap 和 Hashtable 同作为常见的 Map 实现，两者的区别在于 HashMap 支持 key=null、value=null 而 Hashtable 不支持；HashMap 不支持同步而 Hashtable 采用 synchronized 修饰方法。除此之外，两者提供的功能几乎相同。两者都采取 array+list 的方式存储键值对 Entry，array[i]事实上存储了一个 list 的头结点。但是，相对于 Hashtable，HashMap 会在 array.length(称为 capacity)和 list.size()都达到一定程度之后，将 list 转换成红黑树；而红黑树的结点低于一定数量的时候，也会重新转换成 list。</p>
 <p>本文着重 HashMap 与 Hashtable，并不讨论红黑树结构。如有需要，请移步红黑树相关文章。</p>
 <p>为了方便叙述，本文中 table 指存储 Entry 的数组结构(Entry[] table)；bin 指 table[i]及其 list 或红黑树；capacity 指 table.length，也就是 bin 的数量；threshold 指达到再散列的门槛 size(Entry 总数)。</p>
 <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
@@ -505,7 +505,7 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/java源码/" rel="tag"># java源码</a>
+            <a href="/tags/源码/" rel="tag"># 源码</a>
           
         </div>
       
@@ -518,8 +518,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/jdk-AbstractList-ArrayList-LinkedList.html" rel="next" title="java系列——ArrayList与LinkedList">
-                <i class="fa fa-chevron-left"></i> java系列——ArrayList与LinkedList
+              <a href="/jdk-AbstractList-ArrayList-LinkedList.html" rel="next" title="ArrayList与LinkedList">
+                <i class="fa fa-chevron-left"></i> ArrayList与LinkedList
               </a>
             
           </div>
@@ -528,8 +528,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/jdk-AbstractMap-LinkedHashMap.html" rel="prev" title="java系列——LinkedHashMap">
-                java系列——LinkedHashMap <i class="fa fa-chevron-right"></i>
+              <a href="/jdk-AbstractMap-LinkedHashMap.html" rel="prev" title="LinkedHashMap">
+                LinkedHashMap <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -626,7 +626,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -638,6 +640,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
@@ -697,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap——兼以-Hashtable"><span class="nav-number">1.</span> <span class="nav-text">HashMap——兼以 Hashtable </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法"><span class="nav-number">1.3.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散列方法"><span class="nav-number">1.4.</span> <span class="nav-text">散列方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#put-get-remove"><span class="nav-number">1.5.</span> <span class="nav-text">put/get/remove</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#put"><span class="nav-number">1.5.1.</span> <span class="nav-text">put</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get"><span class="nav-number">1.5.2.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remove"><span class="nav-number">1.5.3.</span> <span class="nav-text">remove</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#resize"><span class="nav-number">1.6.</span> <span class="nav-text">resize</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法"><span class="nav-number">3.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散列方法"><span class="nav-number">4.</span> <span class="nav-text">散列方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#put-get-remove"><span class="nav-number">5.</span> <span class="nav-text">put/get/remove</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#put"><span class="nav-number">5.1.</span> <span class="nav-text">put</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get"><span class="nav-number">5.2.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remove"><span class="nav-number">5.3.</span> <span class="nav-text">remove</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#resize"><span class="nav-number">6.</span> <span class="nav-text">resize</span></a></li></ol></div>
             
 
           </div>

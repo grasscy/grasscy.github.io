@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="LinkedHashMap  概述LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。 大体来说，相对于Has">
-<meta name="keywords" content="java,java源码">
+  <meta name="description" content="概述LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。 大体来说，相对于HashMap，LinkedHash">
+<meta name="keywords" content="java,源码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java系列——LinkedHashMap">
+<meta property="og:title" content="LinkedHashMap">
 <meta property="og:url" content="http://grassc.cn/jdk-AbstractMap-LinkedHashMap.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="LinkedHashMap  概述LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。 大体来说，相对于Has">
+<meta property="og:description" content="概述LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。 大体来说，相对于HashMap，LinkedHash">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-11-29T11:08:32.340Z">
+<meta property="og:updated_time" content="2022-11-29T11:29:23.798Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java系列——LinkedHashMap">
-<meta name="twitter:description" content="LinkedHashMap  概述LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。 大体来说，相对于Has">
+<meta name="twitter:title" content="LinkedHashMap">
+<meta name="twitter:description" content="概述LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。 大体来说，相对于HashMap，LinkedHash">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>java系列——LinkedHashMap | 小草窝</title>
+  <title>LinkedHashMap | 小草窝</title>
   
 
 
@@ -328,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">java系列——LinkedHashMap
+          <h2 class="post-title" itemprop="name headline">LinkedHashMap
               
             
           </h2>
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-11-29 19:08:32" itemprop="dateModified" datetime="2022-11-29T19:08:32+08:00">2022-11-29</time>
+                <time title="修改时间：2022-11-29 19:29:23" itemprop="dateModified" datetime="2022-11-29T19:29:23+08:00">2022-11-29</time>
               
             
           </span>
@@ -394,7 +394,7 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/源码/" itemprop="url" rel="index"><span itemprop="name">源码</span></a></span>
 
                 
                 
@@ -438,7 +438,7 @@
       
 
       
-        <h1 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap  "></a>LinkedHashMap  <!-- omit in toc --></h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>LinkedHashMap与HashMap的主要区别不在多述：LinkedHashMap是有序的而HashMap是无序的。具体来说，LinkedHashMap可以基于插入顺序或者访问顺序（Least Recently Used，最近最少使用）进行遍历。从这两个类名上，我们就可以一窥LinkedHashMap实现有序性的关键词：linked。</p>
 <p>大体来说，相对于HashMap，LinkedHashMap的每个节点都额外增加了before与after两个链接，来记录顺序。遍历之时，只需把after复制给next即可：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 迭代器</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedHashIterator</span> </span>&#123;</span><br><span class="line">    <span class="comment">// next结点</span></span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">    LinkedHashIterator() &#123;</span><br><span class="line">        next = head; <span class="comment">// next初始化</span></span><br><span class="line">        expectedModCount = modCount;</span><br><span class="line">        current = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> LinkedHashMap.<span class="function">Entry&lt;K,V&gt; <span class="title">nextNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        LinkedHashMap.Entry&lt;K,V&gt; e = next;</span><br><span class="line">        <span class="comment">// fast-fail</span></span><br><span class="line">        <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        <span class="keyword">if</span> (e == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">        current = e;</span><br><span class="line">        <span class="comment">// 将after赋值给next</span></span><br><span class="line">        next = e.after;</span><br><span class="line">        <span class="keyword">return</span> e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>既然LinkedHashMap相对于HashMap的最大区别仅仅是多维护了两个链接，那么这样的继承关系也是自然而然了：</p>
@@ -447,9 +447,12 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLinkedHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K k,V v)</span></span>&#123;</span><br><span class="line">        V v= <span class="keyword">super</span>.put(k,v);</span><br><span class="line">        afterNodeInsertion();</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(K k)</span></span>&#123;</span><br><span class="line">        V v= <span class="keyword">super</span>.get(k);</span><br><span class="line">        afterNodeAccess();</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(K k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> res= <span class="keyword">super</span>.remove(k);</span><br><span class="line">        afterNodeRemoval();</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 维护before与after链接方法</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterNodeAccess</span><span class="params">(Node&lt;K,V&gt; old)</span> </span>&#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterNodeInsertion</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterNodeRemoval</span><span class="params">(Node&lt;K,V&gt; old)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在LinkedHashMap中，也维护了这三个方法，并运行了设计模式：模板方法模式。</p>
 <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
-<li><a href="#%E9%92%A9%E5%AD%90%E6%96%B9%E6%B3%95">钩子方法</a></li>
+<li><a href="#概述">概述</a></li>
+<li><a href="#linkedhashmap与hashmap模板方法模式">LinkedHashMap与HashMap：模板方法模式</a></li>
+<li><a href="#钩子方法">钩子方法</a></li>
+<li><a href="#其他">其他</a><h2 id="LinkedHashMap与HashMap：模板方法模式"><a href="#LinkedHashMap与HashMap：模板方法模式" class="headerlink" title="LinkedHashMap与HashMap：模板方法模式"></a>LinkedHashMap与HashMap：模板方法模式</h2></li>
 </ul>
-<h2 id="LinkedHashMap与HashMap：模板方法模式"><a href="#LinkedHashMap与HashMap：模板方法模式" class="headerlink" title="LinkedHashMap与HashMap：模板方法模式"></a>LinkedHashMap与HashMap：模板方法模式</h2><p>模板方法模式定义了一些概念，如在父类中，相关方法被分为模板方法与基本方法两大类，基本方法又分为三类：钩子方法、抽象方法、具体方法。先看一个简单的例子：</p>
+<p>模板方法模式定义了一些概念，如在父类中，相关方法被分为模板方法与基本方法两大类，基本方法又分为三类：钩子方法、抽象方法、具体方法。先看一个简单的例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 模板方法</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">meet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        greet();</span><br><span class="line">        chat();</span><br><span class="line">        <span class="keyword">if</span> (isFriend()) &#123;</span><br><span class="line">            <span class="comment">// do something</span></span><br><span class="line">        &#125;</span><br><span class="line">        farewell();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//  钩子方法</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 钩子方法</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isFriend</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 抽象方法</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">chat</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 具体方法</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">farewell</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Goodbye!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span> <span class="keyword">extends</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isFriend</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">chat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"blablabla..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>LinkedHashMap与HashMap的实现也运用了这种模式,如</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">replace</span><span class="params">(K key, V oldValue, V newValue)</span> </span>&#123;</span><br><span class="line">        Node&lt;K,V&gt; e; V v;</span><br><span class="line">        <span class="keyword">if</span> ((e = getNode(hash(key), key)) != <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">            ((v = e.value) == oldValue || (v != <span class="keyword">null</span> &amp;&amp; v.equals(oldValue)))) &#123;</span><br><span class="line">            e.value = newValue;</span><br><span class="line">            <span class="comment">// 钩子</span></span><br><span class="line">            afterNodeAccess(e);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 钩子方法</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterNodeAccess</span><span class="params">(Node&lt;K,V&gt; p)</span> </span>&#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterNodeInsertion</span><span class="params">(<span class="keyword">boolean</span> evict)</span> </span>&#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterNodeRemoval</span><span class="params">(Node&lt;K,V&gt; p)</span> </span>&#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 实现钩子</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterNodeAccess</span><span class="params">(Node&lt;K,V&gt; e)</span> </span>&#123; <span class="comment">// move node to last</span></span><br><span class="line">        LinkedHashMap.Entry&lt;K,V&gt; last;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -479,7 +482,7 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/java源码/" rel="tag"># java源码</a>
+            <a href="/tags/源码/" rel="tag"># 源码</a>
           
         </div>
       
@@ -502,8 +505,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/jdk-CopyOnWriteArrayList.html" rel="prev" title="java系列——CopyOnWriteArrayList">
-                java系列——CopyOnWriteArrayList <i class="fa fa-chevron-right"></i>
+              <a href="/jdk-CopyOnWriteArrayList.html" rel="prev" title="CopyOnWriteArrayList">
+                CopyOnWriteArrayList <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -600,7 +603,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -612,6 +617,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
@@ -671,7 +678,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">1.</span> <span class="nav-text">LinkedHashMap  </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap与HashMap：模板方法模式"><span class="nav-number">1.3.</span> <span class="nav-text">LinkedHashMap与HashMap：模板方法模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#钩子方法"><span class="nav-number">1.4.</span> <span class="nav-text">钩子方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.5.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap与HashMap：模板方法模式"><span class="nav-number">3.</span> <span class="nav-text">LinkedHashMap与HashMap：模板方法模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#钩子方法"><span class="nav-number">4.</span> <span class="nav-text">钩子方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>

@@ -109,18 +109,18 @@
 
 
   <meta name="description" content="前言“池”这个字恐怕大家都耳熟能详，诸如连接池、对象池以及线程池等等。我们可以将暂时用不到的资源搁置在池中，等待需要使用的时候，就可以直接从池中获取。池不仅可以重复利用资源，而无需重新进行资源的构建工作，还可以因此简化资源的管理与调用，提升效率与简化编码。 而线程池，就是一种常见的“池”。比起降低新建线程的开销，线程池更可以帮助我们处理线程的切换，减少线程上下文切换的开销。同时，也可以帮助任务的调">
-<meta name="keywords" content="java Executor 线程池">
+<meta name="keywords" content="java,源码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java系列之Executor与线程池">
+<meta property="og:title" content="Executor与线程池">
 <meta property="og:url" content="http://grassc.cn/jdk-Executor.html">
 <meta property="og:site_name" content="小草窝">
 <meta property="og:description" content="前言“池”这个字恐怕大家都耳熟能详，诸如连接池、对象池以及线程池等等。我们可以将暂时用不到的资源搁置在池中，等待需要使用的时候，就可以直接从池中获取。池不仅可以重复利用资源，而无需重新进行资源的构建工作，还可以因此简化资源的管理与调用，提升效率与简化编码。 而线程池，就是一种常见的“池”。比起降低新建线程的开销，线程池更可以帮助我们处理线程的切换，减少线程上下文切换的开销。同时，也可以帮助任务的调">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://grassc.cn/jdk-Executor/executor.png">
 <meta property="og:image" content="http://grassc.cn/jdk-Executor/execute.png">
-<meta property="og:updated_time" content="2022-11-29T11:08:32.648Z">
+<meta property="og:updated_time" content="2022-11-29T11:28:35.168Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java系列之Executor与线程池">
+<meta name="twitter:title" content="Executor与线程池">
 <meta name="twitter:description" content="前言“池”这个字恐怕大家都耳熟能详，诸如连接池、对象池以及线程池等等。我们可以将暂时用不到的资源搁置在池中，等待需要使用的时候，就可以直接从池中获取。池不仅可以重复利用资源，而无需重新进行资源的构建工作，还可以因此简化资源的管理与调用，提升效率与简化编码。 而线程池，就是一种常见的“池”。比起降低新建线程的开销，线程池更可以帮助我们处理线程的切换，减少线程上下文切换的开销。同时，也可以帮助任务的调">
 <meta name="twitter:image" content="http://grassc.cn/jdk-Executor/executor.png">
 
@@ -139,7 +139,7 @@
   };
 </script>
 
-  <title>java系列之Executor与线程池 | 小草窝</title>
+  <title>Executor与线程池 | 小草窝</title>
   
 
 
@@ -331,7 +331,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">java系列之Executor与线程池
+          <h2 class="post-title" itemprop="name headline">Executor与线程池
               
             
           </h2>
@@ -373,7 +373,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-11-29 19:08:32" itemprop="dateModified" datetime="2022-11-29T19:08:32+08:00">2022-11-29</time>
+                <time title="修改时间：2022-11-29 19:28:35" itemprop="dateModified" datetime="2022-11-29T19:28:35+08:00">2022-11-29</time>
               
             
           </span>
@@ -397,7 +397,7 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java源码/" itemprop="url" rel="index"><span itemprop="name">java源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/源码/" itemprop="url" rel="index"><span itemprop="name">源码</span></a></span>
 
                 
                 
@@ -525,7 +525,7 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/java源码/" rel="tag"># java源码</a>
+            <a href="/tags/源码/" rel="tag"># 源码</a>
           
         </div>
       
@@ -538,8 +538,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/jdk-ThreadLocal.html" rel="next" title="java系列——ThreadLocal">
-                <i class="fa fa-chevron-left"></i> java系列——ThreadLocal
+              <a href="/jdk-ThreadLocal.html" rel="next" title="ThreadLocal">
+                <i class="fa fa-chevron-left"></i> ThreadLocal
               </a>
             
           </div>
@@ -548,8 +548,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/java-intro2IO_NIO.html" rel="prev" title="java系列之IO、NIO简述">
-                java系列之IO、NIO简述 <i class="fa fa-chevron-right"></i>
+              <a href="/java-intro2IO_NIO.html" rel="prev" title="IO、NIO简述">
+                IO、NIO简述 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -646,7 +646,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -658,6 +660,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
