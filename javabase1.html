@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化 引用类型  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的参数个数、顺序、">
+  <meta name="description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化 引用类型 JIT 编译器  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java基础知识（一）">
 <meta property="og:url" content="http://grassc.cn/javabase1.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化 引用类型  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的参数个数、顺序、">
+<meta property="og:description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化 引用类型 JIT 编译器  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-11-30T11:17:30.567Z">
+<meta property="og:updated_time" content="2022-12-01T12:04:01.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基础知识（一）">
-<meta name="twitter:description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化 引用类型  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的参数个数、顺序、">
+<meta name="twitter:description" content="导航  面向对象的特点 类的初始化顺序 8 种基本数据类型 注解 反射 泛型 序列化与反序列化 引用类型 JIT 编译器  面向对象的特点 封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。 继承：从一个已知类中派生出一个新的类，新类拥有已知类的行为和属性。 多态：本质是存在同名的不同方法，实现方式： 子类对父类的方法重写 方法重载 方法的">
 
 
 
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-11-30 19:17:30" itemprop="dateModified" datetime="2022-11-30T19:17:30+08:00">2022-11-30</time>
+                <time title="修改时间：2022-12-01 20:04:01" itemprop="dateModified" datetime="2022-12-01T20:04:01+08:00">2022-12-01</time>
               
             
           </span>
@@ -440,6 +440,7 @@
 <li><a href="#泛型">泛型</a></li>
 <li><a href="#序列化与反序列化">序列化与反序列化</a></li>
 <li><a href="#引用类型">引用类型</a></li>
+<li><a href="#jit-编译器">JIT 编译器</a></li>
 </ul>
 <h2 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h2><ul>
 <li>封装：将事物封装成一个类，开放接口供外界调用，从而减少耦合与隐藏内部实现。当内部实现改变时，不影响外部调用。</li>
@@ -507,6 +508,10 @@
 <li>弱引用：gc 时回收，可以通过弱引用的 get 方法得到引用对象</li>
 <li>虚引用：gc 时回收，gc 掉时会收到一个通知，不能通过 get 方法得到引用对象</li>
 </ul>
+<h2 id="JIT-编译器"><a href="#JIT-编译器" class="headerlink" title="JIT 编译器"></a>JIT 编译器</h2><p>just in time compile，也就是即时编译器，把经常运行的代码作为“热点代码”编译成与本地平台相关的机器码，并并行各种优化，包括逃逸分析、锁消除、锁膨胀、方法内联、空值检查消除、类型检测消除以及公共子表达式消除等。</p>
+<blockquote>
+<p>逃逸分析的基本行为就是分析对象动态作用域，当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他地方中，称为方法逃逸。JIT 编译器的优化包括如下：<br>(1) 同布省略：也就是锁消除，当 JIT 编译器判断不会产生并发问题，那么会将同步 synchronized 去掉<br>(2) 标量替换<br>我们先来解释下标量和聚合量的基本概念。<br>(1) 标量(Scalar)是指一个无法再分解成更小的数据的数据。Java 中的原始数据类型就是标量。<br>(2) 聚合量(Aggregate)是还可以分解的数据。Java 中的对象就是聚合量，因为他可以分解成其他聚合量和标量。<br>在 JIT 阶段，如果经过逃逸分析，发现一个对象不会被外界访问的话，那么经过 JIT 优化，就会把这个对象拆解成若干个其中包含的若干个成员变量来代替。这个过程就是标量替换。标量替换的好处就是对象可以不在堆内存进行分配，为栈上分配提供了良好的基础。</p>
+</blockquote>
 
       
     </div>
@@ -625,7 +630,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -723,7 +728,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象的特点"><span class="nav-number">2.</span> <span class="nav-text">面向对象的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的初始化顺序"><span class="nav-number">3.</span> <span class="nav-text">类的初始化顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-种基本数据类型"><span class="nav-number">4.</span> <span class="nav-text">8 种基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解"><span class="nav-number">5.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射"><span class="nav-number">6.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number">7.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序列化与反序列化"><span class="nav-number">8.</span> <span class="nav-text">序列化与反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型"><span class="nav-number">9.</span> <span class="nav-text">引用类型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象的特点"><span class="nav-number">2.</span> <span class="nav-text">面向对象的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的初始化顺序"><span class="nav-number">3.</span> <span class="nav-text">类的初始化顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-种基本数据类型"><span class="nav-number">4.</span> <span class="nav-text">8 种基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解"><span class="nav-number">5.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射"><span class="nav-number">6.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number">7.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序列化与反序列化"><span class="nav-number">8.</span> <span class="nav-text">序列化与反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型"><span class="nav-number">9.</span> <span class="nav-text">引用类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JIT-编译器"><span class="nav-number">10.</span> <span class="nav-text">JIT 编译器</span></a></li></ol></div>
             
 
           </div>
