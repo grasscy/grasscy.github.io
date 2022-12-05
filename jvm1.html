@@ -108,13 +108,13 @@
 
 
 
-  <meta name="description" content="导航 内存划分 方法区(永久代) 线程之间共享的区域 常量、静态变量以及 jit 编译后的代码都在方法区 主要存储已被虚拟机加载的类信息 运行时常量池 Class 文件中除了有类的版本、字段、方法、接口等描述等信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中     堆内存 线程之间">
+  <meta name="description" content="导航  内存划分 jdk8 的变化   内存分配与垃圾回收 堆内存 非堆内存 创建对象时的内存分配 如何判定对象是否应该回收 对象的回收（垃圾回收） 回收算法 垃圾收集器   内存调优 命令 排查异常   类加载 类加载器的分类 类加载器的职责    内存划分  方法区(永久代) 线程之间共享的区域 常量、静态变量以及 jit 编译后的代码都在方法区 主要存储已被虚拟机加载的类信息 运行时常量池">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jvm（一）">
 <meta property="og:url" content="http://grassc.cn/jvm1.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="导航 内存划分 方法区(永久代) 线程之间共享的区域 常量、静态变量以及 jit 编译后的代码都在方法区 主要存储已被虚拟机加载的类信息 运行时常量池 Class 文件中除了有类的版本、字段、方法、接口等描述等信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中     堆内存 线程之间">
+<meta property="og:description" content="导航  内存划分 jdk8 的变化   内存分配与垃圾回收 堆内存 非堆内存 创建对象时的内存分配 如何判定对象是否应该回收 对象的回收（垃圾回收） 回收算法 垃圾收集器   内存调优 命令 排查异常   类加载 类加载器的分类 类加载器的职责    内存划分  方法区(永久代) 线程之间共享的区域 常量、静态变量以及 jit 编译后的代码都在方法区 主要存储已被虚拟机加载的类信息 运行时常量池">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://grassc.cn/jvm1/jvm.jpg">
 <meta property="og:image" content="http://grassc.cn/jvm1/heap.jpg">
@@ -124,10 +124,10 @@
 <meta property="og:image" content="http://grassc.cn/jvm1/gcs.jpg">
 <meta property="og:image" content="http://grassc.cn/jvm1/cms.jpg">
 <meta property="og:image" content="http://grassc.cn/jvm1/load.jpg">
-<meta property="og:updated_time" content="2022-12-05T12:46:14.563Z">
+<meta property="og:updated_time" content="2022-12-05T13:00:12.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm（一）">
-<meta name="twitter:description" content="导航 内存划分 方法区(永久代) 线程之间共享的区域 常量、静态变量以及 jit 编译后的代码都在方法区 主要存储已被虚拟机加载的类信息 运行时常量池 Class 文件中除了有类的版本、字段、方法、接口等描述等信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中     堆内存 线程之间">
+<meta name="twitter:description" content="导航  内存划分 jdk8 的变化   内存分配与垃圾回收 堆内存 非堆内存 创建对象时的内存分配 如何判定对象是否应该回收 对象的回收（垃圾回收） 回收算法 垃圾收集器   内存调优 命令 排查异常   类加载 类加载器的分类 类加载器的职责    内存划分  方法区(永久代) 线程之间共享的区域 常量、静态变量以及 jit 编译后的代码都在方法区 主要存储已被虚拟机加载的类信息 运行时常量池">
 <meta name="twitter:image" content="http://grassc.cn/jvm1/jvm.jpg">
 
 
@@ -362,9 +362,13 @@
                 
               
 
-              <time title="创建时间：2022-12-05 20:46:14" itemprop="dateCreated datePublished" datetime="2022-12-05T20:46:14+08:00">2022-12-05</time>
+              <time title="创建时间：2022-12-05 20:46:14 / 修改时间：21:00:12" itemprop="dateCreated datePublished" datetime="2022-12-05T20:46:14+08:00">2022-12-05</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -424,7 +428,34 @@
       
 
       
-        <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><h2 id="内存划分"><a href="#内存划分" class="headerlink" title="内存划分"></a>内存划分</h2><ul>
+        <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
+<li><a href="#内存划分">内存划分</a><ul>
+<li><a href="#jdk8-的变化">jdk8 的变化</a></li>
+</ul>
+</li>
+<li><a href="#内存分配与垃圾回收">内存分配与垃圾回收</a><ul>
+<li><a href="#堆内存">堆内存</a></li>
+<li><a href="#非堆内存">非堆内存</a></li>
+<li><a href="#创建对象时的内存分配">创建对象时的内存分配</a></li>
+<li><a href="#如何判定对象是否应该回收">如何判定对象是否应该回收</a></li>
+<li><a href="#对象的回收垃圾回收">对象的回收（垃圾回收）</a></li>
+<li><a href="#回收算法">回收算法</a></li>
+<li><a href="#垃圾收集器">垃圾收集器</a></li>
+</ul>
+</li>
+<li><a href="#内存调优">内存调优</a><ul>
+<li><a href="#命令">命令</a></li>
+<li><a href="#排查异常">排查异常</a></li>
+</ul>
+</li>
+<li><a href="#类加载">类加载</a><ul>
+<li><a href="#类加载器的分类">类加载器的分类</a></li>
+<li><a href="#类加载器的职责">类加载器的职责</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="内存划分"><a href="#内存划分" class="headerlink" title="内存划分"></a>内存划分</h2><p><img src="/jvm1/jvm.jpg" alt=""></p>
+<ul>
 <li>方法区(永久代)<ul>
 <li>线程之间共享的区域</li>
 <li>常量、静态变量以及 jit 编译后的代码都在方法区</li>
@@ -455,7 +486,6 @@
 </ul>
 </li>
 </ul>
-<p><img src="/jvm1/jvm.jpg" alt=""></p>
 <h3 id="jdk8-的变化"><a href="#jdk8-的变化" class="headerlink" title="jdk8 的变化"></a>jdk8 的变化</h3><ul>
 <li>元空间代替了永久代<ul>
 <li>元空间和永久代类似，都是对 JVM 规范中方法区的实现。区别在于元空间并不在虚拟机中，而是使用本地内存，默认情况下元空间的大小仅受本地内存限制，也可以通过-XX：MetaspaceSize 指定元空间大小</li>
@@ -487,7 +517,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="创建对象时的内存分配"><a href="#创建对象时的内存分配" class="headerlink" title="创建对象时的内存分配"></a>创建对象时的内存分配</h3><p>一般情况下我们通过 new 指令来创建对象，当虚拟机遇到一条 new 指令的时候，会去检查这个指令的参数是否能在常量池中定位到某个类的符号引用，并且检查这个符号引用代表的类是否已经被加载，解析和初始化。如果没有，那么会执行类加载过程。<br>通过执行类的加载，验证，准备，解析，初始化步骤，完成了类的加载，这个时候会为该对象进行内存分配，也就是把一块确定大小的内存从 Java 堆中划分出来，在分配的内存上完成对象的创建工作。</p>
+<h3 id="创建对象时的内存分配"><a href="#创建对象时的内存分配" class="headerlink" title="创建对象时的内存分配"></a>创建对象时的内存分配</h3><p>一般情况下我们通过 new 指令来创建对象，当虚拟机遇到一条 new 指令的时候，会去检查这个指令的参数是否能在常量池中定位到某个类的符号引用，并且检查这个符号引用代表的类是否已经被加载，解析和初始化。如果没有，那么会执行类加载过程。</p>
+<p>通过执行类的加载，验证，准备，解析，初始化步骤，完成了类的加载，这个时候会为该对象进行内存分配，也就是把一块确定大小的内存从 Java 堆中划分出来，在分配的内存上完成对象的创建工作。</p>
 <ul>
 <li>指针碰撞：如果 java 堆内存是规整的，用过的在一边，没用过的在另一边，那只是挪动指针</li>
 <li>空闲列表：如果 java 堆内存是不规整的，那需要维护一个空闲内存的列表</li>
@@ -501,7 +532,7 @@
 </li>
 </ul>
 <p>创建的对象会优先在 Eden 分配，如果是大对象(很长的字符串数组)则可以直接进入老年代。虚拟机提供一个-XX:PretenureSizeThreshold 参数，令大于这个参数值的对象直接在老年代中分配，避免在 Eden 区和两个 Survivor 区发生大量的内存拷贝。另外，长期存活的对象将进入老年代，每一次 MinorGC(年轻代 GC)，对象年龄就大一岁，默认 15 岁晋升到老年代，通过-XX:MaxTenuringThreshold 设置晋升年龄。</p>
-<h3 id="如果判定对象是否应该回收"><a href="#如果判定对象是否应该回收" class="headerlink" title="如果判定对象是否应该回收"></a>如果判定对象是否应该回收</h3><ul>
+<h3 id="如何判定对象是否应该回收"><a href="#如何判定对象是否应该回收" class="headerlink" title="如何判定对象是否应该回收"></a>如何判定对象是否应该回收</h3><ul>
 <li>引用计数法：有一个引用即计数加一，回收时只收集计数为 0 的对象，但无法处理循环引用</li>
 <li>root 根搜索法：通过一系列作为 root 的对象作为起始点，向下搜索。如果一个对象无法被搜索到，即可回收。<ul>
 <li>root 对象<ul>
@@ -879,7 +910,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存划分"><span class="nav-number">2.</span> <span class="nav-text">内存划分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk8-的变化"><span class="nav-number">2.1.</span> <span class="nav-text">jdk8 的变化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配与垃圾回收"><span class="nav-number">3.</span> <span class="nav-text">内存分配与垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆内存"><span class="nav-number">3.1.</span> <span class="nav-text">堆内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非堆内存"><span class="nav-number">3.2.</span> <span class="nav-text">非堆内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象时的内存分配"><span class="nav-number">3.3.</span> <span class="nav-text">创建对象时的内存分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果判定对象是否应该回收"><span class="nav-number">3.4.</span> <span class="nav-text">如果判定对象是否应该回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的回收（垃圾回收）"><span class="nav-number">3.5.</span> <span class="nav-text">对象的回收（垃圾回收）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收算法"><span class="nav-number">3.6.</span> <span class="nav-text">回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">3.7.</span> <span class="nav-text">垃圾收集器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存调优"><span class="nav-number">4.</span> <span class="nav-text">内存调优</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">4.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排查异常"><span class="nav-number">4.2.</span> <span class="nav-text">排查异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载"><span class="nav-number">5.</span> <span class="nav-text">类加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器的分类"><span class="nav-number">5.1.</span> <span class="nav-text">类加载器的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器的职责"><span class="nav-number">5.2.</span> <span class="nav-text">类加载器的职责</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存划分"><span class="nav-number">2.</span> <span class="nav-text">内存划分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk8-的变化"><span class="nav-number">2.1.</span> <span class="nav-text">jdk8 的变化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配与垃圾回收"><span class="nav-number">3.</span> <span class="nav-text">内存分配与垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆内存"><span class="nav-number">3.1.</span> <span class="nav-text">堆内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非堆内存"><span class="nav-number">3.2.</span> <span class="nav-text">非堆内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象时的内存分配"><span class="nav-number">3.3.</span> <span class="nav-text">创建对象时的内存分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何判定对象是否应该回收"><span class="nav-number">3.4.</span> <span class="nav-text">如何判定对象是否应该回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的回收（垃圾回收）"><span class="nav-number">3.5.</span> <span class="nav-text">对象的回收（垃圾回收）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收算法"><span class="nav-number">3.6.</span> <span class="nav-text">回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">3.7.</span> <span class="nav-text">垃圾收集器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存调优"><span class="nav-number">4.</span> <span class="nav-text">内存调优</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">4.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排查异常"><span class="nav-number">4.2.</span> <span class="nav-text">排查异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载"><span class="nav-number">5.</span> <span class="nav-text">类加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器的分类"><span class="nav-number">5.1.</span> <span class="nav-text">类加载器的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器的职责"><span class="nav-number">5.2.</span> <span class="nav-text">类加载器的职责</span></a></li></ol></li></ol></div>
             
 
           </div>
