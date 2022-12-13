@@ -108,25 +108,29 @@
 
 
 
-  <meta name="description" content="前言springboot 大幅简化了 spring 框架的繁琐配置，非常容易快速上手。一个简单的 springboot 应用，只要加上@SpringBootApplication 注解就可以实现自动配置。而对于许多第三方库，只要引入相应的 starter，就可以直接生成相应的 bean 而无需自行初始化。而这就是 springboot 的自动装配机制。 那么自动装配机制是如何实现的呢？今天我们就来">
-<meta name="keywords" content="java,spring">
+  <meta name="description" content="导航  数据类型 配置文件 缓存问题 内存淘汰策略 删除策略 持久化方式 事务 高可用  数据类型 string,list,set,softed set,hash bitmaps,hyperloglogs,地理空间 geospatial,消息 streams 底层结构：简单动态字符串，链表，字典，跳表，整数集合和压缩链表  配置文件 network：redis 服务器地址，端口以及超时时间等 ge">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springboot自动装配">
-<meta property="og:url" content="http://grassc.cn/springboot_auto_config.html">
+<meta property="og:title" content="redis（一）">
+<meta property="og:url" content="http://grassc.cn/redis.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="前言springboot 大幅简化了 spring 框架的繁琐配置，非常容易快速上手。一个简单的 springboot 应用，只要加上@SpringBootApplication 注解就可以实现自动配置。而对于许多第三方库，只要引入相应的 starter，就可以直接生成相应的 bean 而无需自行初始化。而这就是 springboot 的自动装配机制。 那么自动装配机制是如何实现的呢？今天我们就来">
+<meta property="og:description" content="导航  数据类型 配置文件 缓存问题 内存淘汰策略 删除策略 持久化方式 事务 高可用  数据类型 string,list,set,softed set,hash bitmaps,hyperloglogs,地理空间 geospatial,消息 streams 底层结构：简单动态字符串，链表，字典，跳表，整数集合和压缩链表  配置文件 network：redis 服务器地址，端口以及超时时间等 ge">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-12-10T05:48:10.048Z">
+<meta property="og:image" content="http://grassc.cn/redis/ms1.jpg">
+<meta property="og:image" content="http://grassc.cn/redis/ms2.jpg">
+<meta property="og:image" content="http://grassc.cn/redis/rc.jpg">
+<meta property="og:updated_time" content="2022-12-13T12:34:45.223Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springboot自动装配">
-<meta name="twitter:description" content="前言springboot 大幅简化了 spring 框架的繁琐配置，非常容易快速上手。一个简单的 springboot 应用，只要加上@SpringBootApplication 注解就可以实现自动配置。而对于许多第三方库，只要引入相应的 starter，就可以直接生成相应的 bean 而无需自行初始化。而这就是 springboot 的自动装配机制。 那么自动装配机制是如何实现的呢？今天我们就来">
+<meta name="twitter:title" content="redis（一）">
+<meta name="twitter:description" content="导航  数据类型 配置文件 缓存问题 内存淘汰策略 删除策略 持久化方式 事务 高可用  数据类型 string,list,set,softed set,hash bitmaps,hyperloglogs,地理空间 geospatial,消息 streams 底层结构：简单动态字符串，链表，字典，跳表，整数集合和压缩链表  配置文件 network：redis 服务器地址，端口以及超时时间等 ge">
+<meta name="twitter:image" content="http://grassc.cn/redis/ms1.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://grassc.cn/springboot_auto_config.html"/>
+  <link rel="canonical" href="http://grassc.cn/redis.html"/>
 
 
 
@@ -136,7 +140,7 @@
   };
 </script>
 
-  <title>springboot自动装配 | 小草窝</title>
+  <title>redis（一） | 小草窝</title>
   
 
 
@@ -311,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/springboot_auto_config.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/redis.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -328,7 +332,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">springboot自动装配
+          <h2 class="post-title" itemprop="name headline">redis（一）
               
             
           </h2>
@@ -353,7 +357,7 @@
                 
               
 
-              <time title="创建时间：2022-12-10 13:48:10" itemprop="dateCreated datePublished" datetime="2022-12-10T13:48:10+08:00">2022-12-10</time>
+              <time title="创建时间：2022-12-13 20:34:45" itemprop="dateCreated datePublished" datetime="2022-12-13T20:34:45+08:00">2022-12-13</time>
             
 
             
@@ -371,14 +375,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -393,8 +390,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/springboot_auto_config.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/springboot_auto_config.html" itemprop="commentCount"></span>
+                <a href="/redis.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/redis.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -422,26 +419,130 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>springboot 大幅简化了 spring 框架的繁琐配置，非常容易快速上手。一个简单的 springboot 应用，只要加上@SpringBootApplication 注解就可以实现自动配置。而对于许多第三方库，只要引入相应的 starter，就可以直接生成相应的 bean 而无需自行初始化。而这就是 springboot 的自动装配机制。</p>
-<p>那么自动装配机制是如何实现的呢？今天我们就来探究一下。</p>
-<h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
-<li><a href="#前言">前言</a></li>
-<li><a href="#enableautoconfiguration-注解">@EnableAutoConfiguration 注解</a></li>
-<li><a href="#conditional">@Conditional</a></li>
+        <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
+<li><a href="#数据类型">数据类型</a></li>
+<li><a href="#配置文件">配置文件</a></li>
+<li><a href="#缓存问题">缓存问题</a></li>
+<li><a href="#内存淘汰策略">内存淘汰策略</a></li>
+<li><a href="#删除策略">删除策略</a></li>
+<li><a href="#持久化方式">持久化方式</a></li>
+<li><a href="#事务">事务</a></li>
+<li><a href="#高可用">高可用</a></li>
 </ul>
-<h2 id="EnableAutoConfiguration-注解"><a href="#EnableAutoConfiguration-注解" class="headerlink" title="@EnableAutoConfiguration 注解"></a>@EnableAutoConfiguration 注解</h2><p>@SpringBootApplication 注解集合了@SpringBootConfiguration、@EnableAutoConfiguration、@ComponentScan 三大注解，自动装配无疑和@EnableAutoConfiguration 注解有关。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import</span>(AutoConfigurationImportSelector.class)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Import</span>(AutoConfigurationPackages.Registrar.class)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AutoConfigurationPackage &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到@EnableAutoConfiguration 注解使用@Import 导入了两个类，分别是 AutoConfigurationPackages.Registrar 和 AutoConfigurationImportSelector。</p>
-<p>先来看@Import 注解。调用关系是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-&gt;context.refresh()</span><br><span class="line">-&gt;context.invokeBeanFactoryPostProcessors()</span><br><span class="line">-&gt;PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors()</span><br><span class="line">-&gt;PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(postProcessors,...)</span><br></pre></td></tr></table></figure>
-<p>这里的 postProcessors 包括 ConfigurationClassPostProcessor，将会调用其的 postProcessBeanDefinitionRegistry()方法，这个方法会加载注册更多的 bean 定义信息， 主要是通过 ConfigurationClassParser 的 parse()方法和 ConfigurationClassBeanDefinitionReader 的 loadBeanDefinitions()。</p>
-<p>其中各种注解的解析在 parse()中，包括@PropertySource、@ComponentScan、@Import、@ImportResource、@Bean 等。注意，@import 注解就在其中：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Process any @Import annotations</span></span><br><span class="line">processImports(configClass, sourceClass, getImports(sourceClass), filter, <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
-<p>由此可见，processImports()方法就是@Import 的处理逻辑，点开它:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">for</span> (SourceClass candidate : importCandidates) &#123;</span><br><span class="line">  <span class="comment">// 实现了ImportSelector接口</span></span><br><span class="line">  <span class="keyword">if</span> (candidate.isAssignable(ImportSelector.class)) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="comment">// 如果是DeferredImportSelector接口类型</span></span><br><span class="line">    <span class="keyword">if</span> (selector <span class="keyword">instanceof</span> DeferredImportSelector) &#123;</span><br><span class="line">      <span class="comment">// 与ImportSelector相比，实现该子接口的类将会在所有配置类之后执行，并且可以用@Order排序</span></span><br><span class="line">      <span class="comment">// AutoConfigurationImportSelector走到这里</span></span><br><span class="line">      <span class="keyword">this</span>.deferredImportSelectorHandler.handle(configClass, (DeferredImportSelector) selector);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 否则便执行selectImports()方法</span></span><br><span class="line">           <span class="comment">// 注意AutoConfigurationImportSelector并不会走到这里</span></span><br><span class="line">      String[] importClassNames = selector.selectImports(currentSourceClass.getMetadata());</span><br><span class="line">      Collection&lt;SourceClass&gt; importSourceClasses = asSourceClasses(importClassNames, exclusionFilter);</span><br><span class="line">      processImports(configClass, currentSourceClass, importSourceClasses, exclusionFilter, <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 实现了ImportBeanDefinitionRegistrar接口，动态生成BeanDefinition对象并注册</span></span><br><span class="line">  <span class="comment">// AutoConfigurationPackages.Registrar类实现了此接口</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (candidate.isAssignable(ImportBeanDefinitionRegistrar.class)) &#123;</span><br><span class="line">      Class&lt;?&gt; candidateClass = candidate.loadClass();</span><br><span class="line">            ImportBeanDefinitionRegistrar registrar =</span><br><span class="line">                ParserStrategyUtils.instantiateClass(candidateClass, ImportBeanDefinitionRegistrar.class,</span><br><span class="line">                    <span class="keyword">this</span>.environment, <span class="keyword">this</span>.resourceLoader, <span class="keyword">this</span>.registry);</span><br><span class="line">            configClass.addImportBeanDefinitionRegistrar(registrar, currentSourceClass.getMetadata());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123; <span class="comment">// 当做普通@Configuration类处理</span></span><br><span class="line">    processConfigurationClass(candidate.asConfigClass(configClass), exclusionFilter);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于 AutoConfigurationImportSelector 继承的是 ImportSelector 的子接口 DeferredImportSelector，所以在这里它并不会直接调用 selectImports 方法，而是通过 handler 获取其静态内部类 AutoConfigurationGroup，执行内部类的 process()和 selectImports()方法，其中 process()就会扫描 META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports 里的 class，注意自 3.0 版本的路径不再是 META-INF/spring.factories 了。</p>
-<h2 id="Conditional"><a href="#Conditional" class="headerlink" title="@Conditional"></a>@Conditional</h2><p>打开 starter，经常发现配置类上有各种 Conditional 注解，如@ConditionalOnBean、@ConditionalOnClass、@ConditionalOnProperty 等等，那么这些注解是怎么起作用的呢？追踪源码发现，依然是在 ConfigurationClassParser 的 doProcessConfigurationClass()方法中：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!componentScans.isEmpty() &amp;&amp;</span><br><span class="line">      <span class="comment">// conditionEvaluator用于处理 @Conditional 注解</span></span><br><span class="line">      <span class="comment">// 最终会根据Condition接口下的matches() boolean 方法判断</span></span><br><span class="line">      !<span class="keyword">this</span>.conditionEvaluator.shouldSkip(sourceClass.getMetadata(), ConfigurationPhase.REGISTER_BEAN)) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li>string,list,set,softed set,hash</li>
+<li>bitmaps,hyperloglogs,地理空间 geospatial,消息 streams</li>
+<li>底层结构：简单动态字符串，链表，字典，跳表，整数集合和压缩链表</li>
+</ul>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><ul>
+<li>network：redis 服务器地址，端口以及超时时间等</li>
+<li>general：日志文件的路径和日志级别等进行配置</li>
+<li>snapshotting：持久化配置等</li>
+<li>replication：集群配置等</li>
+<li>memory management：内存管理，包括数据过期删除策略信息的设置</li>
+<li>append only mode：持久化方式信息配置</li>
+</ul>
+<h2 id="缓存问题"><a href="#缓存问题" class="headerlink" title="缓存问题"></a>缓存问题</h2><ul>
+<li>缓存雪崩<ul>
+<li>缓存同一时间大面积失效，请求全部打到 db 上</li>
+<li>给缓存设置不同的缓存时间</li>
+<li>更新数据使用互斥锁或双缓存</li>
+</ul>
+</li>
+<li>缓存击穿<ul>
+<li>缓存的热点数据过期</li>
+<li>互斥锁，只让一个请求去 load db，成功后写缓存；其余请求重新获取缓存数据</li>
+</ul>
+</li>
+<li>缓存穿透<ul>
+<li>故意请求缓存中不存在的数据</li>
+<li>使用互斥锁或无论是否有结果都存入缓存</li>
+<li>布隆过滤器</li>
+</ul>
+</li>
+<li>双写一致性<ul>
+<li>双删延时：先删除缓存，再更新数据库，最后再隔固定的时间再次删除缓存</li>
+<li>更新数据库产生的 binlog 订阅(使用 canal)。将有变化的 key 记录下来，并且尝试去不断的去删除缓存(如果上次删除缓存失败)</li>
+</ul>
+</li>
+</ul>
+<h2 id="内存淘汰策略"><a href="#内存淘汰策略" class="headerlink" title="内存淘汰策略"></a>内存淘汰策略</h2><ul>
+<li>maxmemory-policy：配置淘汰策略</li>
+<li><p>maxmemory：限制内存大小</p>
+</li>
+<li><p>volatile-lru：已设置过期时间的数据集中挑选最近最少使用的</p>
+</li>
+<li>volatile-ttl：已设置过期时间的数据集中将要过期的</li>
+<li>volatile-random：已设置过期时间的数据集中随机</li>
+<li>volatile-lfu：已设置过期时间的数据集中使用频率最低的</li>
+<li>allkeys-lru</li>
+<li>allkeys-ttl</li>
+<li>allkeys-random</li>
+<li>no-enviction：默认，新写入操作报错</li>
+</ul>
+<h2 id="删除策略"><a href="#删除策略" class="headerlink" title="删除策略"></a>删除策略</h2><ul>
+<li>定时删除：设置键过期时间的同时设置定时器，过期时立即删除</li>
+<li>惰性删除</li>
+<li>定期删除：默认每 100ms 随机抽取一些设置过期时间的监测</li>
+<li>默认采用定期+惰性删除</li>
+</ul>
+<h2 id="持久化方式"><a href="#持久化方式" class="headerlink" title="持久化方式"></a>持久化方式</h2><ul>
+<li>rdb（全量）<ul>
+<li>手动<ul>
+<li>save：阻塞，直至 rdb 完成</li>
+<li>bgsave：进行 fork 操作创建子进程，由子进程生成 rdb 文件</li>
+</ul>
+</li>
+<li>自动<ul>
+<li>save 900 2：900s 内存在 2 个写操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>aof（增量）<ul>
+<li>三种策略<ul>
+<li>appendfsync always：每次数据更改就追加</li>
+<li>appendfsync everysec：每秒</li>
+<li>appendfsync no：并不直接调用文件同步，而是交给操作系统来处理，操作系统可以根据 buffer 填充情况/通道空闲时间等择机触发同步；这是一种普通的文件操作方式。性能较好，在物理服务器故障时，数据丢失量会因 OS 配置有关</li>
+</ul>
+</li>
+<li>重写：首先读取数据库中现有的键值对状态，然后根据类型使用一条命令来替代前面对键值对操作的多条命令</li>
+<li>重写缓冲区<ul>
+<li>redis 服务器设置了一个 AOF 重写缓冲区。这个缓冲区在创建子进程后开始使用，当 redis 服务器执行一个客户端的写请求命令，之后将这个写命令也发送到 AOF 重写缓冲区。</li>
+<li>当子进程完成 AOF 日志重写之后，给父进程发送信号，父进程接收此信号后，将 AOF 重写缓冲区的内容写到新的 AOF 文件中，保持数据的一致性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重启后先判断有无 aof 文件，有则加载，无则判断是否有 rdb 文件，有则加载</li>
+<li>4.0 后新增混合模式，将 RDB 文件的内容和增量的 AOF 日志文件存在一起。这里的 AOF 日志不再是全量的日志，而是自持久化开始到持久化结束的这段时间发生的增量 AOF 日志，通常这部分 AOF 日志很小。Redis 重启的时候，可以先加载 RDB 的内容，然后再重放增量 AOF 日志，就可以完全替代之前的 AOF 全量文件重放，恢复效率因此大幅得到提升。</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><ul>
+<li>multi：开始</li>
+<li>discard：取消</li>
+<li>exec：执行所有事务块内命令</li>
+<li>unwatch：取消 watch 命令对所有 key 的监视</li>
+<li>watch key[…]:监视一或多个 key，如果事务执行前 key 被修改，那么事务将被打断</li>
+</ul>
+<h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><ul>
+<li>主从模式<ul>
+<li>可以将数据同步到多台不同机器，在主节点宕机时仍然对外提供服务</li>
+<li>读写分离</li>
+<li>一般线上搭建主从环境时，为了保证数据的一致性，从节点不允许写</li>
+<li>一台主，其他都为从节点<br><img src="/redis/ms1.jpg" alt=""><br><img src="/redis/ms2.jpg" alt=""></li>
+</ul>
+</li>
+<li>哨兵机制<ul>
+<li>功能<ul>
+<li>监控：不断检查主从服务器是否正常运行</li>
+<li>通知：当被监控的某个 Redis 服务器出现问题时， Sentinel 可以通过 API 向管理员或者其他应用程序发送通知</li>
+<li>自动故障迁移：当一个主服务器不能正常工作时， Sentinel 会开始一次自动故障迁移操作， 它会将失效主服务器的其中一个从服务器升级为新的主服务器， 并让失效主服务器的其他从服务器改为复制新的主服务器； 当客户端试图连接失效的主服务器时， 集群也会向客户端返回新主服务器的地址， 使得集群可以使用新主服务器代替失效服务器。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Redis-cluster 去中心化分片式集群<br><img src="/redis/rc.jpg" alt=""></li>
+</ul>
 
       
     </div>
@@ -462,9 +563,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
-          
-            <a href="/tags/spring/" rel="tag"># spring</a>
+            <a href="/tags/redis/" rel="tag"># redis</a>
           
         </div>
       
@@ -477,8 +576,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/spring1.html" rel="next" title="spring（一）">
-                <i class="fa fa-chevron-left"></i> spring（一）
+              <a href="/mybatis1.html" rel="next" title="mybatis（一）">
+                <i class="fa fa-chevron-left"></i> mybatis（一）
               </a>
             
           </div>
@@ -486,10 +585,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/mybatis1.html" rel="prev" title="mybatis（一）">
-                mybatis（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -672,7 +767,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">2.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EnableAutoConfiguration-注解"><span class="nav-number">3.</span> <span class="nav-text">@EnableAutoConfiguration 注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditional"><span class="nav-number">4.</span> <span class="nav-text">@Conditional</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存问题"><span class="nav-number">4.</span> <span class="nav-text">缓存问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存淘汰策略"><span class="nav-number">5.</span> <span class="nav-text">内存淘汰策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除策略"><span class="nav-number">6.</span> <span class="nav-text">删除策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持久化方式"><span class="nav-number">7.</span> <span class="nav-text">持久化方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">8.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高可用"><span class="nav-number">9.</span> <span class="nav-text">高可用</span></a></li></ol></div>
             
 
           </div>
