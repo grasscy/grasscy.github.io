@@ -108,20 +108,20 @@
 
 
 
-  <meta name="description" content="前言上一篇大概介绍了redis属于内存数据库，采用了事件驱动模式并通过io复用来实现。除此之外，redis还可以以AOF与RDB两种方式进行持久化等。接下来，我们继续从redis的早期版本入手，了解redis基本结构。 导航  前言 从文件名出发…… redis.c  从文件名出发…… 文件并不多，大体如下：  数据结构 adlist:双向链表 dict:哈希表   事件驱动 ae,ae_epol">
+  <meta name="description" content="前言上一篇大概介绍了 redis 属于内存数据库，采用了事件驱动模式并通过 io 复用来实现。除此之外，redis 还可以以 AOF 与 RDB 两种方式进行持久化等。接下来，我们继续从 redis 的早期版本入手，了解 redis 基本结构。 导航  前言 从文件名出发…… redis.c  从文件名出发…… 文件并不多，大体如下：  数据结构 adlist:双向链表 dict:哈希表   事件">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis基本结构">
 <meta property="og:url" content="http://grassc.cn/redis-basemain.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="前言上一篇大概介绍了redis属于内存数据库，采用了事件驱动模式并通过io复用来实现。除此之外，redis还可以以AOF与RDB两种方式进行持久化等。接下来，我们继续从redis的早期版本入手，了解redis基本结构。 导航  前言 从文件名出发…… redis.c  从文件名出发…… 文件并不多，大体如下：  数据结构 adlist:双向链表 dict:哈希表   事件驱动 ae,ae_epol">
+<meta property="og:description" content="前言上一篇大概介绍了 redis 属于内存数据库，采用了事件驱动模式并通过 io 复用来实现。除此之外，redis 还可以以 AOF 与 RDB 两种方式进行持久化等。接下来，我们继续从 redis 的早期版本入手，了解 redis 基本结构。 导航  前言 从文件名出发…… redis.c  从文件名出发…… 文件并不多，大体如下：  数据结构 adlist:双向链表 dict:哈希表   事件">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://grassc.cn/redis-basemain/files.png">
 <meta property="og:image" content="http://grassc.cn/redis-basemain/main.png">
-<meta property="og:updated_time" content="2022-08-13T04:20:45.544Z">
+<meta property="og:updated_time" content="2022-12-15T10:54:50.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis基本结构">
-<meta name="twitter:description" content="前言上一篇大概介绍了redis属于内存数据库，采用了事件驱动模式并通过io复用来实现。除此之外，redis还可以以AOF与RDB两种方式进行持久化等。接下来，我们继续从redis的早期版本入手，了解redis基本结构。 导航  前言 从文件名出发…… redis.c  从文件名出发…… 文件并不多，大体如下：  数据结构 adlist:双向链表 dict:哈希表   事件驱动 ae,ae_epol">
+<meta name="twitter:description" content="前言上一篇大概介绍了 redis 属于内存数据库，采用了事件驱动模式并通过 io 复用来实现。除此之外，redis 还可以以 AOF 与 RDB 两种方式进行持久化等。接下来，我们继续从 redis 的早期版本入手，了解 redis 基本结构。 导航  前言 从文件名出发…… redis.c  从文件名出发…… 文件并不多，大体如下：  数据结构 adlist:双向链表 dict:哈希表   事件">
 <meta name="twitter:image" content="http://grassc.cn/redis-basemain/files.png">
 
 
@@ -356,24 +356,12 @@
                 
               
 
-              <time title="创建时间：2022-03-02 17:29:19" itemprop="dateCreated datePublished" datetime="2022-03-02T17:29:19+08:00">2022-03-02</time>
+              <time title="创建时间：2022-12-15 18:39:56 / 修改时间：18:54:50" itemprop="dateCreated datePublished" datetime="2022-12-15T18:39:56+08:00">2022-12-15</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2022-08-13 12:20:45" itemprop="dateModified" datetime="2022-08-13T12:20:45+08:00">2022-08-13</time>
               
             
           </span>
@@ -441,7 +429,7 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇大概介绍了redis属于内存数据库，采用了事件驱动模式并通过io复用来实现。除此之外，redis还可以以AOF与RDB两种方式进行持久化等。接下来，我们继续从redis的早期版本入手，了解redis基本结构。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇大概介绍了 redis 属于内存数据库，采用了事件驱动模式并通过 io 复用来实现。除此之外，redis 还可以以 AOF 与 RDB 两种方式进行持久化等。接下来，我们继续从 redis 的早期版本入手，了解 redis 基本结构。</p>
 <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
 <li><a href="#前言">前言</a></li>
 <li><a href="#从文件名出发">从文件名出发……</a></li>
@@ -467,7 +455,7 @@
 </li>
 <li>功能性<ul>
 <li>tcp：anet</li>
-<li>开放api：hiredis</li>
+<li>开放 api：hiredis</li>
 <li>命令行编辑器：linenoise</li>
 </ul>
 </li>
@@ -478,25 +466,26 @@
 </ul>
 </li>
 </ul>
-<p>可以看出主体服务在redis.c文件中，而这些文件中有一个字符串辅助库sds(A C dynamic strings library)比较特别。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sds.h</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *sds;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> &#123;</span></span><br><span class="line">    <span class="keyword">long</span> len; <span class="comment">// 字符串长度</span></span><br><span class="line">    <span class="keyword">long</span> <span class="built_in">free</span>; <span class="comment">// </span></span><br><span class="line">    <span class="keyword">char</span> buf[]; <span class="comment">// 字符串，'\0'结尾（同c字符串）</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// sds.c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// new sds</span></span><br><span class="line"><span class="function">sds <span class="title">sdsnew</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *init)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> initlen = (init == <span class="literal">NULL</span>) ? <span class="number">0</span> : <span class="built_in">strlen</span>(init);</span><br><span class="line">    <span class="keyword">return</span> sdsnewlen(init, initlen);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">sds <span class="title">sdsnewlen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *init, <span class="keyword">size_t</span> initlen)</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> *<span class="title">sh</span>;</span></span><br><span class="line"></span><br><span class="line">    sh = zmalloc(<span class="keyword">sizeof</span>(struct sdshdr)+initlen+<span class="number">1</span>); <span class="comment">// 分配空间</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    sh-&gt;len = initlen;</span><br><span class="line">    sh-&gt;<span class="built_in">free</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (initlen) &#123;</span><br><span class="line">        <span class="keyword">if</span> (init) <span class="built_in">memcpy</span>(sh-&gt;buf, init, initlen); <span class="comment">// </span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">memset</span>(sh-&gt;buf,<span class="number">0</span>,initlen);</span><br><span class="line">    &#125;</span><br><span class="line">    sh-&gt;buf[initlen] = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">char</span>*)sh-&gt;buf; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到，sds总是指向sdshdr结构中实际存储字符串的地方buf[]，而sdsnew()函数返回的是sds。这样，一方面可以兼容c字符串函数，另一方便，通过指针的移动，很容易获取sdshdr结构中的其他成员：len，free。len记录着sds的长度，注意这个长度并不是buf[]的长度，而是buf[]中实际用于存储字符的长度。至于buf中没有用来存储字符的长度，则记录在了free里。所以实际上，len(buf)=len+free+1(结尾字符)。</p>
-<p>所以使用sds，可以避免通过遍历来计算字符串的长度，将O(n)的时间复杂度降为O(1)；还可以通过预分配来减少重新分配内存空间次数：</p>
+<p>可以看出主体服务在 redis.c 文件中，而这些文件中有一个字符串辅助库 sds(A C dynamic strings library)比较特别。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sds.h</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *sds;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> &#123;</span></span><br><span class="line">    <span class="keyword">long</span> len; <span class="comment">// 字符串长度</span></span><br><span class="line">    <span class="keyword">long</span> <span class="built_in">free</span>; <span class="comment">//</span></span><br><span class="line">    <span class="keyword">char</span> buf[]; <span class="comment">// 字符串，'\0'结尾（同c字符串）</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// sds.c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// new sds</span></span><br><span class="line"><span class="function">sds <span class="title">sdsnew</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *init)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> initlen = (init == <span class="literal">NULL</span>) ? <span class="number">0</span> : <span class="built_in">strlen</span>(init);</span><br><span class="line">    <span class="keyword">return</span> sdsnewlen(init, initlen);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">sds <span class="title">sdsnewlen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *init, <span class="keyword">size_t</span> initlen)</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> *<span class="title">sh</span>;</span></span><br><span class="line"></span><br><span class="line">    sh = zmalloc(<span class="keyword">sizeof</span>(struct sdshdr)+initlen+<span class="number">1</span>); <span class="comment">// 分配空间</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    sh-&gt;len = initlen;</span><br><span class="line">    sh-&gt;<span class="built_in">free</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (initlen) &#123;</span><br><span class="line">        <span class="keyword">if</span> (init) <span class="built_in">memcpy</span>(sh-&gt;buf, init, initlen); <span class="comment">//</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">memset</span>(sh-&gt;buf,<span class="number">0</span>,initlen);</span><br><span class="line">    &#125;</span><br><span class="line">    sh-&gt;buf[initlen] = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">char</span>*)sh-&gt;buf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，sds 总是指向 sdshdr 结构中实际存储字符串的地方 buf[]，而 sdsnew()函数返回的是 sds。这样，一方面可以兼容 c 字符串函数，另一方便，通过指针的移动，很容易获取 sdshdr 结构中的其他成员：len，free。len 记录着 sds 的长度，注意这个长度并不是 buf[]的长度，而是 buf[]中实际用于存储字符的长度。至于 buf 中没有用来存储字符的长度，则记录在了 free 里。所以实际上，len(buf)=len+free+1(结尾字符)。</p>
+<p>所以使用 sds，可以避免通过遍历来计算字符串的长度，将 O(n)的时间复杂度降为 O(1)；还可以通过预分配来减少重新分配内存空间次数：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> sds <span class="title">sdsMakeRoomFor</span><span class="params">(sds s, <span class="keyword">size_t</span> addlen)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">free</span> &gt;= addlen) <span class="keyword">return</span> s; <span class="comment">// free大于所需空间直接返回</span></span><br><span class="line">    len = sdslen(s);</span><br><span class="line">    sh = (<span class="keyword">void</span>*) (s-(<span class="keyword">sizeof</span>(struct sdshdr)));</span><br><span class="line">    newlen = (len+addlen)*<span class="number">2</span>; <span class="comment">// 预分配 len+addlen 长度</span></span><br><span class="line">    newsh = zrealloc(sh, <span class="keyword">sizeof</span>(struct sdshdr)+newlen+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而sdstrim()函数中，也不会释放多余的内存空间，而是通过变更len与free值来维护sds。</p>
-<h2 id="redis-c"><a href="#redis-c" class="headerlink" title="redis.c"></a>redis.c</h2><p>了解了sds，再看服务入口文件redis.c。在redis.c文件中，定义了一些基本数据类型。让我们从这些数据类型开始了解。</p>
+<p>而 sdstrim()函数中，也不会释放多余的内存空间，而是通过变更 len 与 free 值来维护 sds。</p>
+<h2 id="redis-c"><a href="#redis-c" class="headerlink" title="redis.c"></a>redis.c</h2><p>了解了 sds，再看服务入口文件 redis.c。在 redis.c 文件中，定义了一些基本数据类型。让我们从这些数据类型开始了解。</p>
 <ul>
-<li><p>redisObject</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisObject</span> &#123;</span></span><br><span class="line">    <span class="keyword">void</span> *ptr; <span class="comment">// 对象指针</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> type; <span class="comment">// 对象类型，string，list，set，zset，hash等</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> encoding; <span class="comment">// 对象编码，RAW（sds），int等</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> notused[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> refcount; <span class="comment">// 引用计数，用于内存回收</span></span><br><span class="line">&#125; robj;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>redisDb</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisDb</span> &#123;</span></span><br><span class="line">    dict *dict; <span class="comment">// 哈希表</span></span><br><span class="line">    dict *expires;</span><br><span class="line">    <span class="keyword">int</span> i</span><br><span class="line">&#125; redisDb;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>redisCommand</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">redisCommand</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">    redisCommandProc *proc; <span class="comment">// 执行器</span></span><br><span class="line">    <span class="keyword">int</span> arity; <span class="comment">// 参数数量</span></span><br><span class="line">    <span class="keyword">int</span> flags; <span class="comment">// 命令类型，bulk，inline</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
+<li>redisObject</li>
 </ul>
-<p>再加上上一篇所提到的事件驱动模式，redis的主体流程就呼之欲出了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisObject</span> &#123;</span></span><br><span class="line">    <span class="keyword">void</span> *ptr; <span class="comment">// 对象指针</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> type; <span class="comment">// 对象类型，string，list，set，zset，hash等</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> encoding; <span class="comment">// 对象编码，RAW（sds），int等</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> notused[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> refcount; <span class="comment">// 引用计数，用于内存回收</span></span><br><span class="line">&#125; robj;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>redisDb</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisDb</span> &#123;</span></span><br><span class="line">    dict *dict; <span class="comment">// 哈希表</span></span><br><span class="line">    dict *expires;</span><br><span class="line">    <span class="keyword">int</span> i</span><br><span class="line">&#125; redisDb;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>redisCommand</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">redisCommand</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">    redisCommandProc *proc; <span class="comment">// 执行器</span></span><br><span class="line">    <span class="keyword">int</span> arity; <span class="comment">// 参数数量</span></span><br><span class="line">    <span class="keyword">int</span> flags; <span class="comment">// 命令类型，bulk，inline</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>再加上上一篇所提到的事件驱动模式，redis 的主体流程就呼之欲出了：</p>
 <p><img src="/redis-basemain/main.png" alt="main"></p>
 
       
@@ -531,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/intro2redis.html" rel="next" title="redis之初窥">
-                <i class="fa fa-chevron-left"></i> redis之初窥
+              <a href="/redis.html" rel="next" title="redis（一）">
+                <i class="fa fa-chevron-left"></i> redis（一）
               </a>
             
           </div>
@@ -541,8 +530,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/jdk-Object.html" rel="prev" title="Object">
-                Object <i class="fa fa-chevron-right"></i>
+              <a href="/intro2Mybatis.html" rel="prev" title="初识——搭建简易mybatis">
+                初识——搭建简易mybatis <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

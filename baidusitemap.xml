@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://grassc.cn/redis-basemain.html</loc>
+    <lastmod>2022-12-15</lastmod>
+  </url>  <url>
+    <loc>http://grassc.cn/intro2redis.html</loc>
+    <lastmod>2022-12-15</lastmod>
+  </url>  <url>
     <loc>http://grassc.cn/intro2Mybatis.html</loc>
     <lastmod>2022-12-15</lastmod>
   </url>  <url>
@@ -78,11 +84,5 @@
   </url>  <url>
     <loc>http://grassc.cn/jdk-AbstractStringBuilder-StringBuilder-StringBuffer.html</loc>
     <lastmod>2022-11-29</lastmod>
-  </url>  <url>
-    <loc>http://grassc.cn/redis-basemain.html</loc>
-    <lastmod>2022-08-13</lastmod>
-  </url>  <url>
-    <loc>http://grassc.cn/intro2redis.html</loc>
-    <lastmod>2022-08-13</lastmod>
   </url>
 </urlset>
