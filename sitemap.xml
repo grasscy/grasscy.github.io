@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://grassc.cn/redis2.html</loc>
+    
+    <lastmod>2022-12-15T11:33:47.047Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://grassc.cn/redis-basemain.html</loc>
     
-    <lastmod>2022-12-15T10:54:50.246Z</lastmod>
+    <lastmod>2022-12-15T10:56:28.340Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://grassc.cn/intro2redis.html</loc>
     
-    <lastmod>2022-12-15T10:54:22.774Z</lastmod>
+    <lastmod>2022-12-15T10:56:23.263Z</lastmod>
     
   </url>
   

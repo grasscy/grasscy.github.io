@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="导航  核心组件 标签  核心组件 SqlSessionFactoryBuilder 通过 xml 或 java 编码的方式获得资源来构建 SqlSessionFactory 一个 builder 可以构建多个 SqlSessionFactory 生命周期一般只存在与方法的局部，用完即可回收    1SqlSessionFactory build = new SqlSessionFactoryBu">
-<meta name="keywords" content="mybatis,java">
+  <meta name="description" content="导航  功能 多路 io 复用 单线程与多线程 事务 aof AOF 重写缓存区：   过期回收  功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实现限流。 消息队列：Redis 自带的 list 数据结构可以作为一个简单的队列使用。Redis5.0 中增加的">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis（一）">
-<meta property="og:url" content="http://grassc.cn/mybatis1.html">
+<meta property="og:title" content="redis（二）">
+<meta property="og:url" content="http://grassc.cn/redis2.html">
 <meta property="og:site_name" content="小草窝">
-<meta property="og:description" content="导航  核心组件 标签  核心组件 SqlSessionFactoryBuilder 通过 xml 或 java 编码的方式获得资源来构建 SqlSessionFactory 一个 builder 可以构建多个 SqlSessionFactory 生命周期一般只存在与方法的局部，用完即可回收    1SqlSessionFactory build = new SqlSessionFactoryBu">
+<meta property="og:description" content="导航  功能 多路 io 复用 单线程与多线程 事务 aof AOF 重写缓存区：   过期回收  功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实现限流。 消息队列：Redis 自带的 list 数据结构可以作为一个简单的队列使用。Redis5.0 中增加的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-12-11T11:30:05.968Z">
+<meta property="og:updated_time" content="2022-12-15T11:33:47.047Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mybatis（一）">
-<meta name="twitter:description" content="导航  核心组件 标签  核心组件 SqlSessionFactoryBuilder 通过 xml 或 java 编码的方式获得资源来构建 SqlSessionFactory 一个 builder 可以构建多个 SqlSessionFactory 生命周期一般只存在与方法的局部，用完即可回收    1SqlSessionFactory build = new SqlSessionFactoryBu">
+<meta name="twitter:title" content="redis（二）">
+<meta name="twitter:description" content="导航  功能 多路 io 复用 单线程与多线程 事务 aof AOF 重写缓存区：   过期回收  功能 分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。 限流：一般是通过 Redis + Lua 脚本的方式来实现限流。 消息队列：Redis 自带的 list 数据结构可以作为一个简单的队列使用。Redis5.0 中增加的">
 
 
 
 
 
 
-  <link rel="canonical" href="http://grassc.cn/mybatis1.html"/>
+  <link rel="canonical" href="http://grassc.cn/redis2.html"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>mybatis（一） | 小草窝</title>
+  <title>redis（二） | 小草窝</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://grassc.cn/mybatis1.html">
+    <link itemprop="mainEntityOfPage" href="http://grassc.cn/redis2.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JL Wang">
@@ -328,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">mybatis（一）
+          <h2 class="post-title" itemprop="name headline">redis（二）
               
             
           </h2>
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2022-12-11 19:30:05" itemprop="dateCreated datePublished" datetime="2022-12-11T19:30:05+08:00">2022-12-11</time>
+              <time title="创建时间：2022-12-15 19:33:47" itemprop="dateCreated datePublished" datetime="2022-12-15T19:33:47+08:00">2022-12-15</time>
             
 
             
@@ -371,14 +371,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -393,8 +386,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/mybatis1.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/mybatis1.html" itemprop="commentCount"></span>
+                <a href="/redis2.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/redis2.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -423,54 +416,111 @@
 
       
         <h2 id="导航"><a href="#导航" class="headerlink" title="导航 "></a>导航 <!-- omit in toc --></h2><ul>
-<li><a href="#核心组件">核心组件</a></li>
-<li><a href="#标签">标签</a></li>
-</ul>
-<h2 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h2><ul>
-<li>SqlSessionFactoryBuilder<ul>
-<li>通过 xml 或 java 编码的方式获得资源来构建 SqlSessionFactory</li>
-<li>一个 builder 可以构建多个 SqlSessionFactory</li>
-<li>生命周期一般只存在与方法的局部，用完即可回收</li>
+<li><a href="#功能">功能</a></li>
+<li><a href="#多路-io-复用">多路 io 复用</a></li>
+<li><a href="#单线程与多线程">单线程与多线程</a></li>
+<li><a href="#事务">事务</a></li>
+<li><a href="#aof">aof</a><ul>
+<li><a href="#aof-重写缓存区">AOF 重写缓存区：</a></li>
 </ul>
 </li>
+<li><a href="#过期回收">过期回收</a></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SqlSessionFactory build = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(configuration);</span><br></pre></td></tr></table></figure>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>分布式锁：通过 Redis 来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于 Redisson 来实现分布式锁。</li>
+<li>限流：一般是通过 Redis + Lua 脚本的方式来实现限流。</li>
+<li>消息队列：Redis 自带的 list 数据结构可以作为一个简单的队列使用。Redis5.0 中增加的 Stream 类型的数据结构更加适合用来做消息队列。它比较类似于 Kafka，有主题和消费组的概念，支持消息持久化以及 ACK 机制。</li>
+<li>复杂业务场景：通过 Redis 以及 Redis 扩展（比如 Redisson）提供的数据结构，我们可以很方便地完成很多复杂的业务场景比如通过 bitmap 统计活跃用户、通过 sorted set 维护排行榜</li>
+</ul>
+<h2 id="多路-io-复用"><a href="#多路-io-复用" class="headerlink" title="多路 io 复用"></a>多路 io 复用</h2><blockquote>
+<p>Redis 基于 Reactor 模式开发了自己的网络事件处理器：这个处理器被称为文件事件处理器（file event handler）。文件事件处理器使用 I/O 多路复用（multiplexing）程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器。</p>
+</blockquote>
+<blockquote>
+<p>当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。</p>
+<p><strong>虽然文件事件处理器以单线程方式运行，但通过使用 I/O 多路复用程序来监听多个套接字</strong>，文件事件处理器既实现了高性能的网络通信模型，又可以很好地与 Redis 服务器中其他同样以单线程方式运行的模块进行对接，这保持了 Redis 内部单线程设计的简单性。</p>
+</blockquote>
+<p>可以看出，文件事件处理器（file event handler）主要是包含 4 个部分：</p>
 <ul>
-<li>SqlSessionFactory<ul>
-<li>创建 sqlSession</li>
-<li>应该在 mybatis 应用的整个生命周期中，一般使用单例模式创建</li>
-</ul>
+<li>多个 socket（客户端连接）</li>
+<li>IO 多路复用程序（支持多个客户端连接的关键）</li>
+<li>文件事件分派器（将 socket 关联到相应的事件处理器）</li>
+<li><p>事件处理器（连接应答处理器、命令请求处理器、命令回复处理器）</p>
 </li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SqlSession sqlSession = sqlSessionFactory.openSession();</span><br></pre></td></tr></table></figure>
+<li><p>select</p>
 <ul>
-<li>SqlSession<ul>
-<li>既可以执行 sql 也可以获取 mapper 对象</li>
-<li>线程不安全，生命周期应该是请求数据库处理事务的过程中</li>
+<li>修改入参数组</li>
+<li>最大监听 1024</li>
+<li>需要轮询返回数据的 socket</li>
+<li>线程不安全</li>
+<li>文件描述符被另一个线程关闭的话，结果不唯一</li>
+</ul>
+</li>
+<li>poll<ul>
+<li>去掉 1024 的限制（链表）</li>
+<li>不修改入参数组</li>
+<li>线程不安全</li>
+</ul>
+</li>
+<li>epoll<ul>
+<li>可确定那个 socket 有数据</li>
+<li>线程安全</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserMapper mapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">sqlSession.selectOne(<span class="string">"..."</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="单线程与多线程"><a href="#单线程与多线程" class="headerlink" title="单线程与多线程"></a>单线程与多线程</h2><ul>
+<li>4.0 后增加了对多线程的支持<ul>
+<li>主要是针对一些大键值对的删除操作的命令，使用这些命令就会使用主处理之外的其他线程来“异步处理”。</li>
+</ul>
+</li>
+<li>6.0 之后为何引入了多线程<ul>
+<li>主要是为了提高网络 IO 读写性能</li>
+<li>只是在网络数据的读写这类耗时操作上使用了，执行命令仍然是单线程顺序执行。</li>
+<li>默认是禁用的，只使用主线程。如需开启需要修改 redis 配置文件 <code>redis.conf</code></li>
+<li>开启多线程后，还需要设置线程数，否则是不生效的。同样需要修改 redis 配置文件 <code>redis.conf</code> :</li>
+</ul>
+</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><ul>
+<li>隔离性：redis 是单进程的程序，保证在执行事务时，不会对事务进行中断，事务可以运行直到执行完所有事务队列中的命令为止。所以 redis 的事务支持隔离性。</li>
+<li>redis 会将一个事务中的所有命令序列化，然后按顺序执行。redis 不可能在一个事务的执行过程中插入执行另一个客户端发出的请求。可以保证 Redis 将这些命令作为一个单独的隔离操作执行。</li>
+<li>不支持回滚</li>
+</ul>
+<h2 id="aof"><a href="#aof" class="headerlink" title="aof"></a>aof</h2><ul>
+<li>若开启了 aof 持久化，启动时优先 aof 还原数据</li>
+<li>过程<ul>
+<li>append 命令追加：完成写命令，按格式追加至 aof_buf 缓冲区的末尾</li>
+<li>append 追加后，调用 flushAppendOnluFile 函数确定是否写入文件</li>
+</ul>
+</li>
+<li>策略：appendfsync 配置<ul>
+<li>always：每次追加到 aof 文件时都 fsync 到磁盘</li>
+<li>everysec：默认</li>
+<li>no：何时 fsync 由 os 决定</li>
+</ul>
+</li>
+</ul>
+<h3 id="AOF-重写缓存区："><a href="#AOF-重写缓存区：" class="headerlink" title="AOF 重写缓存区："></a>AOF 重写缓存区：</h3><ul>
+<li>redis 是单线程工作，当 AOF 文件较大时重写时间会比较长，在重写 AOF 期间，redis 将长时间无法处理客户端请求。为了解决这个问题，可以将 AOF 重写程序放到子进程中执行，好处如下：<ul>
+<li>子进程进行 AOF 重写期间，服务器进程(父进程)可以继续处理其它客户端请求。</li>
+<li>子进程带有父进程的数据副本，使用子进程而不是线程，可以在避免使用锁的情况下，保证数据的安全性。</li>
+</ul>
+</li>
+<li>子进程中 AOF 重写导致的问题：<ul>
+<li>子进程在进行 AOF 重写期间，服务器进程依然可以处理其它客户端请求，这就会导致数据库状态已经发生了改变，使得当前数据库数据状态和重写后的 AOF 文件中的数据不一致。</li>
+<li>也就是出现了 AOF 文件和数据库中数据不一致的问题。</li>
+</ul>
+</li>
+<li>数据状态不一致解决办法：<ul>
+<li>redis 服务器设置了一个 AOF 重写缓冲区。这个缓冲区在创建子进程后开始使用，当 redis 服务器执行一个客户端的写请求命令，之后将这个写命令也发送到 AOF 重写缓冲区（同时将命令追加到 AOF 缓冲区和 AOF 重写缓冲区）</li>
+<li>当子进程完成 AOF 日志重写之后，给父进程发送信号，父进程接收此信号后，将 AOF 重写缓冲区的内容写到新的 AOF 文件中，保持数据的一致性。</li>
+<li>改名覆盖</li>
+</ul>
+</li>
+</ul>
+<h2 id="过期回收"><a href="#过期回收" class="headerlink" title="过期回收"></a>过期回收</h2><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Redis 通过一个叫做过期字典（可以看作是 hash 表）来保存数据过期的时间。过期字典的键指向 Redis 数据库中的某个 key(键)，过期字典的值是一个 long long 类型的整数，这个整数保存了 key 所指向的数据库键的过期时间（毫秒精度的 UNIX 时间戳）。</span><br><span class="line"></span><br><span class="line">typedef struct redisDb &#123;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="code">    dict *dict;     //数据库键空间,保存着数据库中所有键值对</span></span><br><span class="line"><span class="code">    dict *expires   // 过期字典,保存着键的过期时间</span></span><br><span class="line"><span class="code">    ...</span></span><br><span class="line"></span><br><span class="line">&#125; redisDb;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Mapper<ul>
-<li>负责发送 sql 去执行，并返回结果</li>
-</ul>
-</li>
-</ul>
-<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ul>
-<li>九大动态标签<ul>
-<li>if：单条件</li>
-<li>choose,when,otherwise：多条件</li>
-<li>trim,where,set：对拼接的 sql 进行处理</li>
-<li>bind：模糊匹配查询是使用，提高数据库的可移植性</li>
-</ul>
-</li>
-<li>其他标签举例<ul>
-<li>select,updata,delete,insert</li>
-<li>resultMap,parameterMap,sql,include,selectKey</li>
-<li>trim,where,set,foreach,if,choose,when,otherwise,bind</li>
-</ul>
-</li>
+<li>定期:每隔一段时间抽取一批 key 执行删除过期 key 操作。并且，Redis 底层会通过限制删除操作执行的时长和频率来减少删除操作对 CPU 时间的影响。</li>
+<li>惰性</li>
 </ul>
 
       
@@ -492,9 +542,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
-          
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/redis/" rel="tag"># redis</a>
           
         </div>
       
@@ -507,8 +555,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/springboot_auto_config.html" rel="next" title="springboot自动装配">
-                <i class="fa fa-chevron-left"></i> springboot自动装配
+              <a href="/intro2redis.html" rel="next" title="redis之初窥">
+                <i class="fa fa-chevron-left"></i> redis之初窥
               </a>
             
           </div>
@@ -516,10 +564,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/redis.html" rel="prev" title="redis（一）">
-                redis（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -704,7 +748,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心组件"><span class="nav-number">2.</span> <span class="nav-text">核心组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">3.</span> <span class="nav-text">标签</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航"><span class="nav-number">1.</span> <span class="nav-text">导航 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能"><span class="nav-number">2.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多路-io-复用"><span class="nav-number">3.</span> <span class="nav-text">多路 io 复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程与多线程"><span class="nav-number">4.</span> <span class="nav-text">单线程与多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">5.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aof"><span class="nav-number">6.</span> <span class="nav-text">aof</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF-重写缓存区："><span class="nav-number">6.1.</span> <span class="nav-text">AOF 重写缓存区：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过期回收"><span class="nav-number">7.</span> <span class="nav-text">过期回收</span></a></li></ol></div>
             
 
           </div>
